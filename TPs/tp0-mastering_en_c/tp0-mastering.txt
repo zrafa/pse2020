@@ -37,8 +37,10 @@ Una complicacion adicional (o no, depende de como quiera verse)
 es que si se recorre los bits de cada byte desde el mas significativo
 al menos significativo las letras saldrán invertidas.
 
-En la imagen de ejemplo se recorren de izquierda a derecha como
-presentados, por lo que de esta manera están invertidos.
+En la imagen de ejemplo se analizan un par de letras
+y se los bits de izquierda a derecha (del mas significativo
+al menos significativo) como presentado, por lo que de esta 
+manera están invertidos (ejemplo_font_h.jpg).
 
 
 Tareas
@@ -110,6 +112,7 @@ El programa tp0-mastering.c imprime en una terminal Linux un texto
 pasado como argumento, pero utilizando el font ya definido en font.h
 
 Observe en la imagen de ejemplo como es una salida típica.
+(tp0-salida.jpg);
 
 1.0 La primera parte es de análisis. Si bien el programa no es demasiado extenso
 intente realizar una traza de cómo funciona el programa, comenzando
