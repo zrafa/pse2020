@@ -79,6 +79,14 @@ git clone https://github.com/zrafa/pse2020
 llamada pse2020/ ).
 
 
+- Para compilar el programa
+cd pse2020/TPs/tp0-mastering_en_c/
+make clean
+make
+
+(el make clean antes de compilar cada vez es importante).
+
+
 -------------------------------------------------------------------------------
 
 0. Escriba un programa en C que incluya la cabecera font.h. El programa
