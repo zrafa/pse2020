@@ -26,6 +26,14 @@ con poca memoria).
 El font.h de este ejercicio contiene los valores de los pixeles
 para todos los caracteres ASCII, en el orden de la tabla ASCII.
 Por cada valor ASCII, existe en font.h, 5 bytes.
+Esto significa que los primeros cinco bytes en font.h son para el
+primer caracter ASCII de la tabla ASCII. Los siguientes 5 bytes
+son para el segundo caracter. Etc. Si queremos obtener
+los cinco bytes para la letra 'M', deberíamos posicionarnos
+en el arreglo de font.h en arreglo[5*'M']. A partir de ese
+elemento y los siguientes 4 estarían los cinco bytes 
+correspondientes a la letra 'M'.
+
 Cada byte contiene los valores de los pixeles de cada columna de la letra
 a ser dibujada en el LCD.
 Por lo que cada letra se representa por 5 columnas de 8 filas (5 bytes). 
