@@ -30,11 +30,12 @@ Cada byte contiene los valores de los pixeles de cada columna de la letra
 a ser dibujada en el LCD.
 Por lo que cada letra se representa por 5 columnas de 8 filas (5 bytes). 
 
-Observe la imagen de ejemplo que acompaña este enunciado.
+Observe la imagen de ejemplo que acompaña este enunciado (ejemplo_font_h.jpg).
+O el archivo ejemplo_font_h.ods
 
 Una complicacion adicional (o no, depende de como quiera verse)
 es que si se recorre los bits de cada byte desde el mas significativo
-al menos significativo las las letras saldrán invertida.
+al menos significativo las letras saldrán invertidas.
 
 En la imagen de ejemplo se recorren de izquierda a derecha como
 presentados, por lo que de esta manera están invertidos.
@@ -48,8 +49,10 @@ Para esta tarea necesita:
 - saber utilizar las páginas de manual del programador. Por ejemplo,
 en una terminal Linux, debería poder ejecutar "man memcpy" y el
 manual de la función memcpy() debería verse en pantalla.
+
 Teniendo las páginas de manual del programador ayuda mucho a conocer
 que realiza cada función o cabecera de la biblioteca estándar de C.
+
 Si cuenta con el sistema de compilación buil-essential en su sistema
 entonces es probable que tenga las páginas de manual del programador
 instaladas. Sino, consulte a la cátedra con su distribución Linux
@@ -98,6 +101,10 @@ Este programa será útil en el desarrollo del punto 1.
 
 
 1. Complete el programa tp0-mastering.c
+Al finalizar y ejecutar correctamente, podrá ejecutar su programa así:
+./tp0-mastering Laboratorio 0
+y el programa debe emitir como salida en PANTALLA como se muestra
+en la figura : tp0-salida.jpg
 
 El programa tp0-mastering.c imprime en una terminal Linux un texto
 pasado como argumento, pero utilizando el font ya definido en font.h
