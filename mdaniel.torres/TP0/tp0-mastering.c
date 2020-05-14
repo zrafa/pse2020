@@ -52,8 +52,8 @@ void draw_char_on_buffer(unsigned char x, unsigned char y, char c,
                             unsigned char color)
 {
 
-	int i; /* para recorrer el font por columnas */
-	int j; /* para recorrer el font por filas */
+	int i; 
+	int j; 
 
 	for(i = 0; i < 5; i++){
 	    int aux = font[5*c + i];
