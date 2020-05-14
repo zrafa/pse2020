@@ -1,0 +1,197 @@
+﻿1. Enumerar los tipos básicos de C.
+
+
+* char (un elemento del tamaño de un byte)
+* int (un número entero con signo)
+* long (un entero largo)
+* float (un número en punto flotante)
+* double (un número en punto flotante, doble precisión)
+
+
+2. Explique qué significa la palabra word cuando el contexto es la arquitectura de una computadora.
+
+
+Un word se refiere al tamaño en bits de los registros del procesador. Puede variar según la arquitectura. En MIPS por ejemplo 1 word equivale a 32 bits.
+
+
+3. ¿Cuántos bits puede almacenar una variable declarada como int (ej. int var;) en 3 computadoras de arquitecturas diferentes: arquitecturas de 8bits, 32bits y 64bits?
+
+
+El lenguaje C no define el tamaño de los objetos de datos de un tipo determinado. Es decir, un entero puede ocupar 16 bits en una implementación del compilador, 32 en otra, o aun 64. Un long puede tener, o no, más bits que un int. Un short puede ser, o no, más corto que un int. Según K&R, lo único seguro es que “un short no es mayor que un int, que a su vez no es mayor que long”.
+
+
+Por supuesto, distintos tamaños en bits implican diferentes rangos de valores. Si deseamos portar un programa, hecho bajo una implementación del compilador, a otra, no es posible asegurar a priori el rango que tomará un tipo de datos. La fuente ideal para conocer los rangos de los diferentes tipos, en una implementación determinada, es –además del manual del compilador– el header limits.h de la Biblioteca Standard. Debe recordarse que cualquier suposición que hagamos sobre el rango o tamaño de un objeto de datos afecta la portabilidad de un programa en C.
+
+
+4. Explique la diferencia en la salida de las siguientes instrucciones:
+   char a = 'M';
+   printf ("a = %i \n", a);
+   printf ("La letra %c \n", a);
+
+
+La diferencia reside en que "printf("a = %i \n", a);" muestra el valor numérico de la variable a según como está en memoria, es decir 77. Mientras que "printf("La letra %c \n", a);" muestra el símbolo en la tabla ASCII que representa el valor numérico de la variable a.
+
+
+5. ¿Cual es el rango numérico de i y j?
+  char i;
+  unsigned char j;
+
+
+Los tipos enteros (char, int y long) admiten los modificadores signed (con signo) y unsigned (sin signo). Un objeto de datos unsigned utiliza todos sus bits para representar magnitud; un signed utiliza un bit para signo, en representación complemento a dos.
+
+
+El modificador signed sirve sobre todo para explicitar el signo de los chars. El default para un int es signed; el default para char puede ser signed o unsigned, dependiendo del compilador.
+
+
+En una arquitectura típica el rango de valores posibles para las respectivas variables es el siguiente:
+
+
+i   [-128, 127] or [0, 255]
+j   [0, 255]
+
+
+No obstante, se deberá chequear limits.h para verificar si el rango es correcto, dependiendo de la arquitectura en donde se trabaje. En el caso de MSVC (Microsoft Studio Visual Compiler) con Intel x64 la siguiente información es obtenida:
+
+_CRT_BEGIN_C_HEADER
+
+#define CHAR_BIT	8
+#define SCHAR_MIN	(-128)
+#define SCHAR_BIT	127
+#define UHAR_BIT	0xFF
+
+
+6. ¿Cual es el valor en base 2 (binario) de i, j, k, m, n, p?  Explique el porqué de su respuesta. Contestar: Las variables anteriores, ¿fueron declaradas e inicializadas con valores diferente?
+   char i = 'a';
+   char j = 77;
+   char k = 0x4D;
+   unsigned char m = 'a';
+   unsigned char n = 0x4d;
+   unsigned char p = 'A';
+
+
+
+
+i = 0110 0001  // 97
+j = 0100 1101  // 77
+k = 0100 1101  // 77
+m = 0110 0001  // 97
+n = 0100 1101  // 77
+p = 0100 0001  // 65
+
+		 8 bit memory      ASCII value 
+
+A		0 1 0 0 0 0 0 1		65
+a		0 1 1 0 0 0 0 1		97
+
+  
+
+Todo valor de una variable se guarda en memoria como un valor numérico. Por lo tanto cada vez que se define un char, este se va a guardar, en memoria, con su representación en hexadecimal.
+
+
+7. Comprender las siguientes definiciones y operaciones. Si al comenzar el programa el sistema asignó la dirección 0xFFA00004 al arreglo x[], ¿Cuál es el valor final del contenido de ptr al finalizar la ejecución del programa? ¿Cuál es el valor final del contenido de la variable 'a' al finalizar el programa? ¿Cuál es la dirección de la variable x[2]?
+main () {
+        int x[3];
+        int *ptr;
+        char a;
+        char *b;
+          x[0] = 1024;
+          x[1] = 32;
+          x[2] = -1;
+        ptr = &x[0];
+        ptr++;
+        ptr++;
+        a = 5;
+        b = &a;
+        printf ("a=%i, lo apuntado por b=%i, el contenido de b=%X, y la direccion de b=%X \n", a, *b, b, &b);
+        
+        *b = 21;
+}
+
+
+
+
+* Al finalizar la ejecución, el contenido de ptr es -1.
+* El valor final de la variable a es 21 en decimal.
+* La dirección de la variable x[2] al finalizar la ejecución es: BaseAddress + sizeof(int) * 2. Por ejemplo, si asumimos que un entero vale 4 bytes la dirección de x[2] es 0xFFA0000C.
+
+
+8. En la programación de sistemas embebidos es muy común leer y escribir registros del hardware.
+
+
+1. Escriba un programa que defina una variable de tipo char.
+2. Asigne la operación shift mencionada arriba a esa variable.
+3. Indique cual es el valor en base 2 de la variable de tipo char.
+4. Indique cual es el valor en decimal.
+
+
+unsigned char left_shift = 1 << 5;
+
+
+El valor en base 2 de la variable es: 0010 0000
+El valor en decimal de la variable es: 32
+
+
+1. Escriba un programa que defina una variable de tipo char.
+2. Asigne a la variable la operación shift mencionada arriba.
+3. Indique cual es el valor en base 2 de la variable de tipo char.
+4. Indique cual es el valor en decimal.
+
+
+unsigned char negated_shift = ~(1 << 5);
+
+
+El valor en base 2 de la variable es: 1101 1111
+El valor en decimal de la variable es: 223
+
+
+Para la siguiente definición:
+
+
+unsigned char x = 11;
+
+
+Indique el valor binario de cada bit de la variable x:
+
+
+bit7	bit6	bit5	bit4	bit3	bit2	bit1	bit0
+0	0	0	0	1	0	1	1
+	
+
+
+
+Se desea ejecutar un bloque de código en C si el bit 3 de la variable x anterior está en 1. Complete la siguiente sentencia condicional if.
+
+
+if ( (x & 0x08) >> 3 )
+printf("el bit3 de la variable registro es 1 \n");
+
+
+Explicación: Primero nos quedamos únicamente con el bit3 de la variable utilizando la operación and, luego desplazamos ese bit al principio (bit0). Si dicho bit era 1 el condicional evaluará en true, caso contrario será falso.
+
+
+
+
+Escriba una sentencia en C para eliminar los bits2, bit1 y bit0 (ponerlos en cero), sin modificar el resto de los bits.
+
+
+x & ~(0b111)
+
+
+x & 0xF0
+
+
+Escriba una sentencia en C para asertar los bits7 y bit6 (ponerlos en uno), sin modificar el resto de los bits.
+
+
+x | 0b11000000
+
+
+9. ¿Qué sucede si quiero almacenar en un registro de 8bits el resultado de esta operación? Si var = 190, ¿por qué motivo esta operación no dará un resultado esperado? (un valor < 255).
+
+
+unsigned char RES;
+unsigned char var;
+RES = var * 500 /190;
+
+
+El resultado de la cuenta es 1F4 y debido a que se puede guardar un byte por char entonces se queda con F4 ya que si quisiéramos guardar el valor real necesitaríamos al menos 2 bytes.
