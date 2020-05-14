@@ -15,7 +15,8 @@ para verificar las implementaciones que se hicieron.
 Para la parte de git haremos lo siguiente :
 
 1. Crear una cuenta en la web de github y enviarnos el nombre de usuario 
-a través del foro consulta o por correo. Nosotros agregaremos el usuario 
+a través de telegram,  foro consulta (no sé si funciona) o por correo. 
+Nosotros agregaremos el usuario 
 al proyecto pse2020 de github, para que tengamos permiso de hacer push 
 a ese repositorio.
 2. Luego de que hayamos sido agregados al proyecto pueden subir los 
@@ -84,7 +85,7 @@ herramientas graficas de git que vienen en Linux, pero via comandos se
 comprende mejor la sintaxis.
 
 Cualquier consulta de esta práctica en git o de la entrega de los tps 
-podemos utilizar el foro consultas.
+podemos utilizar telegram o correo.
 
 Saludos,
 La cátedra
