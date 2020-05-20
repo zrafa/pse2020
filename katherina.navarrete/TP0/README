@@ -1,0 +1,21 @@
+TP0
+karen flores
+katherina navarrete
+-------------------tp0-mastering-arreglo.c--------------------------
+Para compilar 
+gcc tp0-mastering-arreglo.c -o tp0-mastering-arreglo
+
+Para ejecutar se debe colocar los argumentos tp0-mastering-arreglo
+y los caracteres que se deberan mostrar.
+
+./tp0-mastering-arreglo letras
+
+-------------------tp0-mastering-puntero.c--------------------------
+Para compilar 
+gcc tp0-mastering-puntero.c -o tp0-mastering-puntero
+
+Para ejecutar se debe colocar los argumentos tp0-mastering-puntero
+y los caracteres que se deberan mostrar.
+
+./tp0-mastering-puntero letras
+
