@@ -1,0 +1,210 @@
+----------------------------------------------------Trabajo Practico 0------------------------------------------------
+Flores karen, 
+Navarrete Katherina
+----------------------------------------------------------------------------------------------------------------------
+
+ 1.Tipos de datos Básicos en C:
+	.char:este tipo de dato corresponde a los caracteres, elementos de un byte de tamaño.
+		Ejemplo: 
+			char a;
+			a= ' a';
+	.int: este tipo de dato corresponde a los enteros con signo.
+			Ejemplo: 
+				int a;
+				a=10;
+			
+	.long:  este tipo de dato corresponde a los enteros largos
+		Ejemplo: 
+			long a;
+			a= 330000;
+			
+	.float:  este tipo de dato corresponde a los números en punto flotante.
+		Ejemplo: 
+			float a;
+			a=5.3;
+			
+	.double:  este tipo de dato corresponde a los números en punto flotante con mayor presión.
+		Ejemplo: 
+			double a;
+			a=2.36536597;
+
+	. Tambien existen otro tipo de variables en C como short (enteros cortos), 
+	  unsigned int (naturales) y long double (decimales doble con mayor precisión).
+	
+2. La palabra "word" en arquitectura de computadoras es  utilizada para referirse a la unidad de datos que utiliza un procesador. 
+Es decir representa una cadena finitas de bits, los cuales son manejados como un conjunto por la maquina. 
+El tamaño de una palabra es definido al momento de realizar el diseño del ordenador. Este es importante ya que refleja muchos aspectos de la estructura y operaciones de las computadoras.
+
+El lenguaje C no define el tamaño de los objetos de datos de un tipo determinado. Es decir, un entero
+puede ocupar 16 bits en una implementación del compilador, 32 en otra, o aun 64. Un long puede tener,
+o no, más bits que un int. Un short puede ser, o no, más corto que un int. Según K&R, lo único seguro
+es que "un short no es mayor que un int, que a su vez no es mayor que long"
+
+3. El tamaño del tipo de dato int depende de la cantidad de bytes que reserve el compilador y de si es un entero definido como  int, 
+short o long. En una arquitectura de 8 bits, una variable de tipo int ocupa 8 bits, es decir que puede tomar valores entre 0 y 255, pero si representa un número entero con signo, podrá tomar valores entre -127 y 127. Si lo que se define es un short, su tamaño en este tipo de arquitectura es de 1bit. Si lo que se define es un long, su tamaño está restringido a 16bits.
+En una arquitectura de 32bits, se puede representar un int de 32bits, si este entero representa un número sin signo, entonces estará 
+comprendido entre los valores 0 y 4294967295. En caso de representar un número con signo, podrá estar comprendido entre los valores -2147483648 a 2147483647. Si se define un short, su tamaño estará restringido a 16bits, cuyo valor estará comprendido entre 0 y 65535 en caso de no tener signo, o entre -32768 y 32767 si es un número con signo. En cuanto a la definición de un long, su tamaño está restringido a 64bits, y su valor estará comprendido entre 0 y 18446744073709551615, para enteros sin signo, y entre -9223372036854775808 y 9223372036854775807, para enteros con signo.
+En una arquitectura de 64bits, generalmente se utiliza un tamaño de 32bits de un int, respetando los valores que se explicaron anteriormente. 
+En caso de utilizar un int cuyo tamaño es de 64bits, su valor estaría comprendido entre -9223372036854775808 y 9223372036854775807.
+Teniendo en cuenta lo explicado anteriormente, cabe destacar que el lenguaje C no limita el tamaño de una variable a 8 bits, incluso cuando 
+está trabajando con un procesador de 8 bits. Esto significa que una variable en el programa en lenguaje de máquina que ejecuta el microprocesador puede corresponder a múltiples registros o ubicaciones de memoria en el hardware. «Manualmente» administrar variables de múltiples bytes (es decir, a través del lenguaje ensamblador) no parece muy deseable, pero a los compiladores no les importa en absoluto, y hacen el trabajo muy bien.
+				
+4. La diferencia entre la instrucción: printf("a= % i \n",a); y printf("La letra  %c \n",a);  
+ 	%i  indica la convernsión a un entero, en este ejemplo convierte el caracter en el entero correspondiente (el valor númerico de ASCII).
+	%c hace referencia a que la conversión  a caracter. 
+	Por lo tanto el primer printf muestra a=77 mientras que el segundo muestra La letra M.
+
+
+5.
+	.char i;   
+		El tipo de dato char en el lenguaje C utiliza 8 bits (1 byte), el rango numérico de i es de -128 a 127.
+	.unsigned char j;  
+	 	unsigned char indica que el cararter j no posee signo, por lo tanto el rango numérico sera de 0 a 255.
+
+
+6.	 
+	char i = 'a';    El valor decimal de a es 97 y su valor binario es  0110 0001.
+    char j = 77;   El char 77 representa la letra M y su valor binario es 0100 1101.
+	char k = 0x4D;   El 0x4D representa el numero 77, por lo tanto corresponde a la la letra M y su valor binario es 0100 1101.
+	unsigned char m = 'a';    El valor decimal de a es 97 y su valor binario es  0110 0001.
+	unsigned char n = 0x4d;   El 0x4D representa el numero 65, por lo tanto corresponde a la la letra A y su valor binario es 0100 1101.  
+ 	unsigned char p = 'A';  su valor binario es 0100 0001. 
+	
+
+
+	Como se puede observar en las declaraciones anteriores el tipo de dato char no esta restringido a la representacion de caracteres,
+	ya que puede tener valores numericos. Aunque se puede observar que las siguientes declaraciones: char i= 77,  char k = 0x4D; y char ='M'
+	son distintas, la forma en que se almacenan corresponden al mismo patron de bits. 
+
+	
+7.1 Si al comenzar el programa el sistema asignó la dirección 0xFFA00004 al arreglo x[]:
+
+	. El valor final del contenido de ptr al finalizar la ejecución del programa sera: 0xFFA0000C, ya que ptr es un puntero a un entero,
+	 al realizar cada incremento se le suma la el tamaño de el tipo int (4 byte).
+	. El valor final del contenido de la variable a al finalizarr el programa sera: 21 ya que la ultima instrucción consiste en asignarle 
+	  a lo apuntado por b 21 y b esta apuntando a la variable a;
+	. La dirección de la variable x[2] sera: 0xFFA0000C, ya que esta se encuentra 2 * 4 bytes del primer elemento del arreglo.
+
+7.2 
+	unsigned int array[5]; //se declara un arreglo de 5 elementos de tipo entero sin signo
+	array[2] = 99; 			//en la posición 2 del arreglo se guarda el valor 99
+	unsigned int *pointer;  //se declara un puntero de entero sin signo
+	pointer = &array[0];	// pointer apunta a la dirección del primer elemnto del arreglo
+	*(pointer+2) = 99;  	// en la posicion 2 del arreglo se almacena el valor 99
+	pointer = array;		//al puntero se le asigna la direccion del array
+
+8 .Operaciones sobre bits particulares
+
+8.1 main()
+	{
+		char a;
+		a = 1 << 5; // el valor de 1 se desplaza 5 bits a la izquierda
+	}
+
+	1 (decimal) = 0000 0000 0000 0000 0000 0000 0000 0001 (binario) 
+
+	desplazar 5 bits a la izquierda  = 0000 0000 0000 0000 0000 0000 0010 0000 
+	por lo tanto al realizar el desplazamiento se obtiene el valor 32.
+
+8.2 main()
+	{
+		char a;
+		a = ~(1 << 5); // el valor de 1 se desplaza 5 bits a la izquierda y luego se realiza la negación de los bits
+	}
+
+	1 (decimal) = 0000 0000 0000 0000 0000 0000 0000 0001 (binario) 
+
+	desplazar 5 bits a la izquierda  = 0000 0000 0000 0000 0000 0000 0010 0000 
+	negación de los bits =  1111 1111 1111 1111 1111 1111 1101 1111  = -33 (decimal) 
+
+8.3
+	#define BIT3 3
+ 	unsigned char status;	
+	status = 0b 00110101;	
+	status = status | 0xFA; // (1)
+	status = status & 20;   // (2)
+	status |= (1 << 6);		// (3)
+	status &= ~(1 << BIT3)	// (4)
+	status |= (1 << BIT3)	// (5)
+
+	(1) 0011 0101  or
+		1111 1010
+		1111 1111  = 0xFF = 255
+
+	(2) 1111 1111 and
+		0001 0100
+		0001 0100 =0x14 = 20
+
+	(3) 0000 0001 dezplazar a la izquierda
+		0100 0000 or
+		0001 0100
+		0101 0100 =0x54 = 84
+
+	(4) 0000 0001 desplazar 3 a izquierda
+		0000 1000 negación binaria
+		1111 0111 and
+		0101 0100
+		0101 0100 =0x54 = 84
+
+	(5) 0000 0001 desplazar 3 a izquierda
+		0000 1000 or
+		0101 0100
+		0101 1100 =0x5C = 92
+
+8.4 unsigned char x = 11;
+ 	0000 1011
+
+8.5
+char x;
+if ( (x & 8) == 8 ) 
+printf ("el bit 3 de la variable registro es 1 \n");
+
+se eligio el valor 8 ya que este en binario 
+
+0000 1000
+
+Al realizar un and con este numero el unico valor que va a variar es el de bit 3 ya que si este es 1 
+el and colocara un 1 caso contrario colocara un 0. Para el resto de los bits el and genera 0.
+Por lo tanto si el resultado del and es el valor 8 es porque el bit 3 de x es 1
+
+8.6
+char x;
+x = (x & 0xF8);
+
+8.7
+char x;
+x = (x |0xC0);
+
+9. Al guardar un resultado que requiere una cantidad de bits mayor a los que tiene asignado el registro, 
+se producirá una pérdida de bits. Por lo tanto, los bits almacenados en el registro representarán un resultado erróneo.
+
+
+unsigned char RES;
+unsigned char var;
+var = 190;
+RES = var * 500 /190;
+
+Como 190 es menor a el rango permitido por unsigned char var almacena de forma correcta el valor 190.
+Mientras que el resultado correcto de res deberia ser 500, pero esta valor sobre pasa el rango de unsigned char.
+Por lo que el valor almacenado en RES es 244, es decir perdió el bits:
+244 = 1111 0100
+500 = 0001 1111 0100
+
+----------------------------------------------------Parte2_mastering------------------------------------------------
+1.0 Traza
+
+main
+	verifica que tenga 2 argumentos
+	imprime el nombre del progrma y el 1° argumento
+
+	se llama al metodo clear_buffer
+		el cual llama al funcion memset, la cual reemplaza los bytes, indicado por (ANCHO * ALTO) * sizeof(unsigned char), del área de memoria indicado por buffer por ' '.
+    se llama print_text_on_buffer(3, 5, argv[1]);
+
+    se llama a render_buffer();
+    	declara e inicia i en 0
+    	declara un array linea de tamaño 81
+    	declara puntero char text y la asigna la direccion de memomia del array formado por hola
+    	recorre desde i en 0 hasta el valor guardado en la variable ALTO
+		guarda en los primeros 80 bytes del arreglo linea el contenido del arreglo buffer en la posición i*80, e imprime el contenido 			de linea como un string
+
