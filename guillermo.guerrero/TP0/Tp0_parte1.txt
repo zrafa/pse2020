@@ -97,4 +97,4 @@ p fue inicializado con otro valor.
 
 	500 = 111110100
 	
-	Pero como solo estamos limitados a 8 bits C se queda con 11110100 = 244 (que se encuentra dentro del rango)
+	Pero como solo estamos limitados a 8 bits C se queda con 11110100 = 244 (que se encuentra dentro del rango).
