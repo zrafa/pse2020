@@ -96,6 +96,12 @@ void clear_buffer(void)
 {
 	memset(buffer, ' ', (ANCHO * ALTO) * sizeof(unsigned char));
 	/* explique como es que esta funcion limpia el buffer */
+    /* explique como es que esta funcion limpia el buffer */
+    /*
+    buffer  -> punto para llenar el bloque de memoria.
+    ' '     -> el valor que desea ajustar
+    (ANCHO * ALTO) * sizeof(unsigned char) -> el número de bytes que se establece en ese valor
+    */
 }
 
 /* Muestra un texto en pantalla
