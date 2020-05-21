@@ -91,10 +91,10 @@ p fue inicializado con otro valor.
     	var |= 0b11000000;
 
    9. 
-	Sólo si var = 95 el resultado de la operacion podra almacenarse. Sino el valor no puede ser 		almacenado debido a que C establece que char_max es 255 por lo tanto si este número se excede de 	 este rango C tratara de quedarse solo con los bits que esten dentro de ese rango.
+	Sólo si var = 95 el resultado de la operacion podra almacenarse. Sino el valor no puede ser almacenado debido a que C establece que char_max es 255 por lo tanto si este número se excede de este rango C tratara de quedarse solo con los bits que esten dentro de ese rango.
 
 	Si var = 190 el resultado de la operacion dara 244 en lugar de 500 esto es asi porque:
 
 	500 = 111110100
 	
-	Pero como solo estamos limitados a 8 bits C se queda con 11110100 = 244 (que se encuentra dentro 		del rango)
+	Pero como solo estamos limitados a 8 bits C se queda con 11110100 = 244 (que se encuentra dentro del rango)
