@@ -1,0 +1,100 @@
+1. Tipos báscios:
+
+	char a;
+	unsigned char b;
+	signed char c;
+	int d;
+	unsigned int f;
+	short g;
+	unsigned short h;
+	long i;
+	unsigned short j;
+	float k;
+	double l;
+	long double m;
+
+2. La palabra word se refiere al tamaño máximo de bits que puede operar un procesador dentro de sus registros.
+
+3. El tamaño real de los tipos enteros varía según la aplicación. La norma sólo requiere relaciones de tamaño entre los tipos de datos y tamaños mínimos para cada tipo de datos:
+
+Los requisitos de relación son que el largo largo no sea menor que el largo, que no sea menor que el int, que no sea menor que el corto. Como el tamaño de char es siempre el tipo de datos mínimo admitido, ningún otro tipo de datos puede ser más pequeño.
+
+El tipo int debe ser el tipo entero con el que el procesador de destino trabaje más eficientemente.
+
+4. La diferencia esta en el operador de prinf:
+ %i El argumento se convierte en notación singed int 
+ %c El argumento es convertido a unsigned char y el caracter resultante es escrito.
+El valor númerico de la variable "a" es 77 que se corresponde con su valor en la tabla ascii.
+
+5. El rango númerico para:
+	char es           [-128, 127] o [0, 255] ***
+	unsigned char     [0, 255]
+
+*** Si el valor de un objeto de tipo char se trata como un entero con signo cuando se utiliza en una expresión, el valor de CHAR_MIN será -128 y el valor de CHAR_MAX será 127. De lo contrario, el valor de CHAR_MIN será 0 y el valor de CHAR_MAX será 255.
+
+6. El valor binario de:
+	
+	i = 1100001 -> 97
+	j = 1001101 -> 77 
+	k = 1001101 -> 77
+	m = 1100001 -> 97 
+	n = 1001101 -> 77
+	p = 1000001 -> 65
+
+Si bien las variables fueron declaradas de distintos tipos dentro de la memoria sus contenidos son almacenados dentro de esta por su valor númerico, es decir que si en una variable se desea almacenar la letra "M" dentro de la memoria se almacenara 11001101 y no M.
+
+i,j,k fueron declaradas como tipo char, m,n,p como tipo unsigned char. 
+
+i,m y p fueron inicializadas con el mismo valor.
+
+j,k y n fueron inicializadas con el mismo valor.
+
+p fue inicializado con otro valor.
+
+
+7. Al finalizar la ejecución del programa:
+	
+	El valor final de ptr sera -1.
+	
+	El valor de a sera 5.
+
+	La dirección de la variable x[2] será = 0xFFA00004 + 2*(sizeof(int)).
+
+8. 	
+   8.1
+	char var = 'M'
+	valor binario = 1001101 	valor decimal = 77
+	Aplico opeacion (var << 1)
+	valor binario = 10011010	valor decimal = 154
+
+   8.2
+	char var = 'M'
+	valor binario = 1001101 	valor decimal = 77
+	Aplico opeacion ~(var << 1)
+	valor binario = -10011011	valor decimal = -155
+
+   8.4
+	b7	b6	b6	b4	b3	b2	b1	b0
+	0	0	0	0	1	1	0	1	
+
+   8.5
+	unsigned char var = 11;
+	if ((var & 0b1000)== 0b1000) printf ("el bit3 de la variable registro es 1 \n");
+
+   8.6
+	unsigned int var = 11;
+    	var = var >> 3;
+    	var = var << 3;
+
+   8.7 
+	unsigned int var = 11;
+    	var |= 0b11000000;
+
+   9. 
+	Sólo si var = 95 el resultado de la operacion podra almacenarse. Sino el valor no puede ser 		almacenado debido a que C establece que char_max es 255 por lo tanto si este número se excede de 	 este rango C tratara de quedarse solo con los bits que esten dentro de ese rango.
+
+	Si var = 190 el resultado de la operacion dara 244 en lugar de 500 esto es asi porque:
+
+	500 = 111110100
+	
+	Pero como solo estamos limitados a 8 bits C se queda con 11110100 = 244 (que se encuentra dentro 		del rango)
