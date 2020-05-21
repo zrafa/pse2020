@@ -79,12 +79,14 @@ void draw_char_on_buffer(unsigned char x, unsigned char y, char c,
 		col = *(fp+i);
 		int bit = 1 ;
 		for (j = 0; j < 8; j++) {
+			//printf("%i -- ",col);
+			//printf("%i \n ",bit);
 			if ((col & bit) == bit ) {
 				draw_pixel_on_buffer(x+i, y+j, 1);
 			} else {
 				draw_pixel_on_buffer(x+i, y+j, 0);
-				bit =bit*2;
 			}
+			bit =bit*2;
 		}
 	}
 }
