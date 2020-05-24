@@ -1,0 +1,79 @@
+1.0 La primera parte es de análisis. Si bien el programa no es demasiado extenso
+intente realizar una traza de cómo funciona el programa, comenzando
+con main y yendo por las diferentes funciones.
+
+--------------------------------------------------------------------------------
+main
+si se ejecutó sin pasar argumento entonces saldrá por pantalla 
+Error: se necesita al menos un argumento.
+
+Si se ejecutó con una o dos palabra como argumento entonces se llama a clear_buffer() y
+luego se envia las palabras a print_text_on_buffer() y finalmente se llama a la función
+render_buffer()
+
+
+clear_buffer()
+
+
+print_text_on_buffer()
+recibe como parámetros la palabra y además las coordenadas desde donde se
+comenzará a escribir. La función comenzará a iterar (a traves de un puntero) por cada
+caracter de la palabra, es decir, cada 8 bits en esta implementación y luego se llamará
+a la funcion draw_char_on_buffer
+
+    draw_char_on_buffer()
+    recibe como parámetros el carácter y las coordenadas donde se escribirá el 
+    carácter. La función calcula la posición inicial de la representación del caracter
+    en el font.h y luego comienza a interpretar ese contenido para luego decidir que pixel
+    "pintar" y cual no, esta información se pasara a la funcion draw_pixel_on_buffer
+
+    draw_pixel_on_buffer()
+    recibe como parámetro las coordenadas de cada pixel y un int que indicará si ese
+    pixel se pinta o no. La función según la condición del pixel irá armando un arreglo
+    llamado buffer que representará el espacio donde se escribirá la palabra pero visto como
+    pixeles.
+
+
+
+render_buffer()
+esta función tomará cada 80 caracteres del buffer y los guardará en el arreglo linea, esto se
+se repetirá 24 veces.
+
+
+
+
+main--->clear_buffer
+    --->print_text_on_buffer--->draw_char_on_buffer--->draw_pixel_on_buffer
+                                                   ...
+                                                   --->draw_pixel_on_buffer
+
+                            ...
+                            --->draw_char_on_buffer--->draw_pixel_on_buffer
+                                                   ...
+                                                   --->draw_pixel_on_buffer
+                                                    
+    --->render_buffer
+
+
+--------------------------------------------------------------------------------
+
+2. Ese ejercicio contiene un Makefile muy sencillo. Lea su contenido
+y trate de entender su uso con ayuda de bibliografía (Taller de C
+o internet). Consulte todas las dudas.
+
+--------------------------------------------------------------------------------
+ 
+Un makefile o Makefile es un archivo que contiene una guia de actividades para make.
+Al ser invocado, el programa make buscará un archivo con alguno de esos nombres en
+el directorio actual, y si lo encuentra, ejecutará las tareas que se indican allí.
+Se utiliza cuando se construyen proyectos complejos, formados por muchos fuentes
+con interdependencias complejas, o cuando se requieren diferentes opciones del
+proceso de compilación (o aun  diferentes compiladores).
+
+En nuestro caso contiene la directivas de compilacion y el borrado del archivo
+ejecutable.
+
+
+
+--------------------------------------------------------------------------------
+
