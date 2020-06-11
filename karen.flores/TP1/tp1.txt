@@ -278,7 +278,7 @@ Al igual que con la arquitectura AVR, el tamaño de las secciones bss, dec y hex
 00002000 g       *ABS*	00000000 __TEXT_REGION_LENGTH__
 00800060 g     O .data	00000002 punt
 
-En la Tabla de Símbolos que resulta luego de ejecutar avr-objdump -t, se puede observar que el símbolo que ocupa mayor espacio es arr, el cuál hace referencia al arreglo definido en el programa, con un tamaño de 0x1f4, lo que significa que ocupa 3 bytes de memoria.
+En la Tabla de Símbolos que resulta luego de ejecutar avr-objdump -t, se puede observar que el símbolo que ocupa mayor espacio es arr, el cuál hace referencia al arreglo definido en el programa, con un tamaño de 0x1f4, lo que significa que ocupa 500 bytes de memoria.
 
 9) En el código en lenguaje ensamblador AVR lo primero en ejecutarse no es el main() es <__ctors_end>.
 El main() se ejecutará luego de que el salto correspondiente a la instrucción en la posisción de memoria 00000026 no se realice. Anteriormente no se realiza ninguna llamada al mismo.
