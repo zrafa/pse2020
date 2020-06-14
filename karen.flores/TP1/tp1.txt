@@ -1,0 +1,287 @@
+Trabajo Practico 1
+-------------------
+2.a No se utiliza el printf porque esta instrucción se encarga de imprimir por consola 
+el mensaje que corresponda, cuando se realiza la ejecución. Pero en nuestro caso al estar
+utilizando cross no sabemos cual va a ser el entorno en el que se va a ejecutar, por lo tanto
+no sabemos si la arquitectura en la que va a ser ejecutado podra mostrar el mensaje.
+
+3.a Al utilizar el comando file:
+	file hello_avr se obtuvo: 
+		hello_avr: ELF 32-bit LSB executable, Atmel AVR 8-bit, version 1 (SYSV), statically linked, not stripped
+	file hello_mips se obtuvo:
+		hello_mips: ELF 32-bit MSB executable, MIPS, MIPS32 rel2 version 1 (SYSV), dynamically linked, interpreter /lib/ld.so.1, for 			GNU/Linux 3.2.0, BuildID[sha1]=13cf2458f0271d0a58892ae5e751afdb37945803, not stripped
+
+Por lo tanto se puede afirmar que la compilación se realizo correctamente para cada compilador.
+4) El paquete binutils-avr se instaló en la siguiente ruta: usr/share/doc
+
+5) Las bibliotecas y encabezados están en la carpeta avr-libc instalada en la siguiente ruta: usr/share/doc
+
+6) El compilador avr-gcc se instaló en la siguiente ruta: /usr/bin
+
+7) a) Decodificación del programa binario ELF:
+
+hello_avr:     formato del fichero elf32-avr
+
+
+Desensamblado de la sección .text:
+
+00000000 <__ctors_end>:
+   0:	10 e0       	ldi	r17, 0x00	; 0
+   2:	a0 e6       	ldi	r26, 0x60	; 96
+   4:	b0 e0       	ldi	r27, 0x00	; 0
+   6:	e8 e0       	ldi	r30, 0x08	; 8
+   8:	f1 e0       	ldi	r31, 0x01	; 1
+   a:	03 c0       	rjmp	.+6      	; 0x12 <__zero_reg__+0x11>
+   c:	c8 95       	lpm
+   e:	31 96       	adiw	r30, 0x01	; 1
+  10:	0d 92       	st	X+, r0
+  12:	ae 36       	cpi	r26, 0x6E	; 110
+  14:	b1 07       	cpc	r27, r17
+  16:	d1 f7       	brne	.-12     	; 0xc <__zero_reg__+0xb>
+
+00000018 <__do_clear_bss>:
+  18:	21 e0       	ldi	r18, 0x01	; 1
+  1a:	ae e6       	ldi	r26, 0x6E	; 110
+  1c:	b0 e0       	ldi	r27, 0x00	; 0
+  1e:	01 c0       	rjmp	.+2      	; 0x22 <.do_clear_bss_start>
+
+00000020 <.do_clear_bss_loop>:
+  20:	1d 92       	st	X+, r1
+
+00000022 <.do_clear_bss_start>:
+  22:	ad 36       	cpi	r26, 0x6D	; 109
+  24:	b2 07       	cpc	r27, r18
+  26:	e1 f7       	brne	.-8      	; 0x20 <.do_clear_bss_loop>
+
+00000028 <main>:
+  28:	cf 93       	push	r28
+  2a:	df 93       	push	r29
+  2c:	cd b7       	in	r28, 0x3d	; 61
+  2e:	de b7       	in	r29, 0x3e	; 62
+  30:	66 97       	sbiw	r28, 0x16	; 22
+  32:	0f b6       	in	r0, 0x3f	; 63
+  34:	f8 94       	cli
+  36:	de bf       	out	0x3e, r29	; 62
+  38:	0f be       	out	0x3f, r0	; 63
+  3a:	cd bf       	out	0x3d, r28	; 61
+  3c:	26 e0       	ldi	r18, 0x06	; 6
+  3e:	e2 e6       	ldi	r30, 0x62	; 98
+  40:	f0 e0       	ldi	r31, 0x00	; 0
+  42:	8c 2f       	mov	r24, r28
+  44:	9d 2f       	mov	r25, r29
+  46:	01 96       	adiw	r24, 0x01	; 1
+  48:	a8 2f       	mov	r26, r24
+  4a:	b9 2f       	mov	r27, r25
+  4c:	01 90       	ld	r0, Z+
+  4e:	0d 92       	st	X+, r0
+  50:	2a 95       	dec	r18
+  52:	e1 f7       	brne	.-8      	; 0x4c <__SREG__+0xd>
+  54:	86 e0       	ldi	r24, 0x06	; 6
+  56:	e8 e6       	ldi	r30, 0x68	; 104
+  58:	f0 e0       	ldi	r31, 0x00	; 0
+  5a:	ac 2f       	mov	r26, r28
+  5c:	bd 2f       	mov	r27, r29
+  5e:	17 96       	adiw	r26, 0x07	; 7
+  60:	01 90       	ld	r0, Z+
+  62:	0d 92       	st	X+, r0
+  64:	8a 95       	dec	r24
+  66:	e1 f7       	brne	.-8      	; 0x60 <__SREG__+0x21>
+  68:	8c 2f       	mov	r24, r28
+  6a:	9d 2f       	mov	r25, r29
+  6c:	0d 96       	adiw	r24, 0x0d	; 13
+  6e:	2c 2f       	mov	r18, r28
+  70:	3d 2f       	mov	r19, r29
+  72:	2f 5f       	subi	r18, 0xFF	; 255
+  74:	3f 4f       	sbci	r19, 0xFF	; 255
+  76:	62 2f       	mov	r22, r18
+  78:	73 2f       	mov	r23, r19
+  7a:	3d d0       	rcall	.+122    	; 0xf6 <strcpy>
+  7c:	8c 2f       	mov	r24, r28
+  7e:	9d 2f       	mov	r25, r29
+  80:	0d 96       	adiw	r24, 0x0d	; 13
+  82:	28 2f       	mov	r18, r24
+  84:	39 2f       	mov	r19, r25
+  86:	e2 2f       	mov	r30, r18
+  88:	f3 2f       	mov	r31, r19
+  8a:	01 90       	ld	r0, Z+
+  8c:	00 20       	and	r0, r0
+  8e:	e9 f7       	brne	.-6      	; 0x8a <__SREG__+0x4b>
+  90:	8e 2f       	mov	r24, r30
+  92:	9f 2f       	mov	r25, r31
+  94:	01 97       	sbiw	r24, 0x01	; 1
+  96:	82 1b       	sub	r24, r18
+  98:	93 0b       	sbc	r25, r19
+  9a:	2c 2f       	mov	r18, r28
+  9c:	3d 2f       	mov	r19, r29
+  9e:	23 5f       	subi	r18, 0xF3	; 243
+  a0:	3f 4f       	sbci	r19, 0xFF	; 255
+  a2:	82 0f       	add	r24, r18
+  a4:	93 1f       	adc	r25, r19
+  a6:	20 e2       	ldi	r18, 0x20	; 32
+  a8:	30 e0       	ldi	r19, 0x00	; 0
+  aa:	e8 2f       	mov	r30, r24
+  ac:	f9 2f       	mov	r31, r25
+  ae:	31 83       	std	Z+1, r19	; 0x01
+  b0:	20 83       	st	Z, r18
+  b2:	2c 2f       	mov	r18, r28
+  b4:	3d 2f       	mov	r19, r29
+  b6:	29 5f       	subi	r18, 0xF9	; 249
+  b8:	3f 4f       	sbci	r19, 0xFF	; 255
+  ba:	8c 2f       	mov	r24, r28
+  bc:	9d 2f       	mov	r25, r29
+  be:	0d 96       	adiw	r24, 0x0d	; 13
+  c0:	62 2f       	mov	r22, r18
+  c2:	73 2f       	mov	r23, r19
+  c4:	0b d0       	rcall	.+22     	; 0xdc <strcat>
+  c6:	80 e0       	ldi	r24, 0x00	; 0
+  c8:	90 e0       	ldi	r25, 0x00	; 0
+  ca:	66 96       	adiw	r28, 0x16	; 22
+  cc:	0f b6       	in	r0, 0x3f	; 63
+  ce:	f8 94       	cli
+  d0:	de bf       	out	0x3e, r29	; 62
+  d2:	0f be       	out	0x3f, r0	; 63
+  d4:	cd bf       	out	0x3d, r28	; 61
+  d6:	df 91       	pop	r29
+  d8:	cf 91       	pop	r28
+  da:	08 95       	ret
+
+000000dc <strcat>:
+  dc:	e6 2f       	mov	r30, r22
+  de:	f7 2f       	mov	r31, r23
+  e0:	a8 2f       	mov	r26, r24
+  e2:	b9 2f       	mov	r27, r25
+  e4:	0d 90       	ld	r0, X+
+  e6:	00 20       	and	r0, r0
+  e8:	e9 f7       	brne	.-6      	; 0xe4 <strcat+0x8>
+  ea:	11 97       	sbiw	r26, 0x01	; 1
+  ec:	01 90       	ld	r0, Z+
+  ee:	0d 92       	st	X+, r0
+  f0:	00 20       	and	r0, r0
+  f2:	e1 f7       	brne	.-8      	; 0xec <strcat+0x10>
+  f4:	08 95       	ret
+
+000000f6 <strcpy>:
+  f6:	e6 2f       	mov	r30, r22
+  f8:	f7 2f       	mov	r31, r23
+  fa:	a8 2f       	mov	r26, r24
+  fc:	b9 2f       	mov	r27, r25
+  fe:	01 90       	ld	r0, Z+
+ 100:	0d 92       	st	X+, r0
+ 102:	00 20       	and	r0, r0
+ 104:	e1 f7       	brne	.-8      	; 0xfe <strcpy+0x8>
+ 106:	08 95       	ret
+
+Desensamblado de la sección .data:
+
+00800060 <__data_start>:
+  800060:	62 00       	.word	0x0062	; ????
+  800062:	48 65       	ori	r20, 0x58	; 88
+  800064:	6c 6c       	ori	r22, 0xCC	; 204
+  800066:	6f 00       	.word	0x006f	; ????
+  800068:	57 6f       	ori	r21, 0xF7	; 247
+  80006a:	72 6c       	ori	r23, 0xC2	; 194
+  80006c:	64 00       	.word	0x0064	; ????
+
+Desensamblado de la sección .bss:
+
+0080006e <__bss_start>:
+	...
+
+Desensamblado de la sección .comment:
+
+00000000 <_end-0x80016d>:
+   0:	47 43       	sbci	r20, 0x37	; 55
+   2:	43 3a       	cpi	r20, 0xA3	; 163
+   4:	20 28       	or	r2, r0
+   6:	47 4e       	sbci	r20, 0xE7	; 231
+   8:	55 29       	or	r21, r5
+   a:	20 35       	cpi	r18, 0x50	; 80
+   c:	2e 34       	cpi	r18, 0x4E	; 78
+   e:	2e 30       	cpi	r18, 0x0E	; 14
+
+
+
+ b) AVR
+
+Al utilizar el comando avr-size se obtuvo la siguiente información acerca del espacio que ocupará el programa en memoria: 
+	
+   text    data    bss	    dec	    hex	   filename
+    264	     14	    255	    533	    215	   hello_avr
+
+El tamaño total del programa es 533, de los cuales los datos ocupan 269 (tamaño obtenido de la suma de las secciones data + bss) y el código ocupa 264, tamaño obtenido de la sección text.
+
+Al aumentar el tamaño del arreglo a 500 se obtuvieron los siguientes resultados:
+
+   text	   data	    bss	    dec	    hex	   filename
+    264	     14	    500	    778	    30a	   hello_avr
+
+Se puede observar que cambió la sección bss, dado que esta sección indica el tamaño del arreglo definido como variable global, aumentando al valor del tamaño definido en el programa. Esto también produjo que aumentara la sección dec y hex, las cuáles indican el tamaño total del programa. Las secciones aumentaron 245 bytes.
+
+ c) MIPS
+
+Al utilizar el comando mips-linux-gnu-size se obtuvo la siguiente información acerca del espacio que ocupará el programa en memoria:
+
+   text	   data	    bss	    dec	    hex	  filename
+   2375	    136	    272	   2783	    adf	  hello_mips
+
+El tamaño total del programa es 2783, de los cuales los datos ocupan 408 (tamaño obtenido de la suma de las secciones data + bss) y el código ocupa 2375, tamaño obtenido de la sección text.
+
+Al aumentar el tamaño del arreglo a 500 se obtuvieron los siguientes resultados:
+
+   text	   data	    bss	    dec	    hex	   filename
+   2375	    136	    516	   3027	    bd3	   hello_mips
+
+Al igual que con la arquitectura AVR, el tamaño de las secciones bss, dec y hex cambiaron. En este caso bss aumentó 244 bytes, provocando que el tamaño total aumente la misma cantidad de bytes (244). 
+
+8) SYMBOL TABLE:
+00000000 l    d  .text	00000000 .text
+00800060 l    d  .data	00000000 .data
+0080006e l    d  .bss	00000000 .bss
+00000000 l    d  .comment	00000000 .comment
+00000000 l    df *ABS*	00000000 _clear_bss.o
+00000022 l       .text	00000000 .do_clear_bss_start
+00000020 l       .text	00000000 .do_clear_bss_loop
+00000000 l    df *ABS*	00000000 hello_world.c
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+0000003f l       *ABS*	00000000 __SREG__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+000000f6 g     F .text	00000012 strcpy
+0080006e g     O .bss	000001f4 arr
+0000ffa0 g       *ABS*	00000000 __DATA_REGION_LENGTH__
+00000000 g       .text	00000000 __trampolines_start
+00000108 g       .text	00000000 _etext
+00000116 g       *ABS*	00000000 __data_load_end
+00000000 g       .text	00000000 __trampolines_end
+00000108 g       *ABS*	00000000 __data_load_start
+00000000 g       .text	00000000 __dtors_end
+00800262 g       .bss	00000000 __bss_end
+00000400 g       *ABS*	00000000 __LOCK_REGION_LENGTH__
+000000dc g     F .text	0000001a strcat
+00000018 g       .text	00000010 .hidden __do_clear_bss
+00810000 g       .comment	00000000 __eeprom_end
+0080006e g       .data	00000000 __data_end
+00000400 g       *ABS*	00000000 __SIGNATURE_REGION_LENGTH__
+00000000 g       .text	00000000 __ctors_start
+00000000 g       .text	00000018 .hidden __do_copy_data
+0080006e g       .bss	00000000 __bss_start
+00000028 g     F .text	000000b4 main
+00000400 g       *ABS*	00000000 __USER_SIGNATURE_REGION_LENGTH__
+00000000 g       .text	00000000 __dtors_start
+00000000 g       .text	00000000 __ctors_end
+0080006e g       .data	00000000 _edata
+00800262 g       .comment	00000000 _end
+00010000 g       *ABS*	00000000 __EEPROM_REGION_LENGTH__
+00800060 g       .data	00000000 __data_start
+00000400 g       *ABS*	00000000 __FUSE_REGION_LENGTH__
+00002000 g       *ABS*	00000000 __TEXT_REGION_LENGTH__
+00800060 g     O .data	00000002 punt
+
+En la Tabla de Símbolos que resulta luego de ejecutar avr-objdump -t, se puede observar que el símbolo que ocupa mayor espacio es arr, el cuál hace referencia al arreglo definido en el programa, con un tamaño de 0x1f4, lo que significa que ocupa 500 bytes de memoria.
+
+9) En el código en lenguaje ensamblador AVR lo primero en ejecutarse no es el main() es <__ctors_end>.
+El main() se ejecutará luego de que el salto correspondiente a la instrucción en la posisción de memoria 00000026 no se realice. Anteriormente no se realiza ninguna llamada al mismo.
+El código de main() comienza en la dirección de memoria 00000028.
+Las instrucciones anteriores a main se encargan de guardar en memoria las constantes y variables definidas en el programa.
+

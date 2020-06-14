@@ -1,0 +1,327 @@
+Trabajo Practico 1
+
+
+Ejercicio 1-------------------------------------------------------------------------------------------
+MIPS
+sudo apt-get install gcc-mips-linux-gnu
+sudo apt-get install binutils-mips-linux-gnu
+sudo apt-get install libc6-dev-mips-cross
+
+AVR
+sudo apt-get install gcc-avr
+sudo apt-get install binutils-avr avr-libc
+
+
+Ejercicio 2-------------------------------------------------------------------------------------------
+No es util usar la funcion printf porque esta se encarga de imprimir por consola un mensaje
+cuando se encuentra en ejecución el programa, pero no sabemos si en el sistema embebido 
+destino (target machine o target computer) se tiene o no consola.
+
+Ejercicio 3-------------------------------------------------------------------------------------------
+file hello-avr
+hello-avr: ELF 32-bit LSB executable, Atmel AVR 8-bit, version 1 (SYSV), statically linked,
+not stripped
+
+file hello-mips
+hello-mips: ELF 32-bit MSB executable, MIPS, MIPS32 rel2 version 1 (SYSV), dynamically linked,
+interpreter /lib/ld.so.1, for GNU/Linux 3.2.0, BuildID[sha1]=473f8f140b3a7a3077abc7e808a62368747a6f16,
+not stripped
+
+Ejercicio 4-------------------------------------------------------------------------------------------
+
+dpkg -L mc lista los ficheros instalados en el sistema, que pertenecen al paquete mc.
+
+
+dpkg -L binutils-avr
+https://pastebin.com/TsMLqZKs
+
+
+/usr/share
+/usr/share/doc
+/usr/share/doc/binutils-avr
+/usr/share/doc/binutils-avr/README.Debian
+/usr/share/doc/binutils-avr/changelog.Debian.gz
+/usr/share/doc/binutils-avr/copyright
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/avr-addr2line.1.gz
+/usr/share/man/man1/avr-ar.1.gz
+/usr/share/man/man1/avr-as.1.gz
+/usr/share/man/man1/avr-c++filt.1.gz
+/usr/share/man/man1/avr-dlltool.1.gz
+/usr/share/man/man1/avr-elfedit.1.gz
+/usr/share/man/man1/avr-gprof.1.gz
+/usr/share/man/man1/avr-ld.1.gz
+/usr/share/man/man1/avr-nlmconv.1.gz
+/usr/share/man/man1/avr-nm.1.gz
+/usr/share/man/man1/avr-objcopy.1.gz
+/usr/share/man/man1/avr-objdump.1.gz
+/usr/share/man/man1/avr-ranlib.1.gz
+/usr/share/man/man1/avr-readelf.1.gz
+/usr/share/man/man1/avr-size.1.gz
+/usr/share/man/man1/avr-strings.1.gz
+/usr/share/man/man1/avr-strip.1.gz
+/usr/share/man/man1/avr-windmc.1.gz
+/usr/share/man/man1/avr-windres.1.gz
+/usr/bin/avr-ar
+/usr/bin/avr-as
+/usr/bin/avr-ld
+
+
+Ejercicio 5-------------------------------------------------------------------------------------------
+
+dpkg -L avr-libc  
+https://pastebin.com/Z8MWF80K
+
+/usr/share/doc
+/usr/share/doc/avr-libc
+/usr/share/doc/avr-libc/README
+/usr/share/doc/avr-libc/avr-libc-user-manual
+/usr/share/doc/avr-libc/avr-libc-user-manual/FAQ.html
+
+
+Ejercicio 6-------------------------------------------------------------------------------------------
+
+dpkg -L gcc-avr
+https://pastebin.com/FasYFJFW
+
+/usr/share
+/usr/share/doc
+/usr/share/doc/gcc-avr
+/usr/share/doc/gcc-avr/README.Debian
+/usr/share/doc/gcc-avr/changelog.Debian.gz
+/usr/share/doc/gcc-avr/copyright
+
+
+Ejercicio 7-a-----------------------------------------------------------------------------------------
+
+avr-objdump -D hello-avr
+----------------------------
+
+
+hello-avr:     formato del fichero elf32-avr
+
+
+Desensamblado de la sección .text:
+
+00000000 <__ctors_end>:
+   0:	10 e0       	ldi	r17, 0x00	; 0
+   2:	a0 e6       	ldi	r26, 0x60	; 96
+   4:	b0 e0       	ldi	r27, 0x00	; 0
+   6:	e0 e7       	ldi	r30, 0x70	; 112
+   8:	f0 e0       	ldi	r31, 0x00	; 0
+   a:	03 c0       	rjmp	.+6      	; 0x12 <__zero_reg__+0x11>
+   c:	c8 95       	lpm
+   e:	31 96       	adiw	r30, 0x01	; 1
+  10:	0d 92       	st	X+, r0
+  12:	a8 36       	cpi	r26, 0x68	; 104
+  14:	b1 07       	cpc	r27, r17
+  16:	d1 f7       	brne	.-12     	; 0xc <__zero_reg__+0xb>
+
+00000018 <__do_clear_bss>:
+  18:	21 e0       	ldi	r18, 0x01	; 1
+  1a:	a8 e6       	ldi	r26, 0x68	; 104
+  1c:	b0 e0       	ldi	r27, 0x00	; 0
+  1e:	01 c0       	rjmp	.+2      	; 0x22 <.do_clear_bss_start>
+
+00000020 <.do_clear_bss_loop>:
+  20:	1d 92       	st	X+, r1
+
+00000022 <.do_clear_bss_start>:
+  22:	a7 36       	cpi	r26, 0x67	; 103
+  24:	b2 07       	cpc	r27, r18
+  26:	e1 f7       	brne	.-8      	; 0x20 <.do_clear_bss_loop>
+
+00000028 <main>:
+  28:	cf 93       	push	r28
+  2a:	df 93       	push	r29
+  2c:	00 d0       	rcall	.+0      	; 0x2e <main+0x6>
+  2e:	00 d0       	rcall	.+0      	; 0x30 <main+0x8>
+  30:	00 d0       	rcall	.+0      	; 0x32 <main+0xa>
+  32:	cd b7       	in	r28, 0x3d	; 61
+  34:	de b7       	in	r29, 0x3e	; 62
+  36:	1a 82       	std	Y+2, r1	; 0x02
+  38:	19 82       	std	Y+1, r1	; 0x01
+  3a:	84 e0       	ldi	r24, 0x04	; 4
+  3c:	90 e0       	ldi	r25, 0x00	; 0
+  3e:	9c 83       	std	Y+4, r25	; 0x04
+  40:	8b 83       	std	Y+3, r24	; 0x03
+  42:	82 e0       	ldi	r24, 0x02	; 2
+  44:	90 e0       	ldi	r25, 0x00	; 0
+  46:	9e 83       	std	Y+6, r25	; 0x06
+  48:	8d 83       	std	Y+5, r24	; 0x05
+  4a:	2b 81       	ldd	r18, Y+3	; 0x03
+  4c:	3c 81       	ldd	r19, Y+4	; 0x04
+  4e:	8d 81       	ldd	r24, Y+5	; 0x05
+  50:	9e 81       	ldd	r25, Y+6	; 0x06
+  52:	82 0f       	add	r24, r18
+  54:	93 1f       	adc	r25, r19
+  56:	9c 83       	std	Y+4, r25	; 0x04
+  58:	8b 83       	std	Y+3, r24	; 0x03
+  5a:	80 e0       	ldi	r24, 0x00	; 0
+  5c:	90 e0       	ldi	r25, 0x00	; 0
+  5e:	26 96       	adiw	r28, 0x06	; 6
+  60:	0f b6       	in	r0, 0x3f	; 63
+  62:	f8 94       	cli
+  64:	de bf       	out	0x3e, r29	; 62
+  66:	0f be       	out	0x3f, r0	; 63
+  68:	cd bf       	out	0x3d, r28	; 61
+  6a:	df 91       	pop	r29
+  6c:	cf 91       	pop	r28
+  6e:	08 95       	ret
+
+Desensamblado de la sección .data:
+
+00800060 <__data_start>:
+  800060:	62 00       	.word	0x0062	; ????
+  800062:	68 6f       	ori	r22, 0xF8	; 248
+  800064:	6c 61       	ori	r22, 0x1C	; 28
+	...
+
+Desensamblado de la sección .bss:
+
+00800068 <__bss_start>:
+	...
+
+Desensamblado de la sección .comment:
+
+00000000 <_end-0x800167>:
+   0:	47 43       	sbci	r20, 0x37	; 55
+   2:	43 3a       	cpi	r20, 0xA3	; 163
+   4:	20 28       	or	r2, r0
+   6:	47 4e       	sbci	r20, 0xE7	; 231
+   8:	55 29       	or	r21, r5
+   a:	20 35       	cpi	r18, 0x50	; 80
+   c:	2e 34       	cpi	r18, 0x4E	; 78
+   e:	2e 30       	cpi	r18, 0x0E	; 14
+	...
+
+
+Ejercicio 7-b-----------------------------------------------------------------------------------------
+
+El campo "text" muestra el tamaño del segmento Text
+El segmento de texto es el área de memoria que contiene las instrucciones de máquina que
+ejecuta la CPU.
+
+"data" muestra el tamaño del segmento "Initialized Data"
+En este segmento se almacenan todas las variables globales o variables estáticas que fueron
+inicializadas.
+
+"bss" muestra el tamaño del segmento "Uninitialized Data" o "BSS"
+Este segmento contiene todas las variables globales y variables estáticas que fueron
+inicializadas a cero o no fueron inicializadas.
+
+"dec" muestra la suma de los tamaños de los tres segmentos juntos
+
+"hex" indica el mismo valor de "dec" en hexadecimal
+
+"filename" el nombre del archivo.
+
+
+avr-size hello-avr
+
+   text	   data	    bss	    dec	    hex	filename
+    112	      8	    255	    375	    177	hello-avr
+
+
+Luego de modificar el tamaño del arreglo a 300, se modifica el segmento "bss" y con ello "dec" y "hex"
+
+   text	   data	    bss	    dec	    hex	filename
+    112	      8	    300	    420	    1a4	hello-avr
+
+
+
+
+Ejercicio 7-c-----------------------------------------------------------------------------------------
+
+¿Porque bss contiene 272 y no 255 (tiene 16/17 de más)?
+
+mips-linux-gnu-size hello-mips
+
+   text	   data	    bss	    dec	    hex	filename
+   1879	    116	    272	   2267	    8db	hello-mips
+
+Luego de modificar el tamaño del arreglo a 300, se modifica el segmento bss y con ello "dec" y "hex"
+
+text	   data	    bss	    dec	    hex	filename
+   1879	    116	    316	   2311	    907	hello-mips
+
+
+
+
+
+
+Muestra información sumaria de las cabeceras de sección del fichero objeto.
+
+mips-linux-gnu-objdump -h hello-mips
+avr-objdump -h hello-avr
+
+
+
+Ejercicio 8-------------------------------------------------------------------------------------------
+
+avr-objdump -t hello-avr
+
+El simbolo que ocupa mas espacio es el array, es decir, la variable global que 
+definí con ese nombre, el cual tiene un tamaño de 255byte que en hex es 000000ff
+
+00800068 g     O .bss	000000ff array
+
+
+
+hello-avr:     formato del fichero elf32-avr
+
+SYMBOL TABLE:
+00000000 l    d  .text	00000000 .text
+00800060 l    d  .data	00000000 .data
+00800068 l    d  .bss	00000000 .bss
+00000000 l    d  .comment	00000000 .comment
+00000000 l    df *ABS*	00000000 _clear_bss.o
+00000022 l       .text	00000000 .do_clear_bss_start
+00000020 l       .text	00000000 .do_clear_bss_loop
+00000000 l    df *ABS*	00000000 hello.c
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+0000003f l       *ABS*	00000000 __SREG__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+0000ffa0 g       *ABS*	00000000 __DATA_REGION_LENGTH__
+00000000 g       .text	00000000 __trampolines_start
+00000070 g       .text	00000000 _etext
+00000078 g       *ABS*	00000000 __data_load_end
+00000000 g       .text	00000000 __trampolines_end
+00000070 g       *ABS*	00000000 __data_load_start
+00000000 g       .text	00000000 __dtors_end
+00800167 g       .bss	00000000 __bss_end
+00000400 g       *ABS*	00000000 __LOCK_REGION_LENGTH__
+00000018 g       .text	00000010 .hidden __do_clear_bss
+00810000 g       .comment	00000000 __eeprom_end
+00800068 g       .data	00000000 __data_end
+00000400 g       *ABS*	00000000 __SIGNATURE_REGION_LENGTH__
+00000000 g       .text	00000000 __ctors_start
+00000000 g       .text	00000018 .hidden __do_copy_data
+00800068 g       .bss	00000000 __bss_start
+00000028 g     F .text	00000048 main
+00000400 g       *ABS*	00000000 __USER_SIGNATURE_REGION_LENGTH__
+00800068 g     O .bss	000000ff array
+00000000 g       .text	00000000 __dtors_start
+00000000 g       .text	00000000 __ctors_end
+00800068 g       .data	00000000 _edata
+00800167 g       .comment	00000000 _end
+00800060 g     O .data	00000002 e
+00010000 g       *ABS*	00000000 __EEPROM_REGION_LENGTH__
+00800060 g       .data	00000000 __data_start
+00000400 g       *ABS*	00000000 __FUSE_REGION_LENGTH__
+00002000 g       *ABS*	00000000 __TEXT_REGION_LENGTH__
+
+
+Ejercicio 9-------------------------------------------------------------------------------------------
+
+
+En el código en lenguaje ensamblador AVR lo primero en ejecutarse es <__ctors_end>.
+
+El código de main() comienza en la dirección de memoria 00000028.
+
+¿Qué son todas las instrucciones anteriores a main?
+
+

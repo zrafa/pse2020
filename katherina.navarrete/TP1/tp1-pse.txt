@@ -1,0 +1,51 @@
+Programación de Sistemas Embebidos 2020
+Facultad de Informática
+Universidad Nacional del Comahue
+
+Trabajo Práctico 1
+==================
+
+1- Instalar un toochain para cross-compiling a AVR y a MIPS.
+
+2- a. Escribir un programa hello world en C, y compilar utilizando un Makefile
+      básico. El hello world debería realizar simplemente la definición
+      de algunas variables y realizar alguna aritmética.
+      Defina tambien una variable global de tipo arreglo, de unos 255 bytes de
+      tamaño. Defina otra variable global de tipo const char * e inicialice
+      la misma con algun texto en la misma sentencia de declaración.
+
+      No utilice printf en su hello world, debido a que no es útil 
+      como parte de un primer programa para una arquitectura nueva. ¿Puede
+      suponer por qué?
+
+   b. Adapte su Makefile para cross compilar para AVR y tambien para MIPS.
+ 
+   c. Cross compile su programa hello world  para ambas arquitecturas.
+
+3- Utilice el comando file para verificar si el codigo generado es de
+   la arquitectura adecuada
+
+4- Verifique donde instaló, el sistema de paquetes de Linux, las binutils de avr
+
+5- ¿Donde están los encabezados y las bibliotecas de C para avr?
+
+6- ¿Donde se instaló el compilador avr-gcc?
+
+7- a. Utilice avr-objdump para realizar un decodificado del programa binario elf
+      (obtener el código en lenguaje ensamblador AVR a partir del binario elf)
+   b. Utilice el comando avr-size para obtener el espacio que ocupará
+      el programa en el sistema. ¿Cuántos bytes ocupa la sección de código?
+      ¿Y la de datos?. Modifique el tamaño del arreglo y verifique
+      que cambia el tamaño de alguna sección del programa. ¿Cuál cambió?
+      ¿En cuánto cambió?
+   c. Utilice el comando size para MIPS y verifique los tamaños tambien
+      para arquitectura MIPS.
+
+8- Utilice avr-objdump -t para obtener los simbolos. ¿Puede encontrar
+   algun simbolo que ocupe mucho espacio?
+
+9- Utilizando el programa decodificado por avr-objdump en 7- a. 
+   ¿Es el código de main() lo primero que se ejecuta en su program? 
+   ¿Puede encontrar la llamada a la función main? ¿En qué dirección comienza
+   el código de la función main? ¿Qué son todas las instrucciones anteriores
+   a main?....................................................................
