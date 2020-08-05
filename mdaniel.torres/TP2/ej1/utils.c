@@ -30,17 +30,17 @@ void esperar() {
 }
 
 void prender_led() {
-volatile unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
-unsigned char valor_b;
-valor_b = *(PUERTO_B);
-valor_b ^= (0x20);
-*(PUERTO_B) = valor_b;
+	volatile unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
+	unsigned char valor_b;
+	valor_b = *(PUERTO_B);
+	valor_b ^= (0x20);
+	*(PUERTO_B) = valor_b;
 }
 
 void apagar_led() {
-volatile unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
-unsigned char valor_b;
-valor_b = *(PUERTO_B);
-valor_b ^= (0x20);
-*(PUERTO_B) = valor_b;
+	volatile unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
+	unsigned char valor_b;
+	valor_b = *(PUERTO_B);
+	valor_b ^= (0x20);
+	*(PUERTO_B) = valor_b;
 }
