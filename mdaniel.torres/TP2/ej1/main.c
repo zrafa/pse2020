@@ -21,7 +21,7 @@ int main(void)
 
 		esperar();
 		apagar_led();
-    	}
+    }
 }
 
 
@@ -32,11 +32,11 @@ volatile unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
 
 /* turn the GPIO pin voltage off* (this should be done before the pins are configured)*/
 
-*(PUERTO_B) = *(PUERTO_B) & (~ LED_ROJO);
+	*(PUERTO_B) = *(PUERTO_B) & (~ LED_ROJO);
 
 /* make sure the LED control pin is set to operate as OUTPUT */
 
-*(DDR_B) = *(DDR_B) | (LED_ROJO);
+	*(DDR_B) = *(DDR_B) | (LED_ROJO);
 
 }
 
