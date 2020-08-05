@@ -1,102 +1,212 @@
 
 led-test:     file format elf32-avr
 
-SYMBOL TABLE:
-00800100 l    d  .data	00000000 .data
-00000000 l    d  .text	00000000 .text
-00800106 l    d  .bss	00000000 .bss
-00000000 l    d  .comment	00000000 .comment
-00000000 l    d  .note.gnu.avr.deviceinfo	00000000 .note.gnu.avr.deviceinfo
-00000000 l    d  .debug_info	00000000 .debug_info
-00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
-00000000 l    d  .debug_line	00000000 .debug_line
-00000000 l    d  .debug_str	00000000 .debug_str
-00000000 l    df *ABS*	00000000 main.c
-0000003e l       *ABS*	00000000 __SP_H__
-0000003d l       *ABS*	00000000 __SP_L__
-0000003f l       *ABS*	00000000 __SREG__
-00000000 l       *ABS*	00000000 __tmp_reg__
-00000001 l       *ABS*	00000000 __zero_reg__
-00000000 l    df *ABS*	00000000 utils.c
-0000003e l       *ABS*	00000000 __SP_H__
-0000003d l       *ABS*	00000000 __SP_L__
-0000003f l       *ABS*	00000000 __SREG__
-00000000 l       *ABS*	00000000 __tmp_reg__
-00000001 l       *ABS*	00000000 __zero_reg__
-00000000 l    df *ABS*	00000000 _exit.o
-000001c2 l       .text	00000000 __stop_program
-00000000 l    df *ABS*	00000000 _clear_bss.o
-00000094 l       .text	00000000 .do_clear_bss_start
-00000092 l       .text	00000000 .do_clear_bss_loop
-000000a2  w      .text	00000000 __vector_22
-000000a2  w      .text	00000000 __vector_1
-0000ffa0 g       *ABS*	00000000 __DATA_REGION_LENGTH__
-00000068 g       .text	00000000 __trampolines_start
-000001c4 g       .text	00000000 _etext
-000000a2  w      .text	00000000 __vector_24
-000000a2  w      .text	00000000 __vector_12
-000000a2 g       .text	00000000 __bad_interrupt
-000001ca g       *ABS*	00000000 __data_load_end
-000000a2  w      .text	00000000 __vector_6
-0000018c g     F .text	00000004 apagar_led
-00000136 g     F .text	0000004c esperar
-00000068 g       .text	00000000 __trampolines_end
-000000a2  w      .text	00000000 __vector_3
-000000a2  w      .text	00000000 __vector_23
-000001c4 g       *ABS*	00000000 __data_load_start
-00000068 g       .text	00000000 __dtors_end
-00800108 g       .bss	00000000 __bss_end
-00000400 g       *ABS*	00000000 __LOCK_REGION_LENGTH__
-000000a2  w      .text	00000000 __vector_25
-000000a2  w      .text	00000000 __vector_11
-00000068  w      .text	00000000 __init
-000000a2  w      .text	00000000 __vector_13
-000000a2  w      .text	00000000 __vector_17
-000000a2  w      .text	00000000 __vector_19
-000000a2  w      .text	00000000 __vector_7
-00800106 g     O .bss	00000002 boton
-0000008a g       .text	00000010 .hidden __do_clear_bss
-00810000 g       .comment	00000000 __eeprom_end
-00000116 g     F .text	00000020 sePresiono
-00000000 g       .text	00000000 __vectors
-00800106 g       .data	00000000 __data_end
-00000000  w      .text	00000000 __vector_default
-000000a2  w      .text	00000000 __vector_5
-00800104 g     O .data	00000002 puerto_b
-00000400 g       *ABS*	00000000 __SIGNATURE_REGION_LENGTH__
-000000b4 g     F .text	0000005c contador
-00000068 g       .text	00000000 __ctors_start
-00000074 g       .text	00000016 .hidden __do_copy_data
-00800106 g       .bss	00000000 __bss_start
-00000190 g     F .text	00000030 main
-000000a2  w      .text	00000000 __vector_4
-00000000  w      *ABS*	00000000 __heap_end
-000000a2  w      .text	00000000 __vector_9
-000000a2  w      .text	00000000 __vector_2
-00000400 g       *ABS*	00000000 __USER_SIGNATURE_REGION_LENGTH__
-00800102 g     O .data	00000002 ddr_b
-000000a2  w      .text	00000000 __vector_21
-000000a2  w      .text	00000000 __vector_15
-00000182 g     F .text	0000000a prender_led
-000000a6 g     F .text	0000000e led_init
-00000068 g       .text	00000000 __dtors_start
-00000068 g       .text	00000000 __ctors_end
-000008ff  w      *ABS*	00000000 __stack
-00000110 g     F .text	00000006 pulsador_init
-00800106 g       .data	00000000 _edata
-00800108 g       .comment	00000000 _end
-000000a2  w      .text	00000000 __vector_8
-000001c0  w      .text	00000000 .hidden exit
-00010000 g       *ABS*	00000000 __EEPROM_REGION_LENGTH__
-000001c0 g       .text	00000000 .hidden _exit
-000000a2  w      .text	00000000 __vector_14
-00800100 g     O .data	00000002 pin_b
-000000a2  w      .text	00000000 __vector_10
-000000a2  w      .text	00000000 __vector_16
-00800100 g       .data	00000000 __data_start
-000000a2  w      .text	00000000 __vector_18
-00000400 g       *ABS*	00000000 __FUSE_REGION_LENGTH__
-00020000 g       *ABS*	00000000 __TEXT_REGION_LENGTH__
-000000a2  w      .text	00000000 __vector_20
 
+Disassembly of section .text:
 
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e4 ec       	ldi	r30, 0xC4	; 196
+  7c:	f1 e0       	ldi	r31, 0x01	; 1
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a6 30       	cpi	r26, 0x06	; 6
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	a6 e0       	ldi	r26, 0x06	; 6
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a8 30       	cpi	r26, 0x08	; 8
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 c8 00 	call	0x190	; 0x190 <main>
+  9e:	0c 94 e0 00 	jmp	0x1c0	; 0x1c0 <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <led_init>:
+  a6:	29 98       	cbi	0x05, 1	; 5
+  a8:	21 9a       	sbi	0x04, 1	; 4
+  aa:	2a 98       	cbi	0x05, 2	; 5
+  ac:	22 9a       	sbi	0x04, 2	; 4
+  ae:	2b 98       	cbi	0x05, 3	; 5
+  b0:	23 9a       	sbi	0x04, 3	; 4
+  b2:	08 95       	ret
+
+000000b4 <contador>:
+  b4:	cf 93       	push	r28
+  b6:	df 93       	push	r29
+  b8:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+  bc:	85 b1       	in	r24, 0x05	; 5
+  be:	c2 e0       	ldi	r28, 0x02	; 2
+  c0:	8c 27       	eor	r24, r28
+  c2:	85 b9       	out	0x05, r24	; 5
+  c4:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+  c8:	85 b1       	in	r24, 0x05	; 5
+  ca:	d6 e0       	ldi	r29, 0x06	; 6
+  cc:	8d 27       	eor	r24, r29
+  ce:	85 b9       	out	0x05, r24	; 5
+  d0:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+  d4:	85 b1       	in	r24, 0x05	; 5
+  d6:	8c 27       	eor	r24, r28
+  d8:	85 b9       	out	0x05, r24	; 5
+  da:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+  de:	85 b1       	in	r24, 0x05	; 5
+  e0:	9e e0       	ldi	r25, 0x0E	; 14
+  e2:	89 27       	eor	r24, r25
+  e4:	85 b9       	out	0x05, r24	; 5
+  e6:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+  ea:	85 b1       	in	r24, 0x05	; 5
+  ec:	8c 27       	eor	r24, r28
+  ee:	85 b9       	out	0x05, r24	; 5
+  f0:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+  f4:	85 b1       	in	r24, 0x05	; 5
+  f6:	8d 27       	eor	r24, r29
+  f8:	85 b9       	out	0x05, r24	; 5
+  fa:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+  fe:	85 b1       	in	r24, 0x05	; 5
+ 100:	c8 27       	eor	r28, r24
+ 102:	c5 b9       	out	0x05, r28	; 5
+ 104:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+ 108:	df 91       	pop	r29
+ 10a:	cf 91       	pop	r28
+ 10c:	0c 94 53 00 	jmp	0xa6	; 0xa6 <led_init>
+
+00000110 <pulsador_init>:
+ 110:	2c 9a       	sbi	0x05, 4	; 5
+ 112:	24 98       	cbi	0x04, 4	; 4
+ 114:	08 95       	ret
+
+00000116 <sePresiono>:
+ 116:	1c 9b       	sbis	0x03, 4	; 3
+ 118:	09 c0       	rjmp	.+18     	; 0x12c <sePresiono+0x16>
+ 11a:	81 e0       	ldi	r24, 0x01	; 1
+ 11c:	90 e0       	ldi	r25, 0x00	; 0
+ 11e:	90 93 07 01 	sts	0x0107, r25	; 0x800107 <__data_end+0x1>
+ 122:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <__data_end>
+ 126:	81 e0       	ldi	r24, 0x01	; 1
+ 128:	90 e0       	ldi	r25, 0x00	; 0
+ 12a:	08 95       	ret
+ 12c:	10 92 07 01 	sts	0x0107, r1	; 0x800107 <__data_end+0x1>
+ 130:	10 92 06 01 	sts	0x0106, r1	; 0x800106 <__data_end>
+ 134:	f8 cf       	rjmp	.-16     	; 0x126 <sePresiono+0x10>
+
+00000136 <esperar>:
+ 136:	cf 93       	push	r28
+ 138:	df 93       	push	r29
+ 13a:	00 d0       	rcall	.+0      	; 0x13c <esperar+0x6>
+ 13c:	00 d0       	rcall	.+0      	; 0x13e <esperar+0x8>
+ 13e:	cd b7       	in	r28, 0x3d	; 61
+ 140:	de b7       	in	r29, 0x3e	; 62
+ 142:	19 82       	std	Y+1, r1	; 0x01
+ 144:	1a 82       	std	Y+2, r1	; 0x02
+ 146:	1b 82       	std	Y+3, r1	; 0x03
+ 148:	1c 82       	std	Y+4, r1	; 0x04
+ 14a:	89 81       	ldd	r24, Y+1	; 0x01
+ 14c:	9a 81       	ldd	r25, Y+2	; 0x02
+ 14e:	ab 81       	ldd	r26, Y+3	; 0x03
+ 150:	bc 81       	ldd	r27, Y+4	; 0x04
+ 152:	80 3d       	cpi	r24, 0xD0	; 208
+ 154:	9d 4d       	sbci	r25, 0xDD	; 221
+ 156:	a6 40       	sbci	r26, 0x06	; 6
+ 158:	b1 05       	cpc	r27, r1
+ 15a:	38 f0       	brcs	.+14     	; 0x16a <esperar+0x34>
+ 15c:	0f 90       	pop	r0
+ 15e:	0f 90       	pop	r0
+ 160:	0f 90       	pop	r0
+ 162:	0f 90       	pop	r0
+ 164:	df 91       	pop	r29
+ 166:	cf 91       	pop	r28
+ 168:	08 95       	ret
+ 16a:	89 81       	ldd	r24, Y+1	; 0x01
+ 16c:	9a 81       	ldd	r25, Y+2	; 0x02
+ 16e:	ab 81       	ldd	r26, Y+3	; 0x03
+ 170:	bc 81       	ldd	r27, Y+4	; 0x04
+ 172:	01 96       	adiw	r24, 0x01	; 1
+ 174:	a1 1d       	adc	r26, r1
+ 176:	b1 1d       	adc	r27, r1
+ 178:	89 83       	std	Y+1, r24	; 0x01
+ 17a:	9a 83       	std	Y+2, r25	; 0x02
+ 17c:	ab 83       	std	Y+3, r26	; 0x03
+ 17e:	bc 83       	std	Y+4, r27	; 0x04
+ 180:	e4 cf       	rjmp	.-56     	; 0x14a <esperar+0x14>
+
+00000182 <prender_led>:
+ 182:	85 b1       	in	r24, 0x05	; 5
+ 184:	9e e0       	ldi	r25, 0x0E	; 14
+ 186:	89 27       	eor	r24, r25
+ 188:	85 b9       	out	0x05, r24	; 5
+ 18a:	08 95       	ret
+
+0000018c <apagar_led>:
+ 18c:	0c 94 c1 00 	jmp	0x182	; 0x182 <prender_led>
+
+00000190 <main>:
+ 190:	0e 94 53 00 	call	0xa6	; 0xa6 <led_init>
+ 194:	0e 94 88 00 	call	0x110	; 0x110 <pulsador_init>
+ 198:	0e 94 8b 00 	call	0x116	; 0x116 <sePresiono>
+ 19c:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <__data_end>
+ 1a0:	90 91 07 01 	lds	r25, 0x0107	; 0x800107 <__data_end+0x1>
+ 1a4:	89 2b       	or	r24, r25
+ 1a6:	19 f4       	brne	.+6      	; 0x1ae <main+0x1e>
+ 1a8:	0e 94 5a 00 	call	0xb4	; 0xb4 <contador>
+ 1ac:	f5 cf       	rjmp	.-22     	; 0x198 <main+0x8>
+ 1ae:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+ 1b2:	0e 94 c1 00 	call	0x182	; 0x182 <prender_led>
+ 1b6:	0e 94 9b 00 	call	0x136	; 0x136 <esperar>
+ 1ba:	0e 94 c6 00 	call	0x18c	; 0x18c <apagar_led>
+ 1be:	ec cf       	rjmp	.-40     	; 0x198 <main+0x8>
+
+000001c0 <_exit>:
+ 1c0:	f8 94       	cli
+
+000001c2 <__stop_program>:
+ 1c2:	ff cf       	rjmp	.-2      	; 0x1c2 <__stop_program>
