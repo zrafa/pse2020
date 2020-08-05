@@ -1,0 +1,102 @@
+
+led-test:     file format elf32-avr
+
+SYMBOL TABLE:
+00800100 l    d  .data	00000000 .data
+00000000 l    d  .text	00000000 .text
+00800106 l    d  .bss	00000000 .bss
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .note.gnu.avr.deviceinfo	00000000 .note.gnu.avr.deviceinfo
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    df *ABS*	00000000 main.c
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+0000003f l       *ABS*	00000000 __SREG__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+00000000 l    df *ABS*	00000000 utils.c
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+0000003f l       *ABS*	00000000 __SREG__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+00000000 l    df *ABS*	00000000 _exit.o
+000001c2 l       .text	00000000 __stop_program
+00000000 l    df *ABS*	00000000 _clear_bss.o
+00000094 l       .text	00000000 .do_clear_bss_start
+00000092 l       .text	00000000 .do_clear_bss_loop
+000000a2  w      .text	00000000 __vector_22
+000000a2  w      .text	00000000 __vector_1
+0000ffa0 g       *ABS*	00000000 __DATA_REGION_LENGTH__
+00000068 g       .text	00000000 __trampolines_start
+000001c4 g       .text	00000000 _etext
+000000a2  w      .text	00000000 __vector_24
+000000a2  w      .text	00000000 __vector_12
+000000a2 g       .text	00000000 __bad_interrupt
+000001ca g       *ABS*	00000000 __data_load_end
+000000a2  w      .text	00000000 __vector_6
+0000018c g     F .text	00000004 apagar_led
+00000136 g     F .text	0000004c esperar
+00000068 g       .text	00000000 __trampolines_end
+000000a2  w      .text	00000000 __vector_3
+000000a2  w      .text	00000000 __vector_23
+000001c4 g       *ABS*	00000000 __data_load_start
+00000068 g       .text	00000000 __dtors_end
+00800108 g       .bss	00000000 __bss_end
+00000400 g       *ABS*	00000000 __LOCK_REGION_LENGTH__
+000000a2  w      .text	00000000 __vector_25
+000000a2  w      .text	00000000 __vector_11
+00000068  w      .text	00000000 __init
+000000a2  w      .text	00000000 __vector_13
+000000a2  w      .text	00000000 __vector_17
+000000a2  w      .text	00000000 __vector_19
+000000a2  w      .text	00000000 __vector_7
+00800106 g     O .bss	00000002 boton
+0000008a g       .text	00000010 .hidden __do_clear_bss
+00810000 g       .comment	00000000 __eeprom_end
+00000116 g     F .text	00000020 sePresiono
+00000000 g       .text	00000000 __vectors
+00800106 g       .data	00000000 __data_end
+00000000  w      .text	00000000 __vector_default
+000000a2  w      .text	00000000 __vector_5
+00800104 g     O .data	00000002 puerto_b
+00000400 g       *ABS*	00000000 __SIGNATURE_REGION_LENGTH__
+000000b4 g     F .text	0000005c contador
+00000068 g       .text	00000000 __ctors_start
+00000074 g       .text	00000016 .hidden __do_copy_data
+00800106 g       .bss	00000000 __bss_start
+00000190 g     F .text	00000030 main
+000000a2  w      .text	00000000 __vector_4
+00000000  w      *ABS*	00000000 __heap_end
+000000a2  w      .text	00000000 __vector_9
+000000a2  w      .text	00000000 __vector_2
+00000400 g       *ABS*	00000000 __USER_SIGNATURE_REGION_LENGTH__
+00800102 g     O .data	00000002 ddr_b
+000000a2  w      .text	00000000 __vector_21
+000000a2  w      .text	00000000 __vector_15
+00000182 g     F .text	0000000a prender_led
+000000a6 g     F .text	0000000e led_init
+00000068 g       .text	00000000 __dtors_start
+00000068 g       .text	00000000 __ctors_end
+000008ff  w      *ABS*	00000000 __stack
+00000110 g     F .text	00000006 pulsador_init
+00800106 g       .data	00000000 _edata
+00800108 g       .comment	00000000 _end
+000000a2  w      .text	00000000 __vector_8
+000001c0  w      .text	00000000 .hidden exit
+00010000 g       *ABS*	00000000 __EEPROM_REGION_LENGTH__
+000001c0 g       .text	00000000 .hidden _exit
+000000a2  w      .text	00000000 __vector_14
+00800100 g     O .data	00000002 pin_b
+000000a2  w      .text	00000000 __vector_10
+000000a2  w      .text	00000000 __vector_16
+00800100 g       .data	00000000 __data_start
+000000a2  w      .text	00000000 __vector_18
+00000400 g       *ABS*	00000000 __FUSE_REGION_LENGTH__
+00020000 g       *ABS*	00000000 __TEXT_REGION_LENGTH__
+000000a2  w      .text	00000000 __vector_20
+
+
