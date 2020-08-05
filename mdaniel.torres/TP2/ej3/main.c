@@ -15,59 +15,59 @@ int main(void)
 	led_init();
 	while (1) {
 		knight_raider();		
-    	}
+    }
 }
 
 void knight_raider(){
-unsigned char* PUERTO_B = 0x25;
+	unsigned char* PUERTO_B = 0x25;
 
-*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
-esperar(3);
-*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
-esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
+	esperar(3);
 
-*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
-esperar(3);
-*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
-esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
+	esperar(3);
 
-*(PUERTO_B) = *(PUERTO_B) ^ (0x08);
-esperar(3);
-*(PUERTO_B) = *(PUERTO_B) ^ (0x08);
-esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x08);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x08);
+	esperar(3);
 
-*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
-esperar(3);
-*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
-esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
+	esperar(3);
 
-*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
-esperar(3);
-*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
-esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
+	esperar(3);
 
 
 }
 
 void led_init(){
-volatile unsigned char* DDR_B = 0x24;
-volatile unsigned char* PUERTO_B = 0x25;
+	volatile unsigned char* DDR_B = 0x24;
+	volatile unsigned char* PUERTO_B = 0x25;
 
 
-//primero
-*(PUERTO_B) = *(PUERTO_B) & (~ 0x02);
+	//primero
+	*(PUERTO_B) = *(PUERTO_B) & (~ 0x02);
 
-*(DDR_B) = *(DDR_B) | (0x02);
+	*(DDR_B) = *(DDR_B) | (0x02);
 
-//segundo
+	//segundo
 
-*(PUERTO_B) = *(PUERTO_B) & (~ 0x04);
+	*(PUERTO_B) = *(PUERTO_B) & (~ 0x04);
 
-*(DDR_B) = *(DDR_B) | (0x04);
+	*(DDR_B) = *(DDR_B) | (0x04);
 
-//tercero
-*(PUERTO_B) = *(PUERTO_B) & (~ 0x08);
+	//tercero
+	*(PUERTO_B) = *(PUERTO_B) & (~ 0x08);
 
-*(DDR_B) = *(DDR_B) | (0x08);
+	*(DDR_B) = *(DDR_B) | (0x08);
 
 }

@@ -6,7 +6,7 @@
  * pines 8-13 de arduino 
  */
 
-
+#define LED_ROJO (0x20)
 /* puertos de E/S */
 volatile unsigned char * puerto_b = (unsigned char *) 0x25; /* direccion de PORTB: SALIDA */
 volatile unsigned char * ddr_b = (unsigned char *) 0x24; /* direccion de DDR B (registro de control) */
@@ -23,24 +23,24 @@ volatile unsigned char * pin_b = (unsigned char *) 0x23; /* direccion PIN B (reg
  * 	pin del atmega328p que tiene conectado un led en una board arduino
  */
 
+
+
 void esperar() {
 	volatile unsigned long i;
 	/* delay de 1 segundo */
-	for (i=0; i<4500000; i++);
+	for (i=0; i<450000; i++);
 }
 
 void prender_led() {
-	volatile unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
 	unsigned char valor_b;
-	valor_b = *(PUERTO_B);
-	valor_b ^= (0x20);
-	*(PUERTO_B) = valor_b;
+	valor_b = *(puerto_b);
+	valor_b &= ~LED_ROJO;
+	*(puerto_b) = valor_b;
 }
 
 void apagar_led() {
-	volatile unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
 	unsigned char valor_b;
-	valor_b = *(PUERTO_B);
-	valor_b ^= (0x20);
-	*(PUERTO_B) = valor_b;
+	valor_b = *(puerto_b);
+	valor_b |= LED_ROJO;
+	*(puerto_b) = valor_b;
 }

@@ -30,44 +30,44 @@ void esperar() {
 }
 
 void prender_led(){
-unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
-unsigned char valor_b;
-valor_b = *(PUERTO_B);
-valor_b ^= (0x02);
-*(PUERTO_B) = valor_b;
+    unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
+    unsigned char valor_b;
+    valor_b = *(PUERTO_B);
+    valor_b ^= (0x02);
+    *(PUERTO_B) = valor_b;
 
-//segundo
-unsigned char valor_segundo;
-valor_segundo = *(PUERTO_B);
-valor_segundo ^= (0x04);
-*(PUERTO_B) = valor_segundo;
+    //segundo
+    unsigned char valor_segundo;
+    valor_segundo = *(PUERTO_B);
+    valor_segundo ^= (0x04);
+    *(PUERTO_B) = valor_segundo;
 
-//tercero 
-unsigned char valor_tercero;
-valor_tercero= *(PUERTO_B);
-valor_tercero^= (0x08);
-*(PUERTO_B) = valor_tercero;
+    //tercero 
+    unsigned char valor_tercero;
+    valor_tercero= *(PUERTO_B);
+    valor_tercero^= (0x08);
+    *(PUERTO_B) = valor_tercero;
 }
 
 
 void apagar_led(){
-unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
-unsigned char valor_b;
-valor_b = *(PUERTO_B);
-valor_b ^= (0x02);
-*(PUERTO_B) = valor_b;
+    unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
+    unsigned char valor_b;
+    valor_b = *(PUERTO_B);
+    valor_b ^= (0x02);
+    *(PUERTO_B) = valor_b;
 
-//segundo
-unsigned char valor_segundo;
-valor_segundo = *(PUERTO_B);
-valor_segundo ^= (0x04);
-*(PUERTO_B) = valor_segundo;
+    //segundo
+    unsigned char valor_segundo;
+    valor_segundo = *(PUERTO_B);
+    valor_segundo ^= (0x04);
+    *(PUERTO_B) = valor_segundo;
 
-//tercero
-unsigned char valor_tercero;
-valor_tercero= *(PUERTO_B);
-valor_tercero^= (0x08);
-*(PUERTO_B) = valor_tercero;
+    //tercero
+    unsigned char valor_tercero;
+    valor_tercero= *(PUERTO_B);
+    valor_tercero^= (0x08);
+    *(PUERTO_B) = valor_tercero;
 }
 
 
