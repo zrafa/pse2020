@@ -41,9 +41,12 @@
     b) ¿Cómo se llaman en el PORT B del AVR?
 
     c) ¿Cuantos dispositivos de E/S observa conectados al DATABUS del AVR? Mencione sus nombres.
+
     d) Usted debe controlar un nuevo dispositivo de E/S en un sistema, utilizando un programa escrito en lenguaje
-    e)f)C. ¿Que detalles necesita conocer para escribir el software? ¿De dónde obtiene los detalles?
-    ¿Qué es el voltage? ¿Qué es la corriente?
-    ¿Por qué se lo clasifica como “arquitectura harvard” a los micros AVR de 8-bits?
+    C. ¿Que detalles necesita conocer para escribir el software? ¿De dónde obtiene los detalles?
+
+    e)¿Qué es el voltage? ¿Qué es la corriente?
+
+    f)¿Por qué se lo clasifica como “arquitectura harvard” a los micros AVR de 8-bits?
 
 
