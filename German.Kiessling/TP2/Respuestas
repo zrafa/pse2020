@@ -37,16 +37,44 @@
     -> "Hecho Hardware " Archivo adjunto -> /Multimedia/ej3
 5)   Responder:
     a) ¿Qué hw existe en cada dispositivo de E/S que permite su programación?
+        -> La programacion de los dispositivos de E/S se logra a traves de los registros, que permiten la escritura y lectura 
+
 
     b) ¿Cómo se llaman en el PORT B del AVR?
+        -> PORTB – The Port B Data Register
+        -> DDRB  – The Port B Data Direction Register
+        -> PINB  – The Port B Input Pins Address
 
     c) ¿Cuantos dispositivos de E/S observa conectados al DATABUS del AVR? Mencione sus nombres.
 
-    d) Usted debe controlar un nuevo dispositivo de E/S en un sistema, utilizando un programa escrito en lenguaje
-    C. ¿Que detalles necesita conocer para escribir el software? ¿De dónde obtiene los detalles?
+        -> 1) PORT D (8)
+        -> 2) PORT B (8)
+        -> 3) PORT C (7)
+        -> 4) USART 0
+        -> 5) EEPROM
+        -> 6) TWI
+        -> 7) 8bit T/C2
+        -> 8) 8bit T/C 0
+        -> 9) 16bit T/C 1
+        -> 10) A/D Conv.
+        -> 11) SPI
 
-    e)¿Qué es el voltage? ¿Qué es la corriente?
+    d) Usted debe controlar un nuevo dispositivo de E/S en un sistema, utilizando un programa escrito en lenguaje C. 
+        ¿Que detalles necesita conocer para escribir el software? ¿De dónde obtiene los detalles?
+
+        ->  Se necesita conocer los distintos registros, los cuales estan documentodos en la hoja de datos.
+           
+
+    e)¿Qué es el voltage? ¿Qué es la corriente? 
+        -> El voltaje es la magnitud que da cuenta de la diferencia en el potencial eléctrico entre dos puntos determinados.
+            Cuando se unen dos puntos que presentan diferencia de potencial eléctrico con un material conductor,
+            se producirá un flujo de electrones, lo que se conoce como corriente eléctrica, 
+            que llevará parte de la carga desde el punto de mayor al de menor potencial.
+    
+            Fuente: https://concepto.de/voltaje/#ixzz6UNConbQC
 
     f)¿Por qué se lo clasifica como “arquitectura harvard” a los micros AVR de 8-bits?
+        La arquitectura Harvard es una arquitectura de computadora con pistas de almacenamiento y
+         de señal físicamente separadas para las instrucciones y para los datos.
 
 
