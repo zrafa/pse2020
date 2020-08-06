@@ -1,0 +1,77 @@
+------------------------------------TP2---------------------------------------
+Katherina Navarrete
+fai-928
+-------------------------------------------------------------------------------
+1.1 El led está conectado al pin 13 de la placa pro mini.
+
+1.2 EL led está conectado al pin PB5(SCK).
+
+
+3. Las primeras 10 posiciones de la tabla de vectores son las siguientes:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+
+5.a Para la programación de los dispositivos de E/S se cuenta con los registro:
+	.De control.
+	.De estado.
+	.De datos.
+
+5.b En el port b del AVR los registros se denominan:
+	.PORTB el registro de datos.
+	.DDRB 	el registro de dirección de datos, es decir en este se establece 
+	  si el pin se utilizará para  entrada o salida.
+	.PINB registro de direcciones de pines de entrada.
+
+5.c Se observan conectados al DATABUS del AVR 11 dispositivos:
+	.EEPROM
+	.8 bit T/C 0
+	.8 bit T/C 2
+	.16 bit T/C 1
+	.A/D Conv.
+	.USART 0
+	.PORT D (8)
+	.PORT B (8)
+	.PORT C (7)
+	.TWI
+	.SPI
+5.d Para poder escribir un software de E/S de un sistema, se debe tener en cuenta el puerto que sera utilizado, 
+las direcciones de los registros correspondientes a el mismo. 
+Esta información se encuntra el la hoja de datos del microcontrolador.
+
+5.e El voltaje o diferencia de potencial es la presion que ejerce una fuente de suministros de energia electrica sobre cargas electricas 
+o electrones de un circuito  cerrado.
+
+La corriente electrica es flujo de cargas electricas que atravieza un material conductor durante un periodo de tiempo determinado.
+
+I = V/R       I (corriente amps)   V (voltaje volts)   R (resistencia Ohms)
+ 
+5.f. Se clasifica como a “arquitectura harvard” a los micros AVR de 8-bits porque ademas de separar la memoria de programa y de datos,
+ el procesador tiene los buses segregados, de modo que cada tipo de memoria tiene un bus de datos, uno de direccionesy uno de control.
+ Esta arquitectura permite adecuar el tamaño de los buses a las caracteristicas de cada tipo de memoria.
+Ademas el procesador puede acceder a cada una de ellas de forma simultanea, lo que se traduce en un aumento 
+significativo de la velocidad de procesamiento.
+
+
+-----------------------------------------------------------OBSERVACIONES--------------------------------------------------------------
+
+. La primera vez que conecte el led con las resistencias me costo un poco ya que no tenia idea de como estas funcionaban.
+asi que al investigar un poco igual tenia un poco de miedo cuando los conecte.
+
+.Pero lo que realmente me costo mucho fue la conexión de boton, va mas que la conexion mi gran problema fue que no entendia 
+muy bien el funcionaimento de los registro. luego de que entendi un poco  funcionamiento de los mismos me costo darme cuenta que 
+el pulso del boton se veia reflejado con 0 y que cuando soltaba el mismo inmediatamente se colocaba un 1.
+Otro inconveniente que tuve fue que pense que si precionaba y soltaba me iba a dejar guardado en el registro que el boton habia sido presionado. 
+lo del boton fue antes de ver el video, el cual me aclaro varias dudas, y me di cuenta que lo de pull-up lo habia ignorado
+(menos mal que la micro ya lo tenia porque lo conecte y hice un monton de pruebas). 
+
+
+
