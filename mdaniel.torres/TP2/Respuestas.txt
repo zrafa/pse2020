@@ -1,0 +1,48 @@
+1) ¿A qué pin de la placa pro mini está conectado el led?
+   Pin SCK.
+
+   ¿A que pin del microcontrolador AVR está conectado el led?
+   Pin PB5(SCK).
+
+3)
+ led-test:     file format elf32-avr
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+
+5)  a) ¿Qué hw existe en cada dispositivo de E/S que permite su programación?
+       En el hw de los dispositivos de E/S existen registros de propósito general que permiten su programación.
+
+    b) ¿Cómo se llaman en el PORT B del AVR?
+       PINB, PORTB, DDRB.
+	
+
+    c) ¿Cuantos dispositivos de E/S observa conectados al DATABUS del AVR? Mencione sus nombres.
+
+       Son en total 11 dispositivos, los cuales son:
+       PORT D, PORT B, PORT C, USART 0, SPI, TWI, 8bit T/C2, 8bit T/C 0, 16bit T/C 1, A/D Conv., EEPROM
+
+    d) Usted debe controlar un nuevo dispositivo de E/S en un sistema, utilizando un programa escrito en lenguaje
+       C. ¿Que detalles necesita conocer para escribir el software? ¿De dónde obtiene los detalles?
+
+       Se necesita conocer dónde conectar el dispositivo de E/S para que pueda interactuar con el hardware y cómo manejar el contenido de los registros en los cuales
+       el dispositivo está conectado para lograr lo que se busca. Esto se logra estudiando el esquemático y la hoja de datos.
+
+    e) ¿Qué es el voltage? ¿Qué es la corriente?
+       Voltaje se define como la cantidad de energía potencial entre dos puntos de un circuito.
+       Uno punto tiene más carga que otro. La diferencia de carga entre los puntos se llama voltaje.
+
+       La corriente eléctrica es el flujo de carga eléctrica que recorre un material.
+
+    f) ¿Por qué se lo clasifica como “arquitectura harvard” a los micros AVR de 8-bits?
+       
