@@ -1,0 +1,37 @@
+------------------------------TP2-RESPUESTAS------------------------------------
+
+1.1) El led está conectado al pin 13 del microcontrolador AVR.
+
+1.2) El led está conectado al pin PB5 de la placa pro mini.
+
+3) Luego de ejecutar avr-objdump obtuve las siguientes primeras 10 posiciones de la tabla de vectores:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  
+
+5) a) En cada dispositivo de E/S existen los siguientes tipos de registros que permiten su programación: control, estado y datos.
+
+b) En el PORT B del AVR los registros reciben los siguientes nombres: PORTB (registro de datos), DDRB (registro de dirección de datos) y PINB (direcciones de pines de entrada).
+
+c) Observo 11 dispositivos de E/S conectados al DATABUS del AVR, los cuales son los siguientes: EEPROM, SPI, USART 0, PORT B, 8bit T/C 0, 8bit T/C 2, 16bit T/C 1, A/D Conv., PORT D, TWI, PORT C.
+
+d) Para escribir el software para controlar un dispositivo de E/S en un sistema es necesario conocer los registros que contiene y las direcciones de los mismos. De esta manera es posible modificar los valores de los registros correspondientes para lograr la funcionalidad deseada. En algunos casos las direcciones de los registros se encuentran almacenados en la memoria RAM y en otros casos se obtienen desde el registro correspondiente del periférico.
+El voltaje, también conocido como diferencia de potencial, es la presión que una fuente de suministro de energía eléctrica ejerce sobre las cargas eléctricas o electrones en un circuito eléctrico cerrado. 
+La corriente eléctrica es el flujo de carga eléctrica que atraviesa un material un material conductor durante un periodo de tiempo determinado.
+
+f) Se lo clasifica como “arquitectura harvard” a los micros AVR de 8-bits porque además de la memoria, el procesador tiene los buses segregados, de modo que cada tipo de memoria tiene un bus de datos, uno de direcciones y uno de control. Esta arquitectura permite adecuar el tamaño de los buses a las características de cada tipo de memoria. Además, el procesador puede acceder a cada una de ellas de forma simultánea, lo que se traduce en un aumento significativo de la velocidad de procesamiento.Típicamente los sistemas con esta arquitectura pueden ser dos veces más rápidos que sistemas similares con arquitectura Von Neumann.
+
+
+*Observaciones: Tuve complicaciones, al principio me costó ver qué pines debía configurar, y después tuve conflictos con el pulsador, que pude resolver con paciencia, información y consultando a mis compañeros. Finalmente los resultados fueron muy satisfactorios.
+
+

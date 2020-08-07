@@ -1,0 +1,272 @@
+Programación de Sistemas Embebidos 2020
+Facultad de Informática
+Universidad Nacional del Comahue
+
+Trabajo Práctico 1
+==================
+
+1- Instalar un toochain para cross-compiling a AVR y a MIPS.
+
+2- a. Escribir un programa hello world en C, y compilar utilizando un Makefile
+      básico. El hello world debería realizar simplemente la definición
+      de algunas variables y realizar alguna aritmética.
+      Defina tambien una variable global de tipo arreglo, de unos 255 bytes de
+      tamaño. Defina otra variable global de tipo const char * e inicialice
+      la misma con algun texto en la misma sentencia de declaración.
+
+      No utilice printf en su hello world, debido a que no es útil 
+      como parte de un primer programa para una arquitectura nueva. ¿Puede
+      suponer por qué?
+
+      --> 
+
+   b. Adapte su Makefile para cross compilar para AVR y tambien para MIPS.
+
+   --> Archivo Makefile programMips y programAvr
+ 
+   c. Cross compile su programa hello world  para ambas arquitecturas.
+
+3- Utilice el comando file para verificar si el codigo generado es de
+   la arquitectura adecuada
+
+helloWorld-avr: ELF 32-bit LSB executable, Atmel AVR 8-bit, version 1 (SYSV), statically linked, not stripped
+
+4- Verifique donde instaló, el sistema de paquetes de Linux, las binutils de avr
+
+--> binutils-avr: /usr/share/doc/binutils-avr/changelog.Debian.gz
+    binutils-avr: /usr/share/doc/binutils-avr/README.Debian
+    binutils-avr: /usr/share/doc/binutils-avr/copyright
+    binutils-avr: /usr/share/doc/binutils-avr
+
+5- ¿Donde están los encabezados y las bibliotecas de C para avr?
+
+6- ¿Donde se instaló el compilador avr-gcc?
+
+-->   gcc-avr: /usr/bin/avr-gcc-ar
+      gcc-avr: /usr/bin/avr-gcc-5.4.0
+      gcc-avr: /usr/bin/avr-gcc
+      gcc-avr: /usr/bin/avr-gcc-nm
+      gcc-avr: /usr/bin/avr-gcc-ranlib
+
+7- a. Utilice avr-objdump para realizar un decodificado del programa binario elf
+      (obtener el código en lenguaje ensamblador AVR a partir del binario elf)
+
+Modo de empleo: avr-objdump <opcion(es)> <fichero(s)>
+ Muestra la información de <fichero(s)> objeto.
+ Se requiere por lo menos una de los siguientes opciones:
+  -a, --archive-headers    Display archive header information
+  -f, --file-headers       Display the contents of the overall file header
+  -p, --private-headers    Display object format specific file header contents
+  -P, --private=OPT,OPT... Display object format specific contents
+  -h, --[section-]headers  Display the contents of the section headers
+  -x, --all-headers        Display the contents of all headers
+  -d, --disassemble        Display assembler contents of executable sections
+  -D, --disassemble-all    Display assembler contents of all sections
+  -S, --source             Intermix source code with disassembly
+  -s, --full-contents      Display the full contents of all sections requested
+  -g, --debugging          Display debug information in object file
+  -e, --debugging-tags     Display debug information using ctags style
+  -G, --stabs              Display (in raw form) any STABS info in the file
+  -W[lLiaprmfFsoRt] or
+  --dwarf[=rawline,=decodedline,=info,=abbrev,=pubnames,=aranges,=macro,=frames,
+          =frames-interp,=str,=loc,=Ranges,=pubtypes,
+          =gdb_index,=trace_info,=trace_abbrev,=trace_aranges,
+          =addr,=cu_index]
+                           Display DWARF info in the file
+  -t, --syms               Display the contents of the symbol table(s)
+  -T, --dynamic-syms       Display the contents of the dynamic symbol table
+  -r, --reloc              Display the relocation entries in the file
+  -R, --dynamic-reloc      Display the dynamic relocation entries in the file
+  @<file>                  Read options from <file>
+  -v, --version            Display this program's version number
+  -i, --info               List object formats and architectures supported
+  -H, --help               Display this information
+
+  helloWorldAvr:     formato del fichero elf32-avr
+
+
+Desensamblado de la sección .text:
+
+00000000 <__ctors_end>:
+   0:	10 e0       	ldi	r17, 0x00	; 0
+   2:	a0 e6       	ldi	r26, 0x60	; 96
+   4:	b0 e0       	ldi	r27, 0x00	; 0
+   6:	e0 e4       	ldi	r30, 0x40	; 64
+   8:	f0 e0       	ldi	r31, 0x00	; 0
+   a:	03 c0       	rjmp	.+6      	; 0x12 <__zero_reg__+0x11>
+   c:	c8 95       	lpm
+   e:	31 96       	adiw	r30, 0x01	; 1
+  10:	0d 92       	st	X+, r0
+  12:	aa 36       	cpi	r26, 0x6A	; 106
+  14:	b1 07       	cpc	r27, r17
+  16:	d1 f7       	brne	.-12     	; 0xc <__zero_reg__+0xb>
+
+00000018 <__do_clear_bss>:
+  18:	21 e0       	ldi	r18, 0x01	; 1
+  1a:	aa e6       	ldi	r26, 0x6A	; 106
+  1c:	b0 e0       	ldi	r27, 0x00	; 0
+  1e:	01 c0       	rjmp	.+2      	; 0x22 <.do_clear_bss_start>
+
+00000020 <.do_clear_bss_loop>:
+  20:	1d 92       	st	X+, r1
+
+00000022 <.do_clear_bss_start>:
+  22:	a9 36       	cpi	r26, 0x69	; 105
+  24:	b2 07       	cpc	r27, r18
+  26:	e1 f7       	brne	.-8      	; 0x20 <.do_clear_bss_loop>
+
+00000028 <main>:
+  28:	cf 93       	push	r28
+  2a:	df 93       	push	r29
+  2c:	cd b7       	in	r28, 0x3d	; 61
+  2e:	de b7       	in	r29, 0x3e	; 62
+  30:	81 e4       	ldi	r24, 0x41	; 65
+  32:	80 93 6a 00 	sts	0x006A, r24	; 0x80006a <__data_end>
+  36:	80 e0       	ldi	r24, 0x00	; 0
+  38:	90 e0       	ldi	r25, 0x00	; 0
+  3a:	df 91       	pop	r29
+  3c:	cf 91       	pop	r28
+  3e:	08 95       	ret
+
+Desensamblado de la sección .data:
+
+00800060 <__data_start>:
+  800060:	62 00       	.word	0x0062	; ????
+  800062:	47 65       	ori	r20, 0x57	; 87
+  800064:	72 6d       	ori	r23, 0xD2	; 210
+  800066:	61 6e       	ori	r22, 0xE1	; 225
+	...
+
+Desensamblado de la sección .bss:
+
+0080006a <__bss_start>:
+	...
+
+Desensamblado de la sección .comment:
+
+00000000 <_end-0x800169>:
+   0:	47 43       	sbci	r20, 0x37	; 55
+   2:	43 3a       	cpi	r20, 0xA3	; 163
+   4:	20 28       	or	r2, r0
+   6:	47 4e       	sbci	r20, 0xE7	; 231
+   8:	55 29       	or	r21, r5
+   a:	20 35       	cpi	r18, 0x50	; 80
+   c:	2e 34       	cpi	r18, 0x4E	; 78
+   e:	2e 30       	cpi	r18, 0x0E	; 14
+
+
+
+
+   b. Utilice el comando avr-size para obtener el espacio que ocupará
+      el programa en el sistema. ¿Cuántos bytes ocupa la sección de código?
+      ¿Y la de datos?. Modifique el tamaño del arreglo y verifique
+      que cambia el tamaño de alguna sección del programa. ¿Cuál cambió?
+      ¿En cuánto cambió?
+
+.text = Code
+.data = Initialized data
+.bss = Uninitialized data
+
+.text + .data = Code space
+Sin data
+arreglo[255]
+   text	   data	    bss	    dec	    hex	filename
+     64	     10	  ->255<-	    329	    149	helloWorldAvr  
+
+arreglo[1]
+   text	   data	    bss	    dec	    hex	filename
+     64	     10	   ->1<-	75	     4b	helloWorldAvr
+
+
+   c. Utilice el comando size para MIPS y verifique los tamaños tambien
+      para arquitectura MIPS.
+
+   arreglo[255]
+   text	   data	    bss	    dec	    hex	filename
+   1893	    120	    272	   2285	    8ed	helloWorldMips
+
+
+   arreglo[1]
+   text	   data	    bss	    dec	    hex	filename
+   1893	    120	     17	   2030	    7ee	helloWorldMips
+
+
+
+8- Utilice avr-objdump -t para obtener los simbolos. ¿Puede encontrar
+   algun simbolo que ocupe mucho espacio?
+
+SYMBOL TABLE:
+00000000 l    d  .text	00000000 .text
+00800060 l    d  .data	00000000 .data
+0080006a l    d  .bss	00000000 .bss
+00000000 l    d  .comment	00000000 .comment
+00000000 l    df *ABS*	00000000 _clear_bss.o
+00000022 l       .text	00000000 .do_clear_bss_start
+00000020 l       .text	00000000 .do_clear_bss_loop
+00000000 l    df *ABS*	00000000 helloWorld.c
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+0000003f l       *ABS*	00000000 __SREG__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+0000ffa0 g       *ABS*	00000000 __DATA_REGION_LENGTH__
+00000000 g       .text	00000000 __trampolines_start
+00000040 g       .text	00000000 _etext
+0000004a g       *ABS*	00000000 __data_load_end
+00000000 g       .text	00000000 __trampolines_end
+00000040 g       *ABS*	00000000 __data_load_start
+00000000 g       .text	00000000 __dtors_end
+00800169 g       .bss	00000000 __bss_end
+00000400 g       *ABS*	00000000 __LOCK_REGION_LENGTH__
+00000018 g       .text	00000010 .hidden __do_clear_bss
+00810000 g       .comment	00000000 __eeprom_end                           
+0080006a g       .data	00000000 __data_end
+00000400 g       *ABS*	00000000 __SIGNATURE_REGION_LENGTH__
+00000000 g       .text	00000000 __ctors_start
+00000000 g       .text	00000018 .hidden __do_copy_data
+0080006a g       .bss	00000000 __bss_start
+00000028 g     F .text	00000018 main
+00000400 g       *ABS*	00000000 __USER_SIGNATURE_REGION_LENGTH__
+0080006a g     O .bss	000000ff arreglo                                << arreglo[255] >>
+00000000 g       .text	00000000 __dtors_start
+00000000 g       .text	00000000 __ctors_end
+0080006a g       .data	00000000 _edata
+00800169 g       .comment	00000000 _end
+00800060 g     O .data	00000002 a
+00010000 g       *ABS*	00000000 __EEPROM_REGION_LENGTH__
+00800060 g       .data	00000000 __data_start
+00000400 g       *ABS*	00000000 __FUSE_REGION_LENGTH__
+00002000 g       *ABS*	00000000 __TEXT_REGION_LENGTH__
+
+
+
+
+9- Utilizando el programa decodificado por avr-objdump en 7- a. 
+    ¿Es el código de main() lo primero que se ejecuta en su program? 
+
+    ->  28:	cf 93       	push	r28
+
+    Instrucción PUSH
+    Propósito: Coloca una palabra en la pila.
+
+    Sintaxis:
+
+    PUSH fuente
+
+    La instrucción PUSH decrementa en dos el valor de SP y luego transfiere el contenido del operando fuente a la nueva dirección resultante en el registro recién   modificado.
+
+    El decremento en la dirección se debe a que al agregar valores a la pila ésta crece de la dirección mayor a la dirección menor del segmento, por lo tanto al    restarle 2 al valor del registro SP lo que hacemos es aumentar el tamaño de la pila en dos bytes, que es la única cantidad de información que puede manejar la pila en cada entrada y salida de datos.
+
+
+    ¿Puede encontrar la llamada a la función main? 
+
+    ¿En qué dirección comienza el código de la función main? 
+    (0x00000028) 
+
+    ¿Qué son todas las instrucciones anteriores a main?
+    00000000 <__ctors_end>:
+    00000018 <__do_clear_bss>
+    00000020 <.do_clear_bss_loop>
+    00000022 <.do_clear_bss_start>
+
+

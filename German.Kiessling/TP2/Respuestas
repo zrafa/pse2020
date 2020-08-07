@@ -1,0 +1,80 @@
+1)
+    - ¿A que pin de la placa pro mini está conectado el led?
+
+      Pin "13" - D13 - PB5 -SCK - PCINT5 - LED
+
+    - ¿A qué pin del microcontrolador AVR está conectado el led?
+
+      Pin PB5(SCK) 
+
+
+2 )  -> "Hecho Hardware" Archivo adjunto -> /Multimedia/ej2
+
+3)
+      Utilice avr-objdump para realizar un decodificado del programa binario elf (obtener el código en lenguaje
+    ensamblador AVR a partir del binario elf). Observe ahora que al compilar el programa para un microcontrolador
+    particular aparece al principio del código la tabla de vectores.
+
+    Presente en este ejercicio las primeras 10 posiciones de la tabla de vectores.
+
+    00000000 <__vectors>:
+       0:	0c 94 3b 00 	jmp	0x76	; 0x76 <__ctors_end>
+       4:	0c 94 58 00 	jmp	0xb0	; 0xb0 <__bad_interrupt>
+       8:	0c 94 58 00 	jmp	0xb0	; 0xb0 <__bad_interrupt>
+       c:	0c 94 58 00 	jmp	0xb0	; 0xb0 <__bad_interrupt>
+      10:	0c 94 58 00 	jmp	0xb0	; 0xb0 <__bad_interrupt>
+      14:	0c 94 58 00 	jmp	0xb0	; 0xb0 <__bad_interrupt>
+      18:	0c 94 58 00 	jmp	0xb0	; 0xb0 <__bad_interrupt>
+      1c:	0c 94 58 00 	jmp	0xb0	; 0xb0 <__bad_interrupt>
+      20:	0c 94 58 00 	jmp	0xb0	; 0xb0 <__bad_interrupt>
+      24:	0c 94 58 00 	jmp	0xb0	; 0xb0 <__bad_interrupt>
+
+4)
+        Modifique el hardware: quitar el pulsador y colocar los leds en los pines de la placa 10, 11, y 12.
+    Escriba un programa que realice el efecto del knight-rider, utilizando esos 3 leds y el conectado en la placa en el pin 13
+    (es decir, utilizando 4 leds). Si cuenta con 5 leds quedará aún mejor.
+
+    -> "Hecho Hardware " Archivo adjunto -> /Multimedia/ej3
+5)   Responder:
+    a) ¿Qué hw existe en cada dispositivo de E/S que permite su programación?
+        -> La programacion de los dispositivos de E/S se logra a traves de los registros, que permiten la escritura y lectura 
+
+
+    b) ¿Cómo se llaman en el PORT B del AVR?
+        -> PORTB – The Port B Data Register
+        -> DDRB  – The Port B Data Direction Register
+        -> PINB  – The Port B Input Pins Address
+
+    c) ¿Cuantos dispositivos de E/S observa conectados al DATABUS del AVR? Mencione sus nombres.
+
+        -> 1) PORT D (8)
+        -> 2) PORT B (8)
+        -> 3) PORT C (7)
+        -> 4) USART 0
+        -> 5) EEPROM
+        -> 6) TWI
+        -> 7) 8bit T/C2
+        -> 8) 8bit T/C 0
+        -> 9) 16bit T/C 1
+        -> 10) A/D Conv.
+        -> 11) SPI
+
+    d) Usted debe controlar un nuevo dispositivo de E/S en un sistema, utilizando un programa escrito en lenguaje C. 
+        ¿Que detalles necesita conocer para escribir el software? ¿De dónde obtiene los detalles?
+
+        ->  Se necesita conocer los distintos registros, los cuales estan documentodos en la hoja de datos.
+           
+
+    e)¿Qué es el voltage? ¿Qué es la corriente? 
+        -> El voltaje es la magnitud que da cuenta de la diferencia en el potencial eléctrico entre dos puntos determinados.
+            Cuando se unen dos puntos que presentan diferencia de potencial eléctrico con un material conductor,
+            se producirá un flujo de electrones, lo que se conoce como corriente eléctrica, 
+            que llevará parte de la carga desde el punto de mayor al de menor potencial.
+    
+            Fuente: https://concepto.de/voltaje/#ixzz6UNConbQC
+
+    f)¿Por qué se lo clasifica como “arquitectura harvard” a los micros AVR de 8-bits?
+        La arquitectura Harvard es una arquitectura de computadora con pistas de almacenamiento y
+         de señal físicamente separadas para las instrucciones y para los datos.
+
+

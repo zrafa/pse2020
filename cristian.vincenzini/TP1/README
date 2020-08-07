@@ -1,0 +1,2 @@
+Compilar con:
+	mips-linux-gnu-gcc main.c -o main-mips
