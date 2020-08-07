@@ -1,0 +1,54 @@
+1.
+	El pin de la placa al que esta conectado el led es el pin 13.
+
+2.
+	El pin del microcontrolador AVR al que esta conectado el led es el PB5(SCK).
+
+3.
+	00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+5.
+a)
+	Cada dispositivo I/O tiene una serie de registros de 8bits con lo cuales el programador puede interactuar. Cada bit de cada registro cumple una funcion particular.
+
+b) 
+	En el PORT B de AVR existen 3 registros (DDxn, PORTxn y PINxn) donde los propios de PORT B son DDRB, PORTB, PINB.
+
+c)
+	En el diagrama del manual del microcontrolador (página 6) se pueden observar 11 dispositivos I/O conectados a databus del avr. 
+Ellos son:
+
+*EEPROM
+*A/D Converter
+*8bit T/C 0
+*16bit T/C 1
+*8bit T/C 2
+*USART 0
+*PORT D (8)
+*SPI
+*PORT B (8)
+*TWI
+*PORT C (7)
+
+d)
+	Necesitaria conocer cuantos registros posee el dispositivo, tamaño de estos registros, proposito de los mismos y sus respectivas direcciones.
+
+Estos detalles se obtienen en la hoja de datos del dispositivo.
+
+e)
+	El voltaje es la energia potencial entre 2 puntos de un circuito. Si existe una diferencia de potencial entre estos 2 puntos (un punto tiene más carga que otra) entonces la diferencia entre estos puntos se conoce como voltaje.
+
+	La corriente es la mágnitud del flujo de electrones que circulan por un conductor. 
+
+f)
+	Se clasifican como arquitectura de harvard porque a diferencia de la arquitectura de von Neumann, estas utilizan buses y memorias completamente separadas para la memoria de programas y datos. Lo que permite un mayor rendimiento, y permite que los buses de programa y de datos tengan diferentes tamaños de bits.
