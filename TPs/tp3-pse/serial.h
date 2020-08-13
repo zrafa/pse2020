@@ -12,7 +12,7 @@
 
 
 void serial_init(void);
-void serial_put_char(char outputChar);
+void serial_put_char(char c);
 char serial_get_char(void);
 
 

@@ -51,7 +51,7 @@ void serial_init() {
 
 
 /* enviar un byte a traves del del dispositivo inicializado */
-void serial_put_char (char outputChar)
+void serial_put_char (char c)
 {
     /* Wait until the transmitter is ready for the next character. */
 
