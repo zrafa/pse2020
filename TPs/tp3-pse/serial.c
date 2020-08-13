@@ -9,7 +9,7 @@
  *
  **********************************************************************/
 
-#include <avr/io.h> /* para los tipos de datos. Ej.: uint8_t */
+#include <stdint.h> /* para los tipos de datos. Ej.: uint8_t */
 
 
 /* Completar la estructura de datos para que se superponga a los registros
