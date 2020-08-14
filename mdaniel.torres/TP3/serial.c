@@ -38,6 +38,7 @@ uart_t* puerto_serial = (uart_t *) (0xc0);
 
 
 #define READY_TO_WRITE 0x20
+#define READY_TO_READ 0x80
 
 void serial_init() {
 	//RXEN0 bit 4    0x10  #define RECEIVER_ENABLE 0x10
@@ -87,11 +88,9 @@ char serial_get_char(void)
     /* Completar con E/S programada similar a serial_put_char pero 
        utilizando el bit correcto */
     
-    // while ( /* completar con E/S programada */ )
-    //     ;
-
-    // return /* DEBE devolver el valor que se encuentra en el registro de datos de E/S */
-
+     while (puerto_serial->status_control_a & READY_TO_READ ){
+	return puerto_serial->data_es
+     }
 }
 
 
