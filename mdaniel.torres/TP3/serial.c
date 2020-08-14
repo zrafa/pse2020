@@ -50,13 +50,10 @@ void serial_init() {
 
 
     /* Enable receiver and transmitter */
-    puerto_serial->satus_control_b |=
-        (0x10  | 0x08 );
+    puerto_serial->satus_control_b |= ( 0x10 | 0x08 );
 
     /* Set frame format: 8data, 2stop bit */
-    puerto_serial->status_control_c |= 
-        (0x08  | (0x02);
-
+    puerto_serial->status_control_c |= 0x03;
 
 }
 
@@ -78,7 +75,7 @@ void serial_put_char (char c)
 	
 	
 	while(puerto_serial->status_control_a & READY_TO_WRITE){
-		
+		puerto_serial->data_es = c;
 	}
 
 }
