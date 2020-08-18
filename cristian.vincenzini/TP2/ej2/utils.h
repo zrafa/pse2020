@@ -1,4 +1,3 @@
-
 /* utils.h - definicion de funciones utiles al TP2 */
 
 #ifndef _UTILS_H

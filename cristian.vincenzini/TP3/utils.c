@@ -32,26 +32,6 @@ void esperar(unsigned long milisegundos)
 	for (i = 0; i < 450 * milisegundos; i++);
 }
 
-unsigned char leer_boton()
-{
-	unsigned char lectura;
-
-	// estado ON mientras no se presione switch
-	lectura = *(PINB) & PB4;
-
-	// cambio para que pulsar sea ON
-	lectura = !lectura;
-
-	// debugging: cuando se presiona boton se enciende pin 13
-	if (lectura) {
-		*(PORTB) |= PB5;
-	} else {
-		*(PORTB) &= ~PB5;
-	}
-
-	return lectura;
-}
-
 void suma_binaria()
 {
 	int i, j;
