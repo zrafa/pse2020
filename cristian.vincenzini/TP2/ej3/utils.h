@@ -6,6 +6,6 @@
 
 void setup();
 void esperar(unsigned long);
-void encender_leds();
+void knight_rider();
 
 #endif	/* _UTILS_H */

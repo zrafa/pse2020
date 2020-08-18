@@ -8,7 +8,6 @@ void setup();
 void esperar(unsigned long);
 void encender_leds();
 void suma_binaria();
-void reiniciar_leds();
 unsigned char leer_boton();
 
 #endif	/* _UTILS_H */

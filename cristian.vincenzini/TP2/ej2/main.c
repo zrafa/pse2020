@@ -1,4 +1,3 @@
-
 /* Pulsador que intercambia modos de operacion */
 
 #include "utils.h"
@@ -14,7 +13,6 @@ int main(void)
 		se_presiono_boton = leer_boton();
 
 		if (se_presiono_boton) {
-			reiniciar_leds();
 			modo = !modo;
 		}
 
@@ -26,5 +24,3 @@ int main(void)
 		}
 	}
 }
-
-

@@ -50,39 +50,34 @@ unsigned char leer_boton()
 
 void suma_binaria()
 {
-	volatile unsigned char i;
+	int i;
+
+
+	for (i = 0; i < 15; i++) {
+		esperar(1);
+		*(PORTB) += 1;
+	}
 
 	// setea pins en OFF
-	*(PORTB) &= ( ~PB0 | ~PB1 | ~PB2 | ~PB3 );
-
-	for (i = 0; i < 16; i++) {
-		*(PORTB) += PB0;
-		esperar(1);
-	}
-}
-
-void reiniciar_leds()
-{
-	*(PORTB) &= ( ~PB0 | ~PB1 | ~PB2 | ~PB3 );
-	esperar(3);
+	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 }
 
 void encender_leds()
 {
-	*(PORTB) &= ( ~PB0 | ~PB1 | ~PB2 | ~PB3 );
+	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 	esperar(1);
 	*(PORTB) |= ( PB0 | PB1 | PB2 | PB3 );
 	esperar(1);
-	*(PORTB) &= ( ~PB0 | ~PB1 | ~PB2 | ~PB3 );
+	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 }
 
 void setup()
 {
 	// setea en OFF el voltaje de los pines
-	*(PORTB) &= ( ~PB0 | ~PB1 | ~PB2 | ~PB3 );
+	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 
 	// setea pines en modo OUTPUT
-	*(DDRB) |= ( PB0 | PB1 | PB2 | PB3);
+	*(DDRB) |= (PB0 | PB1 | PB2 | PB3);
 	
 	/* configuracion del boton */
 	*(DDRB) &= ~PB4;  // setea pin del boton en modo INPUT (bit ddrb = 0)

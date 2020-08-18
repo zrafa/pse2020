@@ -26,50 +26,36 @@ void esperar(unsigned long milisegundos)
 	for (i = 0; i < 450 * milisegundos; i++);
 }
 
-void encender_leds()
+void efecto(unsigned char pin)
 {
-	*(PORTB) |= PB0;
+	*(PORTB) |= pin;
 	esperar(50);
-	*(PORTB) &= ~PB0;
+	*(PORTB) &= ~pin;
 	esperar(50);
+}
 
-	*(PORTB) |= PB1;
-	esperar(50);
-	*(PORTB) &= ~PB1;
-	esperar(50);
+void knight_rider()
+{
+	unsigned char pin[4] = {PB0, PB1, PB2, PB3};
+	int i;
 
-	*(PORTB) |= PB2;
-	esperar(50);
-	*(PORTB) &= ~PB2;
-	esperar(50);
+	for (i = 0; i < 4; i++) {
+		efecto(pin[i]);
+	}
 
-	*(PORTB) |= PB3;
-	esperar(50);
-	*(PORTB) &= ~PB3;
-	esperar(50);
+	for (i = 2; i >= 0; i--) {
+		efecto(pin[i]);
+	}
 
-	*(PORTB) |= PB2;
-	esperar(50);
-	*(PORTB) &= ~PB2;
-	esperar(50);
-
-	*(PORTB) |= PB1;
-	esperar(50);
-	*(PORTB) &= ~PB1;
-	esperar(50);
-
-	*(PORTB) |= PB0;
-	esperar(50);
-	*(PORTB) &= ~PB0;
-	esperar(50);
-
+	// setea en OFF el voltaje de los pines
+	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 }
 
 void setup()
 {
 	// setea en OFF el voltaje de los pines
-	*(PORTB) &= ( ~PB0 | ~PB1 | ~PB2 | ~PB3 );
+	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 
 	// setea pines en modo OUTPUT
-	*(DDRB) |= ( PB0 | PB1 | PB2 | PB3);
+	*(DDRB) |= (PB0 | PB1 | PB2 | PB3);
 }
