@@ -12,6 +12,10 @@ Usar:
 dentro del directorio TP3
 
 utilizar CuteCom para hacer la comunicación con la placa:
+
 ingresar 's' ejecuta efecto Suma
+
 ingresar 'c' ejecuta efecto Knight Rider
+
+ingresar 'q' Finaliza la ejecución
 ----------------------------- -----------------------------
