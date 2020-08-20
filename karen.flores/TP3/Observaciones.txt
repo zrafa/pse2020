@@ -1,0 +1,18 @@
+**********************************OBSERVACIONES*************************************************
+
+1) En el apunte se define la siguiente estructura:
+
+typedef struct
+{
+	uint8_t dataBits;
+	uint8_t stopBits;
+	uint8_t baudRate;
+	parity_t parity;
+} serialparams_t;
+serialparams_t serial_params;
+
+No entendí del todo que función cumple, es decir en qué casos se podría utilizar, ya que configurando los registros de control correspondientes accediendo a la estructura de datos que definí en el código fue suficiente para determinar las funcionalidades requeridas.
+
+2) Se pierden caracteres, en el ejercicio 4, cuando se lee una 'c' o una 'k', supuse que se debía a que se trabaja de forma asincrónica, por lo que por el tiempo que requiere realizar el conteo o el knight-rider puede causar la pérdida de caracteres.
+
+3) En cuanto al TP me pareció tan interesante como los anteriores, costó entender algunos aspectos como todo tema nuevo, pero ver que los resultados obtenidos son los esperados es emocionante.
