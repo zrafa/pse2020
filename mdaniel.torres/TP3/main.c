@@ -25,6 +25,8 @@ int main(void)
 
     while (rcvChar != 'q')
     {
+	    serial_init();
+	    led_init();
         rcvChar = serial_get_char();
 
 	switch (rcvChar) {
@@ -35,7 +37,7 @@ int main(void)
                 break;
             case 'k':
                 
-                for (i = 0; i < 10; i++) {
+                for (int i = 0; i < 10; i++) {
                     knight_rider();
                 }
                 

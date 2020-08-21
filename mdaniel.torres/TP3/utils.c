@@ -23,7 +23,7 @@ volatile unsigned char * pin_b = (unsigned char *) 0x23; /* direccion PIN B (reg
  * 	pin del atmega328p que tiene conectado un led en una board arduino
  */
 
-void esperar(int multiplier) {
+void esperar(unsigned long multiplier) {
 	volatile unsigned long i;
 	/* delay de 1 segundo */
 	for (i=0; i<6000 * multiplier; i++);
@@ -127,25 +127,25 @@ void led_init(){
 void contador(){
     unsigned char* PUERTO_B = 0x25;
 
-    esperar();
+    esperar(30);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x02);
-    esperar();
+    esperar(30);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x02);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x04);
-    esperar();
+    esperar(30);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x02);
-    esperar();
+    esperar(30);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x02);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x04);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x08);
-    esperar();
+    esperar(30);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x02);
-    esperar();
+    esperar(30);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x02);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x04);
-    esperar();
+    esperar(30);
     *(PUERTO_B) = *(PUERTO_B) ^ (0x02);
-    esperar();
+    esperar(30);
     led_init();
 }
 
