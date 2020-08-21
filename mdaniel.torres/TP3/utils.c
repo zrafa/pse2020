@@ -70,7 +70,7 @@ void apagar_led(){
 	*(PUERTO_B) = valor_tercero;
 }
 
-void knight_raider(){
+void knight_rider(){
 	unsigned char* PUERTO_B = 0x25;
 
 	*(PUERTO_B) = *(PUERTO_B) ^ (0x02);

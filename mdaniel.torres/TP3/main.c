@@ -13,6 +13,7 @@ int main(void)
 
     /* Configure the UART for the serial driver */
     serial_init();
+    led_init();
 
     serial_put_char('s');
     serial_put_char('t');
@@ -26,9 +27,26 @@ int main(void)
     {
         rcvChar = serial_get_char();
 
-        serial_put_char(rcvChar);
-        serial_put_char('\r');
-        serial_put_char('\n');
+	switch (rcvChar) {
+            case 'c':
+             
+                contador();
+       
+                break;
+            case 'k':
+                
+                for (i = 0; i < 10; i++) {
+                    knight_rider();
+                }
+                
+                break;
+            default:
+                
+                serial_put_char(rcvChar);
+                serial_put_char('\r');
+                serial_put_char('\n');
+                break;
+        }
     }
 
 
