@@ -24,14 +24,13 @@ int main(void)
 
     while (rcvChar != 'q')
     {
-        /* Wait for an incoming character */
         rcvChar = serial_get_char();
 
-        /* Echo the character back along with a carriage return and line feed */
         serial_put_char(rcvChar);
         serial_put_char('\r');
         serial_put_char('\n');
     }
+
 
     for (;;);
 
