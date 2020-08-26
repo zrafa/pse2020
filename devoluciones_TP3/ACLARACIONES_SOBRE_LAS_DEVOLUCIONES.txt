@@ -1,0 +1,41 @@
+
+
+Hay muchas de los comentarios en las devoluciones que son por falta
+de pulcritud en los apuntes y los TPS, que fueron arrastradas a
+la resolución de los TPs.
+
+Por lo tanto, no tomen todas las devoluciones como correcciones
+severas. Es un error nuestro esos dejos que provienen del libro
+original y otros cursados anteriores (ej., en 2016 se utilizó
+en algunos TPs C++).
+
+Los siguientes items provienen de los apuntes y TPs, y contienen
+los detalles que no siguen las normas de estilo recomendadas, o 
+son incorrectos usos:
+
+- nombre de variable rcvChar. Debería ser rcv_char;
+- nombre de puntero a un registro de E/S. En el apunte figura
+  como PORTB o similar. Debería estar en minúscula: portb. Los
+  tokens en mayúsculas se dejan para macros mayormente.
+- uso de indirección de la siguiente manera: *(PORTB). Debería
+  ser: *portb (sin paréntesis). Sobre todo con otros usos. Por ej., 
+  a Cristian le pasó que usó *portb++. En este caso se necesitan
+  los paréntesis, pero justamente para dar prevalencia a la indirección.
+  Debería ser: (*portb)++; (los operadores unarios tienen orden
+  de derecha a izquierda).
+- uso de volatile unsigned long i, cuando i es una variable local.
+  Proviene del apunte, en la función delay(). No debería ir el 
+  volatile (se explica en el apunte y se explicó en telegram). 
+  No recuerdo por qué está en el apunte, pero creo que quedó 
+  claro cuando se usa y cuando no.
+
+Dicho esto, igualmente les he dejado en la devolución todas estas
+cosas anteriores, que NO deberían usarse, o continuarlas en el cursado. 
+Para que queden claras, ya que uno de los objetivos de esta materia
+es que tengan la posibilidad de realizar ejercitación de la programación 
+en C acorde a las normas de estilo que se usan en entornos profesionales.
+Continuaremos mejorando el apunte y los TPs a futuro para no arrastar
+mas alumnos a estas cuestiones.
+
+
+
