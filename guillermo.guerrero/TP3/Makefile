@@ -1,7 +1,7 @@
 CC=avr-gcc
 OBJETOS=main.o serial.o utils.o
-APP=led-test
-CFLAGS=-Os -DF_CPU=16000000UL -mmcu=atmega328p 
+APP=io
+CFLAGS=-Os -DF_CPU=16000000UL -mmcu=atmega328p
 LDFLAGS=-mmcu=atmega328p
 FIRMWARE=imagen.hex
 
@@ -14,7 +14,7 @@ all: $(APP)
 
 
 $(APP): $(OBJETOS)
-	$(CC) $(LDFLAGS) -o $@ $^ 
+	$(CC) $(LDFLAGS) -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<

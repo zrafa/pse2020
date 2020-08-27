@@ -1,0 +1,27 @@
+
+serial:
+	
+	typedef struct{
+	uint8_t dataBits;
+	uint8_t stopBits;
+	uint8_t baudRate;
+	uint8_t parity;
+	} serial_parements_t;
+
+	serial_parements_t serial_paraments;
+
+	//esta estructura no me queda clara para que usarla se me ocurren dos opciones:
+
+	serial_paraments={8,1,9600,0} para guardar:
+ 		el tamaño de los caractes, 
+		la cantidad de bit de stop,
+		el valor de bautRade, y 
+		que no tiene paridad
+	serial_paraments={0x06,0x0,9600,0x0}
+		
+		representan los bits con 1 necesarios para que el tamaño sea de 8 bits, 
+		para establecer que solo tendra un bit de stop se debe colocar 0 en el 3 bit de control_c,
+		el valor de bautRade, y 
+		que no tiene paridad
+
+
