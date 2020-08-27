@@ -35,16 +35,15 @@ void render_buffer(void)
 void draw_pixel_on_buffer(unsigned char x, unsigned char y, int color)
 {
         switch (color) {
-        case 0:
-                buffer[y*80+x] = ' ';
-                break;
-        case 1:
-                buffer[y*80+x] = 'X';
-                break;
-        default:
-                break;
+                case 0:
+                        buffer[y*80+x] = ' ';
+                        break;
+                case 1:
+                        buffer[y*80+x] = 'X';
+                        break;
+                default:
+                        break;
         }
-
 }
 
 bool check_bit(unsigned char c, int pos)
