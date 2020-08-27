@@ -23,7 +23,6 @@ typedef struct
     uint8_t baud_rate_l;         /* ubrr0l baud rate low */
     uint8_t baud_rate_h;         /* ubrr0h baud rate high */ 
     uint8_t data_es;             /* udr0 i/o data */
-
 } volatile uart_t;
 
 /* puntero a la estructura de los registros del periferico */
@@ -36,8 +35,8 @@ uart_t *puerto_serial = (uart_t *) (0xc0);
 
 /* the UCSZn bits combined with the UCSZn2 bit in UCSRnB sets the number of data bits */
 /* in a frame the receiver and transmitter use */
-#define CHARACTER_SIZE_0 0x02 /* 0b 0000 0010 - bit 1 */
-#define CHARACTER_SIZE_1 0x04 /* 0b 0000 0100 - bit 2 */
+#define FRAME_SIZE_0 0x02 /* 0b 0000 0010 - bit 1 */
+#define FRAME_SIZE_1 0x04 /* 0b 0000 0100 - bit 2 */
 
 /* USBSn (bit 3) selects the number of stop bits to be inserted by the transmitter (0 is 1 bit) */
 /* UPMn these bits set the type of parity generation and check (0 and 0 is disabled) */
@@ -63,15 +62,15 @@ uart_t *puerto_serial = (uart_t *) (0xc0);
 
 void serial_init()
 {
-	/* Configurar los registros High y Low con BAUD_PRESCALE */
-    puerto_serial -> baud_rate_h = (unsigned char) (BAUD_PRESCALE>>8);
-	puerto_serial -> baud_rate_l = (unsigned char) (BAUD_PRESCALE);
+    /* Configurar los registros High y Low con BAUD_PRESCALE */
+    puerto_serial->baud_rate_h = (unsigned char) (BAUD_PRESCALE>>8);
+    puerto_serial->baud_rate_l = (unsigned char) (BAUD_PRESCALE);
 
-	/* Configurar un frame de 8bits, sin bit de paridad y un bit de stop */
-    puerto_serial -> status_control_c = (unsigned char) (CHARACTER_SIZE_0 + CHARACTER_SIZE_1);
+    /* Configurar un frame de 8bits, sin bit de paridad y un bit de stop */
+    puerto_serial->status_control_c = (unsigned char) (FRAME_SIZE_0 + FRAME_SIZE_1);
 
-	/* Activar la recepcion y transmicion */
-    puerto_serial -> status_control_b = (unsigned char) (RECEIVER_ENABLE + TRANSMITTER_ENABLE);
+    /* Activar la recepcion y transmision */
+    puerto_serial->status_control_b = (unsigned char) (RECEIVER_ENABLE + TRANSMITTER_ENABLE);
 }
 
 
@@ -81,12 +80,12 @@ void serial_put_char(char c)
     /* Wait until the transmitter is ready for the next character. */
 
     /* Se debe esperar verificando el bit UDREn del registro UCSRnA,
-       hasta que el buffer esté listo para recibir un dato a transmitir */
-    while( !((puerto_serial -> status_control_a) & (READY_TO_WRITE)) );
+        hasta que el buffer esté listo para recibir un dato a transmitir */
+    while ( !((puerto_serial->status_control_a) & (READY_TO_WRITE)) );
 
     /* Send the character via the serial port. */
     /* (escribir el dato al registro de datos de E/S */
-    puerto_serial -> data_es = c;
+    puerto_serial->data_es = c;
 }
 
 
@@ -95,18 +94,18 @@ char serial_get_char(void)
     /* Wait for the next character to arrive. */
     /* Completar con E/S programada similar a serial_put_char pero 
        utilizando el bit correcto */
-    while( !((puerto_serial -> status_control_a) & (READY_TO_READ)) );
+    while ( !((puerto_serial->status_control_a) & (READY_TO_READ)) );
 
     /* DEBE devolver el valor que se encuentra en el registro de datos de E/S */
-    return (puerto_serial -> data_es);
+    return (puerto_serial->data_es);
 }
 
 
-void serial_put_str(char * mensaje)
+void serial_put_str(char * str)
 {
-    while (*mensaje) {
-        serial_put_char(*mensaje);
-        mensaje++;
+    while (*str) {
+        serial_put_char(*str);
+        str++;
     }
 
     serial_put_char('\r');
