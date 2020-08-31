@@ -9,4 +9,4 @@ void encender_leds();
 void suma_binaria();
 unsigned char leer_boton();
 
-#endif	/* _UTILS_H */
+#endif  /* _UTILS_H */

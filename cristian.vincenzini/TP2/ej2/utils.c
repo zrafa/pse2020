@@ -20,66 +20,66 @@ volatile unsigned char * PINB  = (unsigned char *) 0x23;  /* direccion PIN B (re
 
 /* funciones */
 
-void esperar(unsigned long segundos)
+void esperar(unsigned long sec)
 {
-	volatile unsigned long i;
+        unsigned long i;
 
-	/* delay de 1 segundo */
-	for (i = 0; i < 450000 * segundos; i++);
+        /* delay de 1 segundo */
+        for (i = 0; i < 450000 * sec; i++);
 }
 
 unsigned char leer_boton()
 {
-	unsigned char lectura;
+        unsigned char lectura;
 
-	// estado ON mientras no se presione switch
-	lectura = *(PINB) & PB4;
+        /* estado ON mientras no se presione switch */
+        lectura = *PINB & PB4;
 
-	// cambio para que pulsar sea ON
-	lectura = !lectura;
+        /* cambio para que pulsar sea ON */
+        lectura = !lectura;
 
-	// debugging: cuando se presiona boton se enciende pin 13
-	if (lectura) {
-		*(PORTB) |= PB5;
-	} else {
-		*(PORTB) &= ~PB5;
-	}
+        /* debugging: cuando se presiona boton se enciende pin 13 */
+        if (lectura) {
+                *PORTB |= PB5;
+        } else {
+                *PORTB &= ~PB5;
+        }
 
-	return lectura;
+        return lectura;
 }
 
 void suma_binaria()
 {
-	int i;
+        int i;
 
 
-	for (i = 0; i < 15; i++) {
-		esperar(1);
-		*(PORTB) += 1;
-	}
+        for (i = 0; i < 15; i++) {
+                esperar(1);
+                *PORTB += 1;
+        }
 
-	// setea pins en OFF
-	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
+        /* setea pins en OFF */
+        *PORTB &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 }
 
 void encender_leds()
 {
-	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
-	esperar(1);
-	*(PORTB) |= ( PB0 | PB1 | PB2 | PB3 );
-	esperar(1);
-	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
+        *PORTB &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
+        esperar(1);
+        *PORTB |= ( PB0 | PB1 | PB2 | PB3 );
+        esperar(1);
+        *PORTB &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 }
 
 void setup()
 {
-	// setea en OFF el voltaje de los pines
-	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
+        /* setea en OFF el voltaje de los pines */
+        *PORTB &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 
-	// setea pines en modo OUTPUT
-	*(DDRB) |= (PB0 | PB1 | PB2 | PB3);
-	
-	/* configuracion del boton */
-	*(DDRB) &= ~PB4;  // setea pin del boton en modo INPUT (bit ddrb = 0)
-	*(PORTB) |= PB4;  // activa modo PULL-UP (bit portb = 1)
+        /* setea pines en modo OUTPUT */
+        *DDRB |= (PB0 | PB1 | PB2 | PB3);
+        
+        /* configuracion del boton */
+        *DDRB &= ~PB4;  /* setea pin del boton en modo INPUT (bit ddrb = 0) */
+        *PORTB |= PB4;  /* activa modo PULL-UP (bit portb = 1) */
 }
