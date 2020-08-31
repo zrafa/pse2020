@@ -7,12 +7,13 @@
  */
 #define LED (0x38)
 #define BIT2 (0x04)
-#define CONF_ENTRADAS (0x3C)
+#define CONF_ENTRADA (0x3C)
 
 /* puertos de E/S */
 volatile unsigned char * puerto_b = (unsigned char *) 0x25; /* direccion de PORTB: SALIDA */
 volatile unsigned char * ddr_b = (unsigned char *) 0x24; /* direccion de DDR B (registro de control) */
 volatile unsigned char * pin_b = (unsigned char *) 0x23; /* direccion PIN B (registro de datos)*/
+unsigned char estado;
 
 
 /* 
@@ -24,8 +25,8 @@ volatile unsigned char * pin_b = (unsigned char *) 0x23; /* direccion PIN B (reg
  *      El 5to bit define la entrada o salida del
  * 	pin del atmega328p que tiene conectado un led en una board arduino
  */
-void let_init(){
-	*(puerto_b) = *(puerto_b) & (~ CONF_ENTRADAS);
+void led_init() {
+	*(puerto_b) = *(puerto_b) & (~ CONF_ENTRADA);
 	*(ddr_b) = *(ddr_b) | (LED);
 	*(ddr_b) = *(ddr_b) & (~ BIT2);
 	*(pin_b) =  0x04;
@@ -33,8 +34,8 @@ void let_init(){
 
 void esperar() {
 	unsigned long i;
-	/* delay de 1/2 segundo */
-	for (i=0; i<225000; i++);
+	/* delay de 2 segundo */
+	for (i=0; i<900000; i++);
 }
 
 void prender_led() {
@@ -49,7 +50,18 @@ void apagar_led() {
 	*(puerto_b) = valor_b;
 }
 
-void conteo_binario(){
+unsigned char get_estado() {
+	unsigned char valor_b = *(pin_b);
+	valor_b &=  BIT2 ;
+	if (valor_b != BIT2){
+		if(estado == 0){estado =1;}
+		else{estado = 0;}
+	}
+	
+	return estado;
+}
+
+void conteo_binario() {
 	unsigned char valor_b = *(pin_b);
 	valor_b ^= 0x20;
 	*(puerto_b) = valor_b;

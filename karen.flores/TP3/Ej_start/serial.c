@@ -33,6 +33,9 @@ uart_t *puerto_serial = (uart_t *) (0xc0);
 
 #define USART_BAUDRATE 9600
 #define BAUD_PRESCALE (((F_CPU/(USART_BAUDRATE*16UL)))-1)
+#define SERIAL_READY 0x20
+#define SERIAL_ARRIVE 0x80
+
 unsigned char start = 0; //esta variable es sólo para verificar si se inició el controlador del dispositivo, 
 			//en ese caso init() se ejecuta una vez
 
@@ -42,7 +45,7 @@ void serial_init() {
 
 	/* El manual del atmega328p tiene un ejemplo. Adecuarla a C y
            la estructura de datos */
-	if(start == 0) {
+	if (start == 0) {
 		/* Configurar los registros High y Low con BAUD_PRESCALE */
 		(*puerto_serial).baud_rate_l = (unsigned char) BAUD_PRESCALE;
 		(*puerto_serial).baud_rate_h = (unsigned char) (BAUD_PRESCALE>>8);
@@ -65,12 +68,12 @@ void serial_put_char (char c)
     /* Se debe esperar verificando el bit UDREn del registro UCSRnA,
        hasta que el buffer esté listo para recibir un dato a transmitir */
 	
-     while ( !((*puerto_serial).status_control_a & 0x20) ); 
+     while ( !((*puerto_serial).status_control_a & SERIAL_READY) ); 
 
 
     /* Send the character via the serial port. */
     /* (escribir el dato al registro de datos de E/S */
-	(*puerto_serial).data_es = c;
+    (*puerto_serial).data_es = c;
 
 }
 
@@ -81,7 +84,7 @@ char serial_get_char(void)
     /* Completar con E/S programada similar a serial_put_char pero 
        utilizando el bit correcto */
     
-     while ( !((*puerto_serial).status_control_a & 0x80) ); 
+     while ( !((*puerto_serial).status_control_a & SERIAL_ARRIVE) ); 
          
 
      return (*puerto_serial).data_es; /* DEBE devolver el valor que se encuentra en el registro de datos de E/S */

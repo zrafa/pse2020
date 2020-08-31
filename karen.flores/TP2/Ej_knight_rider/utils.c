@@ -12,7 +12,7 @@
 volatile unsigned char * puerto_b = (unsigned char *) 0x25; /* direccion de PORTB: SALIDA */
 volatile unsigned char * ddr_b = (unsigned char *) 0x24; /* direccion de DDR B (registro de control) */
 volatile unsigned char * pin_b = (unsigned char *) 0x23; /* direccion PIN B (registro de datos)*/
-volatile unsigned char valor_b = 0x20;
+unsigned char valor_b = 0x20;
 
 
 /* 
@@ -24,34 +24,34 @@ volatile unsigned char valor_b = 0x20;
  *      El 5to bit define la entrada o salida del
  * 	pin del atmega328p que tiene conectado un led en una board arduino
  */
-void let_init(){
+void led_init() {
 	*(puerto_b) = *(puerto_b) & (~ LED);
 	*(ddr_b) = *(ddr_b) | (LED);
 }
 
 void esperar() {
-	volatile unsigned long i;
+	unsigned long i;
 	/* delay de 1 segundo */
 	for (i=0; i<56250; i++);
 }
 
 void knight_rider(){
-	while(valor_b > 0x01) 
+	while (valor_b > 0x01) 
 	{
 		*(puerto_b) = valor_b;
 		esperar();
-		if(valor_b > 0x01) {
+		if (valor_b > 0x01) {
 			valor_b >>= 1;
 		}
 	}
 }
 
 void knight_rider_reverso(){
-	while(valor_b < 0x20) 
+	while (valor_b < 0x20) 
 	{
 		*(puerto_b) = valor_b;
 		esperar();
-		if(valor_b < 0x20) {
+		if (valor_b < 0x20) {
 			valor_b <<= 1;
 		}
 	}

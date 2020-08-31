@@ -27,12 +27,12 @@ int main(void)
         /* Wait for an incoming character */
         rcvChar = serial_get_char();
 	serial_put_char(rcvChar);
-	if(rcvChar == 'c') {
+	if (rcvChar == 'c') {
 		let_init(); 
-		binario();
+		conteo_binario();
 		apagar_led();
 	}
-	if(rcvChar == 'k') {
+	else if (rcvChar == 'k') {
 		led_init(); 
 		knight_rider();
 		knight_rider_reverso();

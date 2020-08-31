@@ -26,7 +26,7 @@ volatile unsigned char * pin_b = (unsigned char *) 0x23; /* direccion PIN B (reg
 
 
 void esperar() {
-	volatile unsigned long i;
+	unsigned long i;
 	/* delay de 1 segundo */
 	for (i=0; i<450000; i++);
 }
