@@ -9,7 +9,6 @@
  *
  **********************************************************************/
 
-#include <avr/io.h> /* para los tipos de datos. Ej.: uint8_t */
 #include <stdint.h> /* para los tipos de datos. Ej.: uint8_t */
 
 
@@ -20,16 +19,12 @@
 typedef struct
 {
     uint8_t status_control_a;    /* ucsr0a USART Control and Status A */
-    uint8_t data_es;             /* udr0 i/o data */
-
-
     uint8_t status_control_b;    /* ucsr0b USART Control and Status B */
     uint8_t status_control_c;    /* ucsr0c USART Control and Status C */
     uint8_t _reserved;           /* espacio sin utilizar */
     uint8_t baud_rate_l;         /* ubrr0l baud rate low */
     uint8_t baud_rate_h;         /* ubrr0h baud rate high */ 
-
-    
+    uint8_t data_es;             /* udr0 i/o data */
 
 } volatile uart_t;
 
@@ -77,7 +72,7 @@ char serial_get_char(void)
     /* Wait for the next character to arrive. */
     /* Completar con E/S programada similar a serial_put_char pero 
        utilizando el bit correcto */
-    while ( !((*puerto_serial).status_control_a & 0x20) ); 
+    while ( !((*puerto_serial).status_control_a & 0x80) ); 
 
     /* valor registro de datos de E/S */
     return (puerto_serial -> data_es);
