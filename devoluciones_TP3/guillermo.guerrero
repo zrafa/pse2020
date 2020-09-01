@@ -1,0 +1,115 @@
+Devolución de los trabajos prácticos 2020
+=========================================
+
+Alumno: Guillermo Guerrero
+
+Pros:
+Excelente predisposición.
+Dominio del código para hacerlo funcional.
+
+Cons:
+Dió la sensación que se trabajó con los TPs a ultimo momento.
+Como si fuese un desafío ponerse a resolver los temas con la presión
+de que se acababa el tiempo. 
+
+
+Comentarios sobre la práctica de la programación en C
+-----------------------------------------------------
+
+
+Sería conveniente un README mínimo explicando 
+ - que hace el programa
+ - como se compila y se verifica (testing)
+ - alguna consideración sobre el código o uso
+
+
+En main.c hay un 
+    init();
+
+Si no supiera de que se trata todo el código no sabría nunca
+que hace ese init(); Si inicializa el port donde conectamos los 
+leds podrías ser leds_init(); o portb_init();
+
+
+Lindo cartel "Ejecutando suma", pero claramente deberías
+implementar serial_put_str(), y llamar una unica vez con
+serial_put_str("Ejecutando suma\n\r");
+
+
+Algunas cuestiones de estilo:
+  if(rcvChar == 'c'){
+acá faltaría un espacio entre if y (, y también entre ) y {.
+
+
+En
+if(rcvChar == 's'){
+...
+}
+if(rcvChar == 'c'){
+
+Lo anterior debería ser:
+
+	if (rcvChar == 's') {
+		...
+	} else if (rcvChar == 'c') {
+
+(ver el else if y tambien el estilo en los espacios).
+
+Incluso mejor, si la variable es de un tipo entero simple (char o int)
+y no hay otros condiciones a evaluar se podría usar case en vez de if.
+
+
+En serial.c
+    uint8_t baud_rate_l;/* ubrr0l baud rate low */
+    ;uint8_t baud_rate_h;/* ubrr0h baud rate high */
+    uint8_t data_es;    /* udr0 i/o da....
+
+Hay un ; ahí haciendo ruido.
+
+El problema de estilo en los espacios complica la legibilidad.
+Se repite en todo el código. Ejemplo (en serial.c):
+ while(  !(puerto_serial -> status_control_a & UDRE) ){
+
+    }
+    puerto_serial -> data_es = c;
+
+(falta espacio entre while y (, y entre ) y {. Convendría quitar
+el espacio entre UDRE) y ), y entre ( y !(puerto_serial.
+
+En el código está mezclado el unsigned int y el uint8_t.
+Convendría usar uno de los dos unicamente.
+
+
+En utils.c
+volatile unsigned char Bit0 = 0x01; //D8
+volatile unsigned char Bit1 = 0x02; //D9
+volatile unsigned char Bit2 = 0x04; //D10
+volatile unsigned char Bit3 = 0x08; //D11
+volatile unsigned char Bit4 = 0x10; //D12
+volatile unsigned char Bit5 = 0x20; //D13
+
+
+Esos Bit0, Bit1, son variables con un contenido constante en el programa.
+No deberían ser volatile.
+volatile es unicamente para punteros
+a registros del hardware, que puedan ser modificados por acciones
+asincrónicas al flujo de ejecucion de instrucciones.
+
+Incluso podrían llegar a ser macros. Algo del estilo:
+#define BIT0 0x01
+
+
+El esperar1() tiene un nombre claro, pero mas util y elegante
+es ver una llamada como esperar(1);
+
+apagar_led() creo que apaga todos los leds no?
+Convendría que se llame entonces apagar_leds()
+
+Demasiados estilos de nombres efectoDerecha. Debería ser
+efecto_derecha()
+Ver http://se.fi.uncoma.edu.ar/pse2020/normas_de_estilo.txt
+Politica de nombres
+
+
+Muy pero muy bien  los efectos derecha e izquierda, porque 
+te permite expandirlos. Y muy pero muy bien suma().

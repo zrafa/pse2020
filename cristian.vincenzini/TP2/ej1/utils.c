@@ -24,28 +24,28 @@ volatile unsigned char * PINB  = (unsigned char *) 0x23;  /* direccion PIN B (re
  * 	pin del atmega328p que tiene conectado un led en una board arduino
  */
 
-void esperar(unsigned long segundos)
+void esperar(unsigned long sec)
 {
-	volatile unsigned long i;
+        unsigned long i;
 
-	/* delay de 1 segundo */
-	for (i=0; i<450000*segundos; i++);
+        /* delay de 1 segundo */
+        for (i=0; i<450000*sec; i++);
 }
 
 void cambiar_estado()
 {
-	volatile unsigned char valor_b;
-	
-	valor_b = *(PORTB); // lectura
+        volatile unsigned char valor_b;
+        
+        valor_b = *PORTB; /* lectura */
 
-	valor_b ^= PB5;     // modificacion
+        valor_b ^= PB5;   /* modificacion */
 
-	*(PORTB) = valor_b; // escritura
+        *PORTB = valor_b; /* escritura */
 }
 
 void setup(void)
 {
-	*(PORTB) = *(PORTB) & (~PB5);
+        *PORTB = *PORTB & (~PB5);
 
-	*(DDRB)  = *(DDRB) | (PB5);
+        *DDRB  = *DDRB | (PB5);
 }

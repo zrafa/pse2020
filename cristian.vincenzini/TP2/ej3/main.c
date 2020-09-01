@@ -3,10 +3,10 @@
 #include "utils.h"
 
 int main(void)
-{	
-	setup();
+{
+        setup();
 
-	while (1) {
-		knight_rider();
-	}
+        while (1) {
+                knight_rider();
+        }
 }

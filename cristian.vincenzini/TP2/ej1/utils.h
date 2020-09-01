@@ -7,4 +7,4 @@ void setup();
 void esperar(unsigned long);
 void cambiar_estado();
 
-#endif	/* _UTILS_H */
+#endif  /* _UTILS_H */

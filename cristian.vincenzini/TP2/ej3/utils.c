@@ -18,44 +18,43 @@ volatile unsigned char * PORTB = (unsigned char *) 0x25;  /* direccion de PORTB:
 volatile unsigned char * DDRB  = (unsigned char *) 0x24;  /* direccion de DDR B (registro de control) */
 volatile unsigned char * PINB  = (unsigned char *) 0x23;  /* direccion PIN B (registro de datos)*/
 
-void esperar(unsigned long milisegundos)
+void esperar(unsigned long msec)
 {
-	volatile unsigned long i;
+        unsigned long i;
 
-	/* delay de 1 segundo */
-	for (i = 0; i < 450 * milisegundos; i++);
+        for (i = 0; i < 450 * msec; i++);
 }
 
-void efecto(unsigned char pin)
+void prender_apagar(unsigned char pin)
 {
-	*(PORTB) |= pin;
-	esperar(50);
-	*(PORTB) &= ~pin;
-	esperar(50);
+        *PORTB |= pin;
+        esperar(50);
+        *PORTB &= ~pin;
+        esperar(50);
 }
 
 void knight_rider()
 {
-	unsigned char pin[4] = {PB0, PB1, PB2, PB3};
-	int i;
+        unsigned char pin[4] = {PB0, PB1, PB2, PB3};
+        int i;
 
-	for (i = 0; i < 4; i++) {
-		efecto(pin[i]);
-	}
+        for (i = 0; i < 4; i++) {
+                prender_apagar(pin[i]);
+        }
 
-	for (i = 2; i >= 0; i--) {
-		efecto(pin[i]);
-	}
+        for (i = 2; i >= 0; i--) {
+                prender_apagar(pin[i]);
+        }
 
-	// setea en OFF el voltaje de los pines
-	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
+        /* setea en OFF el voltaje de los pines */
+        *PORTB &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 }
 
 void setup()
 {
-	// setea en OFF el voltaje de los pines
-	*(PORTB) &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
+        /* setea en OFF el voltaje de los pines */
+        *PORTB &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 
-	// setea pines en modo OUTPUT
-	*(DDRB) |= (PB0 | PB1 | PB2 | PB3);
+        /* setea pines en modo OUTPUT */
+        *DDRB |= (PB0 | PB1 | PB2 | PB3);
 }

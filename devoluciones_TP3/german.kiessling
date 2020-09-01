@@ -1,0 +1,184 @@
+Devolución de los trabajos prácticos 2020
+=========================================
+
+Alumno: German Kiessling
+
+Pros:
+Excelente predisposición. Buena busqueda para corroborar que
+el hardware esté funcional (NOTA: aunque yo haya criticado el usar el IDE 
+porque podría ser peor el remedio que la solución). Bien. 
+Dominio del código para hacerlo funcional aún si hay inconvenientes
+que cuestan entender.
+
+Cons:
+Compara su trabajo con el IDE u otra cosa ya funcional, lo cual resta. Es
+como tener que desarrollar un editor de texto y compararlo con libreoffice.
+
+
+Comentarios sobre la práctica de la programación en C
+-----------------------------------------------------
+
+
+Sería conveniente un README mínimo explicando 
+ - que hace el programa
+ - como se compila y se verifica (testing)
+ - alguna consideración sobre el código o uso
+
+
+En main.c hay un 
+
+
+  if(rcvChar=='c'){
+		     conteo();
+        }else{
+	        if(rcvChar=='k'){
+		        prender_led();
+	        }
+        }
+
+
+Faltan normas de estilo. Van espacioes entre el if y el (,
+el ) y {, entre } y else, etc.
+
+Cuando existen ifs anidades y la comparación es contra
+una única variable entera puede ser mas conveniente
+usar 'case (rcvChar)'
+
+
+
+En serial.c
+#include <avr/io.h> /* para los tipos de datos. Ej.: uint8_t */
+
+En realidad es un error heredado seguramente. Hay que quitarlo,
+esa cabecera es para macros y funciones de E/S de avr-libc
+(por ej. interrupciones).
+
+
+En serial.c
+
+typedef struct
+{
+    uint8_t status_control_a;    /* ucsr0a USART Control and Status A */
+    uint8_t data_es;             /* udr0 i/o data */
+
+
+    uint8_t status_control_b;    /* ucsr0b USART Control and Status B */
+    uint8_t status_control_c;    /* ucsr0c USART Control and Status C */
+    uint8_t _reserved;           /* espacio sin utilizar */
+    uint8_t baud_rate_l;         /* ubrr0l baud rate low */
+    uint8_t baud_rate_h;         /* ubrr0h baud rate high */ 
+
+    
+
+} volatile uart_t;
+
+
+Este código no puede funcionar. No recuerdo que data_es esté en esa ubicacion.
+
+
+ while( !((puerto_serial -> status_control_a) & (0x20)) );
+
+0x20 es un número mágico
+
+Una buena práctica es colocar valores constantes con nombres (macros o
+variables constantes con nombre), porque con el tiempo son dificiles 
+de comprender si simplemente aparecen números "harcodeados" en el código
+(se los llama "valores magicos").
+
+Por ahí queda mas claro tener algo así:
+
+#define SERIAL_READY 0x20
+
+
+
+Bien el serial_put_str(). Recomendaría llamar a la variable string 
+simplemente 's' o similar. 
+Es una variable local, y esas 3 líneas en C son un mecanismo estandar
+en C para recorrer con un puntero la memoria, hasta alcanzar NULL. 
+Por lo que el código es entendible y el nombre del puntero local
+queda mas elegante si es breve (mejor dejar nombres de variables 
+largos para variables globales).
+
+
+(*puerto_serial).data_es y todas las demás están bien. 
+De todas maneras, en C existe el operador -> para punteros, que es 
+una indirección y luego desplazamiento. Queda mas legible y es 
+mas usado. Es decir,
+esta forma:
+        (*puerto_serial).data_es 
+es igual a 
+        puerto_serial->data_es
+(esta última es más utilizada).
+
+
+
+
+En utils.c:
+Bien los nombres de las macros LED_1, LED_2, etc.
+
+Bien el código de conteo.
+
+
+En led_init():
+
+    *(PUERTO_B) = *(PUERTO_B) & (~ LED_1);
+    *(PUERTO_B) = *(PUERTO_B) & (~ LED_2);
+    *(PUERTO_B) = *(PUERTO_B) & (~ LED_3);
+    *(PUERTO_B) = *(PUERTO_B) & (~ LED_4);
+    *(PUERTO_B) = *(PUERTO_B) & (~ LED_5);
+    *(PUERTO_B) = *(PUERTO_B) & (~ LED_6);
+
+Convendría una única sentencia que realice el AND de 
+todos los LED_s (unificados con OR y negado al final).
+
+    *(DDR_B) = *(DDR_B) | (LED_1);
+    *(DDR_B) = *(DDR_B) | (LED_2);
+    *(DDR_B) = *(DDR_B) | (LED_3);
+    *(DDR_B) = *(DDR_B) | (LED_4);
+    *(DDR_B) = *(DDR_B) | (LED_5);
+    *(DDR_B) = *(DDR_B) | (LED_6);
+
+Lo mismo. Algo como:
+
+*DDR_B |= (LED_1 | LED_2 | LED_3 | LED_4 | LED_5 | LED_6);
+
+
+esperar() podría tomar un argumento y que permite especificar
+la cantidad de segundos (o milisegundos).
+
+
+Un comentario dice:
+// Se puede unificar los metodos de prender_led y apagar ya que ambos relizan 
+// la accion de cambiar el estado del bit de 0 a 1 o de 1 a 0
+
+Entonces... HACERLO!! y quitar el comentario.
+
+En prender_led() hay varias cuestiones a mejorar:
+
+1- Dice if (recorrido == 0). Es poco legible porque en realidad pareciera
+que si no hay que recorrer entra al if. Pero podría ser al contrario.
+Convendría que el código diga algo así:
+	if (recorrido) {
+		..hacer el recorrido ...
+	}
+
+O tal vez mejor
+	if (recorrer) {
+		..hacer el recorrido ...
+	}
+
+
+2- El recorrido es imposible de leer :) Reescribirlo. 
+Si uno lo mira sin prestar atención observa que todos los bloques en 
+cada case son parecidos. Tiene que haber alguna manera elegante
+de unificar todo ese codigo repetido en estructura.
+
+3- El nombre de la función dice prender_led(), pero luego
+hace un recorrido tipo knight_rider. Quien lea unicamente
+main.c intuirá que prender_led() es una función que ... prende un led.
+
+4- No queda claro ni que hace una rama del if ni la otra mirando el if.
+Aclarar que hace ambas ramas y colocar incluso esa aclaración
+implicita en la condición del if
+
+

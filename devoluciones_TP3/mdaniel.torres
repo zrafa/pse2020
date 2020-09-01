@@ -1,0 +1,191 @@
+Devolución de los trabajos prácticos 2020
+=========================================
+
+Alumno: Marcos Daniel Torres
+
+Pros:
+Excelente predisposición. Velocidad de prototipado impecable.
+Rápido dominio del código para hacerlo funcional.
+
+Cons:
+Falta de ordenamiento del código superfluo (como si sobrara
+mucho tiempo que no se logra dedicar a mejorar el código,
+u hacerlo ordenado).
+No parece haber una convención lo que dificulta
+la lectura y su posterior debug y verificación futura (por el 
+mismo autor); ej: varios punteros al mismo registro de E/S).
+
+
+Comentarios sobre la práctica de la programación en C
+-----------------------------------------------------
+
+
+Sería conveniente un README mínimo explicando 
+ - que hace el programa
+ - como se compila y se verifica (testing)
+ - alguna consideración sobre el código o uso
+
+
+En
+void esperar(unsigned long multiplier) {
+ 	volatile unsigned long i;
+ 	/* delay de 1 segundo */
+ 	for (i=0; i<6000 * multiplier; i++);
+
+
+i no tiene que ser volatile. volatile es unicamente para punteros
+a registros del hardware, que puedan ser modificados por acciones
+asincrónicas al flujo de ejecucion de instrucciones.
+
+Acá i es una variable normal de la funcion del programa, por lo
+que unicamente es modificada por las instrucciones del programa
+(y por lo tanto, no lleva volatile).
+
+
+En main.c TP3
+
+while (rcvChar != 'q')
+    {
+	    serial_init();
+	    led_init();
+        rcvChar = serial_get_char();
+
+
+
+es incorrecto llamar a _init() de serial y led en cada ejecución 
+de la iteración del while.
+Las funciones _init de los drivers se llaman una unica vez.
+Si por algun motivo, el driver acepta modificación de la configuración
+luego de ya inicializado, debería contar con una función llamada 
+serial_control() o similar.
+
+Pero los _init() de los diferentes drivers, se deben ejecutar una unica vez.
+
+
+En main.c TP3:
+
+case 'k':
+                
+                for (int i = 0; i < 10; i++) {
+                    knight_rider();
+                }
+                
+
+
+
+La declaración int i dentro del for es una convención proveniente de C++.
+Desaconsejada (no muy utilizada) en prácticas de programación general C.
+En C una función debería serguir la convención:
+
+tipo  nombre_funcion(argumentos) 
+{
+	declaración de variables;
+
+	cuerpo de la funcion
+	(sentencias en C)
+
+	return valor;  /* solo si se definió un tipo devuelto */
+}
+
+Es decir, toda variable, debería ser declarada primero, en "declaración de 
+variables".
+Esta convención ayuda al debug, porque permite observar rapidamente que 
+variables declara la función, su tipo, y su valor de inicialización si existe.
+En sistemas embebidos podría existir restricción de memoria RAM para
+la pila del anidamiento de llamadas a funciones. En un debug de este tipo,
+si las variables son declaradas en medio de las sentencias del cuerpo 
+de la función, se complejiza el cálculo del tamaño de la pila que utilizará
+la función. Muchos errores silenciosos son por variables sin inicializar,
+por lo que teniendo todas las variables declaradas e inicializadas al 
+principio de la función ayudará a esta verificación.
+
+
+En utils.c
+
+Variable global:
+volatile unsigned char * puerto_b = (unsigned char *) 0x25; /* direccion de PORTB: SALIDA */
+
+En void prender_led(){
+	unsigned char * PUERTO_B = 0x25; /* direccion de PUERTO B */
+
+
+Definís dos punteros al mismo registro. Uno global y otro local a la función.
+Hay que dejar uno solo. 
+
+Siendo un registro de E/S convendría que sea global al módulo.
+
+Si sólo una función accederá al registro, y ningún codigo más en todo el
+programa lo utiliza, se podría justificar que sea un puntero variable local
+a la función. Y quitar el global.
+Tambien convendría realizar un comentario en el README que aclare 
+que ese registro se usa unicamente en una unica función.
+
+
+
+
+En utils.c :
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
+	esperar(3);
+
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
+	esperar(3);
+
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x08);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x08);
+	esperar(3);
+
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
+	esperar(3);
+
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
+	esperar(3);
+	*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
+	esperar(3);
+
+Muchos valores constantes. 
+
+Una buena práctica es colocar valores constantes con nombres (macros),
+porque con el tiempo son dificiles de comprender (se los llama "valores magicos"
+con el tiempo. Cuando quieras entender este código en un futuro
+no sabrás que son todas esas constantes).
+
+Por ahí queda mas claro tener algo así:
+
+*PUERTO_B = *PUERTO_B ^ BIT3;
+
+(el nombre BIT3 con mayúsculas indica que es una macro (si se sigue
+la convención de que a las macros se las define en mayúsculas obvio). El nombre
+BIT3 deja claro que su valor es 0b00001000, ya que
+BIT0 sería 0b0000001
+
+
+
+
+
+void knight_rider(){
+	unsigned char* PUERTO_B = 0x25;
+
+
+Las variables en C deberían estar con minúsculas. 
+PUERTO_B parece mas una macro si uno se la encuentra en el código (por lo de
+mayúscula).
+La variable no tiene la directiva volatile, la cual es recomendada para
+punteros a registros de dispositivos de E/S.
+
+
+
+En serial.c
+
+Muy buen nombre para las macros
+READY_TO_WRITE y READY_TO_READ
+
+
+
+

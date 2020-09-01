@@ -9,13 +9,13 @@
 #include "utils.h"
 
 int main(void)
-{	
-	setup();
+{
+        setup();
 
-	while (1) {
-		esperar(2);
-		cambiar_estado();
-	}
+        while (1) {
+                esperar(2);
+                cambiar_estado();
+        }
 }
 
 

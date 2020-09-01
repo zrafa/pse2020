@@ -1,16 +1,13 @@
 
 /**********************************************************************
  *
- * serial.c - Driver del UART del atmega328p
- *
+ * serial.c - Driver del UART del atmega328p 
  * META : ocultar el hardware a la aplicacion 
  *
  * Configuracion: 9600bps, 8bits data, 1bit stop, sin bit de paridad
  *
  **********************************************************************/
-
-#include <stdint.h> /* para los tipos de datos. Ej.: uint8_t */
-
+#include <stdint.h> /* para los tipos de datos. Ej.: uint8_t */ 
 
 /* Completar la estructura de datos para que se superponga a los registros
    del periferico de hardware del USART del atmega328, segun sugerido
@@ -51,7 +48,7 @@ void serial_init() {
 
 
     /* Enable receiver and transmitter */
-    puerto_serial->satus_control_b |= ( 0x10 | 0x08 );
+    puerto_serial->status_control_b |= ( 0x10 | 0x08 );
 
     /* Set frame format: 8data, 2stop bit */
     puerto_serial->status_control_c |= 0x03;
@@ -75,10 +72,9 @@ void serial_put_char (char c)
     /* (escribir el dato al registro de datos de E/S */
 	
 	
-	while(puerto_serial->status_control_a & READY_TO_WRITE){
-		puerto_serial->data_es = c;
-	}
+	while(!(puerto_serial->status_control_a & READY_TO_WRITE));
 
+		puerto_serial->data_es = c;
 }
 
 
@@ -88,9 +84,8 @@ char serial_get_char(void)
     /* Completar con E/S programada similar a serial_put_char pero 
        utilizando el bit correcto */
     
-     while (puerto_serial->status_control_a & READY_TO_READ ){
-	return puerto_serial->data_es
-     }
+     while (!(puerto_serial->status_control_a & READY_TO_READ )); 
+	return puerto_serial->data_es;
 }
 
 

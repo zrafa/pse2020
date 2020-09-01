@@ -1,0 +1,254 @@
+Devolución de los trabajos prácticos 2020
+=========================================
+
+Alumna: Katherina Navarrete
+
+Pros:
+Buenos comentarios sobre las dificultades. Dominio del código para 
+hacerlo funcional aún si hay inconvenientes
+que cuestan entender.
+
+Cons:
+Pocas consultas sobre los temas, lo que no permite discernir que se
+entiende de lo que no se entiende. Poca participación en clase.
+
+
+Comentarios sobre la práctica de la programación en C
+-----------------------------------------------------
+
+
+
+
+Sería conveniente un README mínimo explicando 
+ - que hace el programa
+ - como se compila y se verifica (testing)
+ - alguna consideración sobre el código o uso
+
+
+En main.c hay un 
+
+
+    /* Configure the UART for the serial driver */
+    serial_init();
+    //transmite los caracteres
+
+
+Dos clases de comentarios. // y /* */
+Conviene usar uno u otro. Ambos a la vez parece poco uniforme.
+
+
+En main():
+
+    serial_put_char('s');
+    serial_put_char('t');
+    serial_put_char('a');
+    serial_put_char('r');
+    serial_put_char('t');
+    serial_put_char('\r');
+    serial_put_char('\n');
+    serial_put_char('h');
+    serial_put_char('o');
+    serial_put_char('l');
+    serial_put_char('a');
+    serial_put_char(' ');
+    serial_put_char('k');
+    serial_put_char('a');
+    serial_put_char('t');
+    serial_put_char('y');
+    serial_put_char('\r');
+    serial_put_char('\n');
+
+
+El programa está pidiendo que implementes serial_put_str("start hola katy");
+
+
+     if(rcvChar=='c')
+                contarBin();
+        else{
+
+
+Faltan normas de estilo. Van espacioes entre el if y el (,
+y else y {, etc.
+
+Lo anterior debería ser:
+
+        if (rcvChar == 'c') {
+                ...
+        } else if (rcvChar == 'k') {
+
+(ver el else if y tambien el estilo en los espacios).
+
+
+Cuando existen ifs anidades y la comparación es contra
+una única variable entera puede ser mas conveniente
+usar 'case (rcvChar)'
+
+
+contarBin(): no sigue la norma de estilo. Debería ser
+contar_bin()
+Hay otras, como outputChar.
+Ver http://se.fi.uncoma.edu.ar/pse2020/normas_de_estilo.txt
+Politica de nombres
+
+
+        /* hacer un salto de linea */
+        serial_put_char('\r');
+        serial_put_char('\n');
+
+Los comentarios siempre son bienvenidos, pero algunos a veces
+no son necesarios, porque el código es ultra claro que
+está haciendo un salto de línea.
+
+
+   }
+        /* hacer un salto de linea */
+        serial_put_char('\r');
+        serial_put_char('\n');
+        /*transmitir los caracteres*/
+        serial_put_char('f');
+        serial_put_char('i');
+        serial_put_char('n');
+        serial_put_char('\r');
+        serial_put_char('\n');
+
+
+Faltarían espacios entre líneas. Es mas legible de esta manera:
+
+   }
+
+        /* hacer un salto de linea */
+        serial_put_char('\r');
+        serial_put_char('\n');
+
+        /*transmitir los caracteres*/
+        serial_put_char('f');
+        serial_put_char('i');
+        serial_put_char('n');
+        serial_put_char('\r');
+        serial_put_char('\n');
+
+
+
+
+
+
+En serial.c
+
+
+#include <avr/io.h> /* para los tipos de datos. Ej.: uint8_t */
+
+En realidad es un error heredado seguramente. Hay que quitar
+esa cabecera, ya que contiene macros y funciones de E/S de avr-libc
+(por ej. para interrupciones).
+
+	uint8_t reserver;    	     /* espacio reservado */
+
+Estimo que quiso ser "reserved".
+
+
+Bien las macros
+#define habilitarTx 0x08
+#define habilitarRx 0x10
+
+
+void serial_init() {
+	if(inicializar==0){
+
+Normas de estilo. Faltan espacios en blanco para legibilidad.
+
+
+
+En serial_get_char (y serial_put_char similar):
+
+		while(!((*puerto_serial).status_control_a & 0x80));
+
+0x80 es un número mágico
+
+Una buena práctica es colocar valores constantes con nombres (macros o
+variables constantes con nombre), porque con el tiempo son dificiles 
+de comprender si simplemente aparecen números "harcodeados" en el código
+(se los llama "valores magicos").
+
+Por ahí queda mas claro tener algo así:
+
+#define SERIAL_READY_TO_READ 0x80
+
+o algo similar.
+
+
+(*puerto_serial).data_es y todas las demás están bien. 
+De todas maneras, en C existe el operador -> para punteros, que es 
+una indirección y luego desplazamiento. Queda mas legible y es 
+mas usado. Es decir,
+esta forma:
+	(*puerto_serial).data_es 
+es igual a 
+	puerto_serial->data_es
+(esta última es más utilizada).
+
+
+
+
+En utils.c
+
+Bien el uso de la macro prende. Aunque convendría darle otro nombre.
+LEDS? o LED_BITS?
+
+
+
+En esperar():
+	volatile unsigned long i;
+	/* delay de 1/2 segundo */
+
+
+i no tiene que ser volatile. volatile es unicamente para punteros
+a registros del hardware, que puedan ser modificados por acciones
+asincrónicas al flujo de ejecucion de instrucciones.
+
+Acá i es una variable normal de la funcion del programa, por lo
+que unicamente es modificada por las instrucciones del programa
+(y por lo tanto, no lleva volatile).
+
+
+
+Lo mismo en las demás funciones, todas definen volatile
+a variables con valores que no son punteros a registros del hardware.
+
+
+
+
+En contarBin() hay demasiados números mágicos.
+
+Esa función está bastante bien porque luego llama a contar().
+Podría ser mas elegante de implementar con una variable
+que se incrementa, se desplaza, y luego llama a contar.
+Todo dentro de un for (y elininás todos los esperar(); contar(); 
+repetidos).
+
+
+contar() no cuenta, por lo que no tiene un nombre de función
+acorde.
+
+
+esperarMenos() es un nombre ya muy vago (vago de poco certero o acorde).
+Cambiar.
+
+
+En void knight_rider(){
+
+Debería ser
+
+void knight_rider()
+{
+
+
+Esa función es muy tricky me parece. ¿Será facil de comprender dentro
+de un mes?
+
+La variable num tiene un nombre muy vago.
+
+apagar_led() apaga todo los leds creo. Sería mejor apagar_leds()?
+Lo mismo prender_led();
+
+
+

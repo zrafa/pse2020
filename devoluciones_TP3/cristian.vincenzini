@@ -1,0 +1,120 @@
+Devolución de los trabajos prácticos 2020
+=========================================
+
+Alumno: Cristian Vincenzini
+
+Pros:
+Buen uso de las normas de estilo. Buena participación en clase.
+Código uniforme. Buenas consultas sobre temas avanzados o complejos.
+
+Cons:
+Trabajar con una maquina virtual con Linux en Windows es como preparse
+un rico pancho con mostaza (o lo que guste) y comerlo en un video
+juego virtual.
+
+
+Comentarios sobre la práctica de la programación en C
+-----------------------------------------------------
+
+
+
+
+Sería conveniente un README mínimo explicando 
+ - que hace el programa
+ - como se compila y se verifica (testing)
+ - alguna consideración sobre el código o uso
+
+
+En main.c
+
+El código main de Flavia se parece al tuyo, o el tuyo al de Flavia.
+Si trabajan en grupo me pueden comentar.
+
+
+En serial.c
+
+Muy buen uso de macros para evitar "numeros mágicos"
+
+Acerca de #define CHARACTER_SIZE. Por ahí un nombre mas acorde?
+Tal vez FRAME_SIZE? o FRAME_BITS?
+
+
+Muy bien con READY_TO_READ y READY_TO_WRITE
+
+
+En serial_init():
+
+	/* Configurar los registros High y Low con BAUD_PRESCALE */
+    puerto_serial -> baud_rate_h = (unsigned char) (BAUD_PRESCALE>>8);
+	puerto_serial -> baud_rate_l = (unsigned char) (BAUD_PRESCALE);
+
+	/* Configurar un frame de 8bits, sin bit de paridad y un bit de stop */
+    puerto_serial -> status_control_c = (unsigned char) (CHARACTER_SIZE_0 + CHARACTER_SIZE_1);
+
+	/* Activar la recepcion y transmicion */
+    puerto_serial -> status_control_b = (unsigned char) (RECEIVER_ENABLE + TRANSMITTER_ENABLE);
+}
+
+
+
+La sangría parece estar desalineada, lo que dificulta la lectura
+del código.
+
+
+
+
+En serial_put_char y serial_get_char:
+
+    while( !((puerto_serial -> status_control_a) & (READY_TO_WRITE)) );
+
+
+- Falta un espacio entre while y (.
+- Un puntero con su indirección y desplazamiento es mas utilizado sin 
+  espacios, así :
+    puerto_serial->status_control_a
+
+
+Bien el serial_put_str(). Recomendaría llamar a la variable mensaje 
+simplemente 'm' o similar. 
+Es una variable local, y esas 3 líneas en C son un mecanismo estandar
+en C para recorrer con un puntero la memoria, hasta alcanzar NULL. 
+Por lo tanto, el código es entendible y el nombre del puntero local
+queda mas elegante si es breve (mejor dejar nombres de variables 
+largos para variables globales).
+
+
+
+En utils.c
+void esperar(unsigned long milisegundos)
+{
+	volatile unsigned long i;
+
+
+i no tiene que ser volatile. volatile es unicamente para punteros
+a registros del hardware, que puedan ser modificados por acciones
+asincrónicas al flujo de ejecucion de instrucciones.
+
+Acá i es una variable normal de la funcion del programa, por lo
+que unicamente es modificada por las instrucciones del programa
+(y por lo tanto, no lleva volatile).
+
+
+// setea en OFF el voltaje de los pines
+
+Se usan los dos tipos de comentarios /* */ y //. Si bien //
+proviene de C++ y fue agregado al estándar de C, es preferible
+usar uno sólo. El código queda mas uniforme. Recomendaría
+/* */ aún si sólo una línea de comentario.
+
+
+Muy bien el codigo del efecto knight_rider!.
+Recomiendo cambiar el nombre de la función efecto(), ya que parece
+un nombre muy genérico (que podría no reflejar con el nombre lo que
+hace la función). Algo mas acorde podría ser: prender_apagar()?
+
+
+Bien el leds_init();
+
+
+
+

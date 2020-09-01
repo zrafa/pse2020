@@ -1,0 +1,84 @@
+Devolución de los trabajos prácticos 2020
+=========================================
+
+Alumna: Flavia Cofre
+
+Pros:
+Buen uso de las normas de estilo. 
+
+Cons:
+Pocas consultas sobre los temas, lo que no permite discernir que se
+entiende de lo que no se entiende. Poca participación en clase.
+
+
+Comentarios sobre la práctica de la programación en C
+-----------------------------------------------------
+
+
+
+
+Sería conveniente un README mínimo explicando 
+ - que hace el programa
+ - como se compila y se verifica (testing)
+ - alguna consideración sobre el código o uso
+
+
+En main.c
+
+El código main de Cristian se parece al tuyo, o el tuyo al de Cristian.
+Si trabajan en grupo me pueden comentar.
+
+
+
+
+
+En utils.c
+
+void esperar(unsigned long n){
+    volatile unsigned long i; 	
+
+i no tiene que ser volatile. volatile es unicamente para punteros
+a registros del hardware, que puedan ser modificados por acciones
+asincrónicas al flujo de ejecucion de instrucciones.
+
+Acá i es una variable normal de la funcion del programa, por lo
+que unicamente es modificada por las instrucciones del programa
+(y por lo tanto, no lleva volatile).
+
+Lo mismo en las demás funciones, todas definen volatile
+a variables con valores que no son punteros a registros del hardware.
+
+
+
+
+contador():
+
+Podría ser mas elegante de implementar con una variable
+que se incrementa, se desplaza, y luego se guarda en PORTB.
+Todo dentro de un for (y eliminás todos los esperarE(); y *PORTB=)
+
+esperarE() no tiene un nombre de función acorde. Mejorar.
+
+
+
+
+efecto_led():
+
+Lo mismo, que lo anterior. Debe existir una forma mas elegante.
+Podría ser un arreglo de 4 lugares, que cada uno tenga
+la máscara de bits que necesitas usar en el efecto.
+Y luego con un for cambias el valor de PORTB con 
+el del arreglo_mascara(i);
+
+
+
+En serial.c:
+
+Muy bien el uso de las macros. El nombre CHARACTER_SIZE podría ser mas bien
+FRAME_BITS, o algo similar.
+
+
+
+
+
+

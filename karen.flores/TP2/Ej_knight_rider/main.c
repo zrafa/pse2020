@@ -11,7 +11,7 @@
 int main(void)
 {	
  	
-	let_init();
+	led_init();
 
 	while (1) {
 	
