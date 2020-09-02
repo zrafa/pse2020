@@ -17,14 +17,14 @@
 
 typedef struct
 {
-    uint8_t status_control_a;    /* ucsr0a USART Control and Status A */
-    uint8_t status_control_b;    /* ucsr0b USART Control and Status B */
-    uint8_t status_control_c;    /* ucsr0c USART Control and Status C */
-    uint8_t _reserved; /* espacio sin utilizar */
-    uint8_t baud_rate_l; /* ubrr0l baud rate low */
-    uint8_t baud_rate_h; /* ubrr0h baud rate high */
+	uint8_t status_control_a;    /* ucsr0a USART Control and Status A */
+	uint8_t status_control_b;    /* ucsr0b USART Control and Status B */
+	uint8_t status_control_c;    /* ucsr0c USART Control and Status C */
+	uint8_t _reserved; /* espacio sin utilizar */
+	uint8_t baud_rate_l; /* ubrr0l baud rate low */
+	uint8_t baud_rate_h; /* ubrr0h baud rate high */
 
-    uint8_t data_es;    /* udr0 i/o data */
+	uint8_t data_es;    /* udr0 i/o data */
 
 } volatile uart_t;
 
@@ -35,10 +35,12 @@ uart_t *puerto_serial = (uart_t *) (0xc0);
 #define BAUD_PRESCALE (((F_CPU/(USART_BAUDRATE*16UL)))-1)
 #define SERIAL_READY 0x20
 #define SERIAL_ARRIVE 0x80
+
 unsigned char start = 0; //esta variable es sólo para verificar si se inició el controlador del dispositivo, 
 			//en ese caso init() se ejecuta una vez
 
-void serial_init() {
+void serial_init() 
+{
 
 	/* Escribir una rutina de inicializacion */
 
@@ -67,12 +69,12 @@ void serial_put_char (char c)
     /* Se debe esperar verificando el bit UDREn del registro UCSRnA,
        hasta que el buffer esté listo para recibir un dato a transmitir */
 	
-     while ( !((*puerto_serial).status_control_a & SERIAL_READY) ); 
+	while ( !((*puerto_serial).status_control_a & SERIAL_READY) ); 
 
 
     /* Send the character via the serial port. */
     /* (escribir el dato al registro de datos de E/S */
-    puerto_serial->data_es = c;
+	(*puerto_serial).data_es = c;
 
 }
 
@@ -83,9 +85,9 @@ char serial_get_char(void)
     /* Completar con E/S programada similar a serial_put_char pero 
        utilizando el bit correcto */
     
-     while ( !((*puerto_serial).status_control_a & SERIAL_ARRIVE) ); 
+	while ( !((*puerto_serial).status_control_a & SERIAL_ARRIVE) ); 
          
 
-     return puerto_serial->data_es; /* DEBE devolver el valor que se encuentra en el registro de datos de E/S */
+	return (*puerto_serial).data_es; /* DEBE devolver el valor que se encuentra en el registro de datos de E/S */
 
 }

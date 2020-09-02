@@ -25,43 +25,52 @@ unsigned char estado;
  *      El 5to bit define la entrada o salida del
  * 	pin del atmega328p que tiene conectado un led en una board arduino
  */
-void led_init() {
+void led_init() 
+{
 	*(puerto_b) = *(puerto_b) & (~ CONF_ENTRADA);
 	*(ddr_b) = *(ddr_b) | (LED);
 	*(ddr_b) = *(ddr_b) & (~ BIT2);
 	*(pin_b) =  0x04;
 }
 
-void esperar() {
+void esperar() 
+{
 	unsigned long i;
 	/* delay de 2 segundo */
 	for (i=0; i<900000; i++);
 }
 
-void prender_led() {
+void prender_led() 
+{
 	unsigned char valor_b = *(puerto_b);
 	valor_b |=  LED ;
 	*(puerto_b) = valor_b;
 }
 
-void apagar_led() {
+void apagar_led()
+{
 	unsigned char valor_b = *(puerto_b);
 	valor_b &= ~(LED);
 	*(puerto_b) = valor_b;
 }
 
-unsigned char get_estado() {
+unsigned char boton_presionado() 
+{
 	unsigned char valor_b = *(pin_b);
 	valor_b &=  BIT2 ;
-	if (valor_b != BIT2){
-		if(estado == 0){estado =1;}
-		else{estado = 0;}
+	if (valor_b != BIT2) {
+		if(estado == 0) {
+			estado =1;
+		} else {
+			estado = 0;
+		}
 	}
 	
 	return estado;
 }
 
-void conteo_binario() {
+void conteo_binario() 
+{
 	unsigned char valor_b = *(pin_b);
 	valor_b ^= 0x20;
 	*(puerto_b) = valor_b;
