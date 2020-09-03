@@ -24,58 +24,67 @@ volatile unsigned char * pin_b = (unsigned char *) 0x23; /* direccion PIN B (reg
  *      El 5to bit define la entrada o salida del
  * 	pin del atmega328p que tiene conectado un led en una board arduino
  */
-void let_init(){
+void let_init()
+{
 	*(puerto_b) = *(puerto_b) & (~ CONF_ENTRADAS);
 	*(ddr_b) = *(ddr_b) | (LED);
 	*(ddr_b) = *(ddr_b) & (~ BIT2);
 	*(pin_b) =  0x04;
 }
 
-void esperar() {
-	unsigned long i;
+void esperar() 
+{
+	volatile unsigned long i;
 	/* delay de 1/2 segundo */
 	for (i=0; i<225000; i++);
 }
 
-void prender_led() {
+void prender_led() 
+{
 	unsigned char valor_b = *(puerto_b);
 	valor_b |=  LED ;
 	*(puerto_b) = valor_b;
 }
 
-void apagar_led() {
+void apagar_led() 
+{
 	unsigned char valor_b = *(puerto_b);
 	valor_b &= ~(LED);
 	*(puerto_b) = valor_b;
 }
 
-void conteo_binario(){
-	unsigned char valor_b = *(pin_b);
-	valor_b ^= 0x20;
-	*(puerto_b) = valor_b;
-	esperar();
-	
-	valor_b ^= 0x30;
-	*(puerto_b) = valor_b;
-	esperar();
-	
-	valor_b ^= 0x20;
-	*(puerto_b) = valor_b;
-	esperar();
-	
-	valor_b ^= 0x38;
-	*(puerto_b) = valor_b;
-	esperar();
-
-	valor_b ^= 0x20;
-	*(puerto_b) = valor_b;
-	esperar();
-
-	valor_b ^= 0x30;
-	*(puerto_b) = valor_b;
-	esperar();
-	
-	valor_b ^= 0x20;
-	*(puerto_b) = valor_b;
-	esperar();
+void conteo_binario()
+{
+	unsigned char c;
+	unsigned char b;
+	int i = 0;
+	while (i < 7) {
+		c++;
+		switch (c) {
+			case 1:
+				b = c << 5;
+			break;
+			case 2:
+				b = c << 3;
+			break;
+			case 3:
+				b = c << 4;
+			break;
+			case 4:
+				b = c << 1;
+			break;
+			case 5:
+				b = c << 3;
+			break;	
+			case 6:
+				b = c << 2;
+			break;	
+			case 7:
+				b = c << 3;
+			break;
+		}
+		*(puerto_b) = b;
+		i++;
+		esperar();
+	}
 }

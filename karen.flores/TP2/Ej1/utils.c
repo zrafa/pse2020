@@ -25,20 +25,23 @@ volatile unsigned char * pin_b = (unsigned char *) 0x23; /* direccion PIN B (reg
 
 
 
-void esperar() {
+void esperar() 
+{
 	unsigned long i;
 	/* delay de 1 segundo */
 	for (i=0; i<450000; i++);
 }
 
-void prender_led() {
+void prender_led() 
+{
 	unsigned char valor_b;
 	valor_b = *(puerto_b);
 	valor_b &= ~LED_ROJO;
 	*(puerto_b) = valor_b;
 }
 
-void apagar_led() {
+void apagar_led() 
+{
 	unsigned char valor_b;
 	valor_b = *(puerto_b);
 	valor_b |= LED_ROJO;

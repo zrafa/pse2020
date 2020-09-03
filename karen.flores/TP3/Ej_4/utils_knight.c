@@ -26,20 +26,22 @@ unsigned char valor_b = 0x20;
  *      El 5to bit define la entrada o salida del
  * 	pin del atmega328p que tiene conectado un led en una board arduino
  */
-void led_init() {
+void led_init() 
+{
 	*(port_b) = *(port_b) & (~ LED);
 	*(r_ddr_b) = *(r_ddr_b) | (LED);
 }
 
-void delay() {
-	unsigned long i;
+void delay() 
+{
+	volatile unsigned long i;
 	/* delay de 1 segundo */
 	for (i=0; i<56250; i++);
 }
 
-void knight_rider() {
-	while (valor_b > VALOR_MIN) 
-	{
+void knight_rider()
+{
+	while (valor_b > VALOR_MIN) {
 		*(port_b) = valor_b;
 		delay();
 		if (valor_b > VALOR_MIN) {
@@ -48,9 +50,9 @@ void knight_rider() {
 	}
 }
 
-void knight_rider_reverso() {
-	while (valor_b < VALOR_MAX) 
-	{
+void knight_rider_reverso() 
+{
+	while (valor_b < VALOR_MAX) {
 		*(port_b) = valor_b;
 		delay();
 		if (valor_b < VALOR_MAX) {

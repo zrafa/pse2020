@@ -12,7 +12,7 @@ int main(void)
 {	
  	
 	led_init(); 
-	volatile unsigned char estado = get_estado();
+	unsigned char estado = boton_presionado();
 
 	while (1) {
 
@@ -20,14 +20,13 @@ int main(void)
 			prender_led();
 			esperar();
 			apagar_led();
-		}
-		else {
+		} else {
 			esperar();
 			conteo_binario();
 			apagar_led();
 		}
 		esperar();
-		estado = get_estado();
+		estado = boton_presionado();
 	}
 return 0;
 }
