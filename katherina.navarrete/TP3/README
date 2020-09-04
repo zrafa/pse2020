@@ -1,0 +1,31 @@
+TP3 
+
+main.c 
+
+--------------------------comportaminento programa ---------------------------------------
+
+envia el string hola katy mediante el metodo serial_put_String
+
+luego se queda en un bucle esperando la recepcion de un caracter:
+
+. si recibe una c enciende los leds correspondientes al conteo binario.
+
+. si recibe una k realiza simula  knight rider mediante la utilización de los leds.
+
+. si recibe una q finaliza dicho bucle.
+
+---------------------------Compilación-----------------------------------------------------
+
+make clean             //borra los objetos y la imagen hex
+
+make                  //crea los objetos: main.o utils.o serial.o y el ejecutable tp3
+
+sudo make flash       //copia el ejecutable en el microprocesador
+
+
+---------------------------Testing --------------------------------------------------------
+
+Se utilizo el programa cutecom para comprobar que el programa tp3 funcionaba correctamente
+
+
+

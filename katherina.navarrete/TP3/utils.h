@@ -10,10 +10,12 @@
 #define _UTILS_H
 
 
-void esperar();
-void prender_led();
-void apagar_led();
-void let_init();
+void esperar_medio_seg();
+void esperar_dos_seg();
+void prender_leds();
+void apagar_leds();
+void lets_init();
 void knight_rider();
-void contarBin();
+void prender_leds_elegidos(unsigned char num);
+void contar_binario();
 #endif	/* _UTILS_H */

@@ -6,7 +6,7 @@
  * pines 8-13 de arduino 
  */
 
-#define prende (0x3F)
+#define LEDS (0x3F)
 
 
 /* puertos de E/S */
@@ -23,84 +23,105 @@ volatile unsigned char * pin_b = (unsigned char *) 0x23; /* direccion PIN B (reg
  *      El 5to bit define la entrada o salida del
  * 	pin del atmega328p que tiene conectado un led en una board arduino
  */
-void let_init(){
-	*(puerto_b) = *(puerto_b) & (~ prende);
-	*(ddr_b) = *(ddr_b) | (prende);
+void lets_init()
+{
+	*puerto_b = *puerto_b & (~ LEDS);
+	*ddr_b = *ddr_b | (LEDS);
 }
 
-void esperar() {
+void esperar_dos_seg() 
+{
 	volatile unsigned long i;
-	for (i=0; i<950000; i++);
+	for (i=0; i<900000; i++);
 }
-void esperarMenos(){
+void esperar_medio_seg()
+{
 	volatile unsigned long i;
-	for (i=0; i<23750; i++);
+	for (i=0; i<22500; i++);
 }
 
 
-void prender_led() {
-	volatile unsigned char valor_b = *(puerto_b);
-	valor_b |=  prende ;
+void prender_leds() 
+{
+	volatile unsigned char valor_b = *puerto_b;
+	valor_b |=  LEDS ;
 	*(puerto_b) = valor_b;
 }
 
-void apagar_led() {
-	volatile unsigned char valor_b = *(puerto_b);
-	valor_b &= ~(prende);
-	*(puerto_b) = valor_b;
+void apagar_leds() 
+{
+	volatile unsigned char valor_b = *puerto_b;
+	valor_b &= ~(LEDS);
+	*puerto_b = valor_b;
 }
 
-void contar(unsigned char num){
-	volatile unsigned char valor_b = *(puerto_b);
-	valor_b ^= num;
-	*(puerto_b) = valor_b;
+void prender_leds_elegidos(unsigned char bits_elegidos)
+{
+	volatile unsigned char valor_b = *puerto_b;
+	valor_b ^= bits_elegidos;
+	*puerto_b = valor_b;
 	
 }
-void contarBin(){
-	apagar_led(); 
-	esperar();
-	contar(0x08);
-	esperar();
-	contar(0x18);
-	esperar();
-	contar(0x08);
-	esperar();
-	contar(0x38);
-	esperar();
-	contar(0x08);
-	esperar();
-	contar(0x18);
-	esperar();
-	contar(0x08);
-	esperar();
-	apagar_led(); 
+
+
+
+
+#define bit_0 0x01
+#define bit_3_2_1 0x07
+
+void contar_binario()
+{
+	unsigned char tmp = bit_0;
+	unsigned char i;
+
+	apagar_leds();
+	for (i=0; i < 3; i++) {
+		
+		prender_leds_elegidos(bit_0);
+		esperar_dos_seg();
+
+		if (tmp == bit_3_2_1) {
+
+			tmp = tmp >> 1;
+
+		} else { 
+
+			tmp = (tmp << 1);
+			tmp |= bit_0;
+		}
+
+		prender_leds_elegidos(tmp);
+		esperar_dos_seg();
+	}
+
+	prender_leds_elegidos(bit_0);
+	esperar_dos_seg();
+	apagar_leds();
 }
-void knight_rider(){
-	volatile unsigned char valor_b = *(puerto_b);
-	volatile unsigned num = 0x20;
-        
-	valor_b ^= num;
-	num = num ^ (num >> 1);
-	*(puerto_b) = valor_b;
-	esperarMenos();
-	while(num != 1){
-		
-		valor_b ^= num;
-		num = (num >> 1);
-		*(puerto_b) = valor_b;
-		esperarMenos();
-	}
-	num = num ^ (num << 1);
-	*(puerto_b) = valor_b;
-	esperarMenos();
-	while(num != 48){
-		
-		valor_b ^= num;
-		num = (num << 1);
-		*(puerto_b) = valor_b;
-		esperarMenos();
-	}
-apagar_led();
+
+
+
+#define maximo 0x20
+#define minimo 0x01
+#define bit_7_6 0xc0
+
+void knight_rider()
+{
+	volatile unsigned char valor_b = *puerto_b;
+	unsigned char tmp = maximo;
+	
+	while (tmp != minimo) {
+		*puerto_b = ( bit_7_6 & valor_b ) | (tmp);
+		esperar_medio_seg();
+		tmp = tmp >> 1;
+ 	}
+
+	while (tmp != maximo) {
+		*puerto_b = ( bit_7_6 & valor_b ) | (tmp);
+		esperar_medio_seg();
+		tmp = tmp << 1;
+ 	}
+	*puerto_b = ( bit_7_6 & valor_b );
 }
 
 
