@@ -9,59 +9,33 @@
 
 int main(void)
 {
-    char rcvChar = 0;
-    let_init();
-    /* Configure the UART for the serial driver */
-    serial_init();
-    //transmite los caracteres
-    serial_put_char('s');
-    serial_put_char('t');
-    serial_put_char('a');
-    serial_put_char('r');
-    serial_put_char('t');
-    serial_put_char('\r');
-    serial_put_char('\n');
-    serial_put_char('h');
-    serial_put_char('o');
-    serial_put_char('l');
-    serial_put_char('a');
-    serial_put_char(' ');
-    serial_put_char('k');
-    serial_put_char('a');
-    serial_put_char('t');
-    serial_put_char('y');
-    serial_put_char('\r');
-    serial_put_char('\n');
+	char rcv_char = 0;
+	lets_init();
 
-    while (rcvChar != 'q')
-    {
-        /* Esperar un caracter entrante */
-       rcvChar = serial_get_char();
+    	/* Configure the UART for the serial driver */
+    	serial_init();
 
-        /* Hacer eco del caracter*/
-        serial_put_char(rcvChar);
-	if(rcvChar=='c')
-		contarBin();
-	else{
-		if(rcvChar=='k'){
-			knight_rider();
-			knight_rider();
-			knight_rider();
+    	serial_put_String("hola katy\n\r");
+
+    	while (rcv_char != 'q') {
+
+		rcv_char = serial_get_char();
+		serial_put_char(rcv_char);
+
+		switch (rcv_char) {
+
+			case 'c' : 
+				contar_binario();
+				break;
+
+			case 'k' :
+				knight_rider();
+				knight_rider();
+				knight_rider();
+				break;
 		}
 	}
-    }
-	/* hacer un salto de linea */
-	serial_put_char('\r');
-        serial_put_char('\n');
- 	/*transmitir los caracteres*/
-	serial_put_char('f');
-    	serial_put_char('i');
-    	serial_put_char('n');
-        serial_put_char('\r');
-    	serial_put_char('\n');
-        
-
-    for (;;);
+	for (;;);
 
     return 0;
 }
