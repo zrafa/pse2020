@@ -4,6 +4,10 @@
 # Simple hack para generar keystrokes segun tp4
 
 # requiere: xdotool instalado
+# como usar: 
+#   configurar velocidad del serial
+#   ejecutar con ./tp4_arrows.sh
+#   finalizar con CTRL+C
 
 
 # Configurar velocidad del serial en PC (la misma que el avr)
