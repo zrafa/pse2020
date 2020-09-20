@@ -27,6 +27,7 @@ int main(void)
     while (1)
     {
         v = adc_get();
+        evaluate(v);
         serial_put_char(v);
     }
 
@@ -34,4 +35,55 @@ int main(void)
         ;
 
     return 0;
+}
+
+void evaluate(int v)
+{
+    if (v < 128)
+    {
+        suma_binaria(0);
+        return;
+    }
+
+    if (v < 256)
+    {
+        suma_binaria(1);
+        return;
+    }
+
+    if (v < 384)
+    {
+        suma_binaria(2);
+        return;
+    }
+
+    if (v < 512)
+    {
+        suma_binaria(3);
+        return;
+    }
+
+    if (v < 640)
+    {
+        suma_binaria(4);
+        return;
+    }
+
+    if (v < 768)
+    {
+        suma_binaria(5);
+        return;
+    }
+
+    if (v < 896)
+    {
+        suma_binaria(6);
+        return;
+    }
+
+    if (v < 1024)
+    {
+        suma_binaria(7);
+        return;
+    }
 }
