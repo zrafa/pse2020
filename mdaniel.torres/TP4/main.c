@@ -29,7 +29,10 @@ int main(void)
     {
         v = adc_get();
         evaluate(v);
-        serial_put_char(v);
+	char buf[3]="";
+	sprintf(buf, "%d", v);
+        serial_put_str(buf);
+
     }
 
     for (;;)
