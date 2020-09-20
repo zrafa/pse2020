@@ -26,7 +26,7 @@ int main(void)
     int v;
     while (1)
     {
-        v = get_adc();
+        v = adc_get();
         serial_put_char(v);
     }
 
