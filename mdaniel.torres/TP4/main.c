@@ -14,6 +14,7 @@ int main(void)
     /* Configure the UART for the serial driver */
     serial_init();
     led_init();
+    adc_init();
 
     serial_put_char('s');
     serial_put_char('t');
@@ -41,7 +42,6 @@ void evaluate(int v)
 {
     if (v < 128)
     {
-        suma_binaria(0);
         return;
     }
 

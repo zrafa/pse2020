@@ -135,5 +135,6 @@ void suma_binaria(int num)
 		*(PUERTO_B) = *(PUERTO_B) ^ (0x02);
 		*(PUERTO_B) = *(PUERTO_B) ^ (0x04);
 		*(PUERTO_B) = *(PUERTO_B) ^ (0x08);
+		break;
 	}
 }
