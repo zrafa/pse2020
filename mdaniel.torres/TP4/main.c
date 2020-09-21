@@ -24,12 +24,12 @@ int main(void)
     serial_put_char('\r');
     serial_put_char('\n');
 
-    int v;
+    int v = 0;
     while (1)
     {
-        v = adc_get();
+        v = adc_get(0);
         evaluate(v);
-	char buf[3]="";
+	char buf[5]="";
 	sprintf(buf, "%d", v);
         serial_put_str(buf);
 

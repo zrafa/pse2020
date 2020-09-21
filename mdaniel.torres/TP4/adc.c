@@ -22,7 +22,6 @@ volatile adc_t *adc = (adc_t *)0x78;
 
 void adc_init()
 {
-    adc->adcsra |= ADC_ENABLE;
     //adc->adcsra |= ADC_ENABLE | ADC_START_CONVERSION | ADC_AUTO_TRIGGER;
     /*
     agregar 0x20 para freerunning
@@ -35,9 +34,10 @@ void adc_init()
     adc->adcsra |= ( 0x04 | 0x02 | 0x01); //division factor 128
 
     adc->admux |= ( 0x80 | 0x40); // internal 1.1v voltage reference with external capacitor at aref pin
+    adc->adcsra |= ADC_ENABLE;
 }
 
-int adc_get()
+int adc_get(int input)
 {
     int val = 0;
 
@@ -51,13 +51,17 @@ int adc_get()
 //    adc->adcsra |= ADC_START_CONVERSION;
 //    descomentar esa linea de arriba y remover en la inicializacion cuando se usa ADC_ENABLE los otros dos macros
 
+    adc->admux |= input;
+
     adc->adcsra |= ADC_START_CONVERSION;
     while (!(adc->adcsra & 0x10))
         ;
     /* cuando se completa una conversión se settea este bit */
 
-    val = (adc->adcl << 0x08);
-    val |= adc->adch;
+   // val = (adc->adcl << 0x08);
+   // val |= adc->adch;
+    val = adc->adcl;
+    val |= (adc->adch << 8);
 
     return val;
 }

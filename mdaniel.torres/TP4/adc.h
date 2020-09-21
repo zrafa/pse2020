@@ -2,6 +2,6 @@
 #define _ADC_H
 
 void adc_init();
-int adc_get();
+int adc_get(int);
 
 #endif
