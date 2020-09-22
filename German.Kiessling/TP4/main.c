@@ -31,7 +31,9 @@ int main(void)
 
         serial_put_char(ascii); /* salida por pantalla intesidad de la luz*/
 
-        conteo(aux);
+        //conteo(aux);
+
+        intensidad(aux);
 
 
     }

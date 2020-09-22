@@ -72,6 +72,13 @@ void conteo(unsigned int num)
 	// setea en OFF el voltaje de los pines
 	*(PUERTO_B) &= ( ~LED_1 & ~LED_2 & ~LED_3 & ~LED_4);
 }
+void intensidad(unsigned int num)
+{
+	// setea en OFF el voltaje de los pines
+	*(PUERTO_B) &= ( ~LED_1 & ~LED_2 & ~LED_3);
+    *(PUERTO_B) += num;
+    esperar(10000);
+}
 
 void knight_rider() {
     unsigned char leds[6] = {LED_1, LED_2, LED_3, LED_4};
