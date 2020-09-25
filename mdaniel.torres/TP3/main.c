@@ -5,6 +5,7 @@
  **********************************************************************/
 
 #include "serial.h"
+#include "utils.h"
 
 
 int main(void)
@@ -25,8 +26,6 @@ int main(void)
 
     while (rcvChar != 'q')
     {
-	    serial_init();
-	    led_init();
         rcvChar = serial_get_char();
 
 	switch (rcvChar) {
