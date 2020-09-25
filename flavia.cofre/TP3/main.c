@@ -13,8 +13,8 @@ int main(void){
     /* configura los pines que controlan los LEDs y el pulsador. */
 	leds_init();  
 
-    /* Configure the UART for the serial driver */ 
-    serial_init(); 
+    /* Configure the UART for the serial driver */
+    serial_init();  
 
 
 
@@ -27,7 +27,7 @@ int main(void){
     serial_put_char('\n'); 
 
     while (rcvChar != 'q') { 
-        /* Wait for an incoming character */ 
+
         rcvChar = serial_get_char();
         switch (rcvChar) {
             case 'c':
@@ -57,7 +57,7 @@ int main(void){
                 }
                 break;
             default:
-                /* Echo the character back along with a carriage return and line feed */
+
                 serial_put_char(rcvChar);
                 serial_put_char('\r');
                 serial_put_char('\n');
@@ -66,6 +66,7 @@ int main(void){
     } 
 
     for (;;); 
+
     return 0;
 
 }

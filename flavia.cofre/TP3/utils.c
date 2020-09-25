@@ -18,7 +18,7 @@ volatile unsigned char * PORTB = (unsigned char *) 0x25; /* direccion de PORTB: 
 volatile unsigned char * DDRB = (unsigned char *) 0x24; /* direccion de DDR B (registro de control) */
 
 
-/* funciones */ 
+
 
 void leds_init(void){	
 
@@ -30,14 +30,10 @@ void leds_init(void){
 }
 
 
-void esperarE(unsigned long n){	
-    volatile unsigned long i; 	
-    /* delay de 1 segundo */	
-    for (i = 0; i < 450000 * n; i++);
-} 
+
 
 void esperar(unsigned long n){
-    volatile unsigned long i; 	
+    unsigned long i; 	
     /* delay */
     for (i = 0; i < 4500 * n; i++);
 } 
@@ -46,84 +42,32 @@ void contador(void){
 
     // el voltage de salida de los pines GPIO es establecido a cero	    
     *(PORTB) &= ( ~MASK0 & ~MASK1 &  ~MASK2);
-    esperarE(1);
-    *(PORTB) ^= MASK0;
-    esperarE(1);
-    *(PORTB) ^= ( MASK0 | MASK1 );
-    esperarE(1);
-    *(PORTB) ^= MASK0;
-    esperarE(1);
-    *(PORTB) ^= ( MASK0 | MASK1 | MASK2);
-    esperarE(1);
-    *(PORTB) ^= MASK0;
-    esperarE(1);
-    *(PORTB) ^= ( MASK0 | MASK1 );
-    esperarE(1);
-    *(PORTB) ^= MASK0;
-    esperarE(1);
-    *(PORTB) &= ( ~MASK0 & ~MASK1 &  ~MASK2);
-    
+    esperar(100);
+    int i;
+    for(i=0; i<7;i++){
+        *(PORTB) += MASK0;
+        esperar(100);
+    }  
    
 } 
 
 
 void efecto_led(void){	
-    *(PORTB) |= MASK0;	
-    esperar(10);	
-    *(PORTB) &= ~MASK0;	
-	
-    *(PORTB) |= MASK1;	
-    esperar(10);	
-    *(PORTB) &= ~MASK1;	
 
- 	
-    *(PORTB) |= MASK2;	
-    esperar(10);	
-    *(PORTB) &= ~MASK2;
+    char arreglo_mascara[5] = {MASK0, MASK1, MASK2, MASK3, MASK5};
+    int i;
+    for (i=0; i<=8; i++){
+        if(i>4){
+            *(PORTB) |= arreglo_mascara[8-i];	
+            esperar(10);	
+            *(PORTB) &= ~(arreglo_mascara[8-i]);
+        }else{
+            *(PORTB) |= arreglo_mascara[i];	
+            esperar(10);	
+            *(PORTB) &= ~(arreglo_mascara[i]);
 
- 	
-    *(PORTB) |= MASK3;	
-    esperar(10);	
-    *(PORTB) &= ~MASK3;	
-
-
-    *(PORTB) |= MASK5;	
-    esperar(10);	
-    *(PORTB) &= ~MASK5;	
-
-
-
-    *(PORTB) |= MASK3;	
-    esperar(10);	
-    *(PORTB) &= ~MASK3;	
-
-
-
-    *(PORTB) |= MASK2;	
-    esperar(10);	
-    *(PORTB) &= ~MASK2;	
-
-
-    *(PORTB) |= MASK1;	
-    esperar(10);	
-    *(PORTB) &= ~MASK1;	
-
-
-    *(PORTB) |= MASK0;	
-    esperar(10);	
-    *(PORTB) &= ~MASK0;	
-
+        }
+    
+    }	
+            
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
