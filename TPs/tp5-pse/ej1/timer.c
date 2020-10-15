@@ -26,8 +26,6 @@
 #define TIMER0_OCR0A (SYSTEM_TICKS/PRESCALAR/TICKS_PER_SECOND)
 
 
-volatile int ticks = 0;
-
 typedef struct
 {
     uint8_t tccr0a; /* Registro de control A del timer0 */
@@ -43,6 +41,8 @@ volatile timer0_t *timer0 = (timer0_t *)(0x44);
 /* registro mascara de interrupciones timer 0 */
 volatile unsigned char *timer0_timsk0 = (unsigned char *)(0x6E);
 
+volatile int ticks;
+
 
 void timer0_init( void )
 {
@@ -51,6 +51,7 @@ void timer0_init( void )
 	timer0->ocr0a = TIMER0_OCR0A; /* valor contra el cual comparar */
 	(*timer0_timsk0) |= 0x02;  /* 0x02: compara contra registro OCR0A 
 				      y genera interrupcion si hay un match */
+	ticks = 0;
 }
 
 ISR(TIMER0_COMPA_vect)
