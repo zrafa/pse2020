@@ -49,6 +49,8 @@ int tasks_def(int ms, void (*f))
 	tasks[n].st = ms;
 	tasks[n].func = f;
 	n++;
+
+	return 0;
 }
 
 
@@ -56,20 +58,20 @@ void tasks_do()
 {
 	int i;
 
-	if (task_sync) {
+	if (task_sync == 0)
+		return;
 
-		/* región critica */
-		cli();
-		task_sync = 0;
-		sei();
+	/* región critica */
+	cli();
+	task_sync = 0;
+	sei();
 		
-		for (i=0; i < n ; i++) {
+	for (i=0; i < n ; i++) {
 
-			tasks[i].st--;
-			if (tasks[i].st == 0) {	/* timer done: run the task */
-				tasks[i].st = tasks[i].ms;
-				tasks[i].func();
-			};
-		}
+		tasks[i].st--;
+		if (tasks[i].st == 0) {	/* timer done: run the task */
+			tasks[i].st = tasks[i].ms;
+			tasks[i].func();
+		};
 	}
 }
