@@ -5,7 +5,7 @@
  *
  * META : ocultar el hardware a la aplicacion 
  *
- * Configuracion: 115200bps, 8bits data, 1bit stop, sin bit de paridad
+ * Configuracion: 9600bps, 8bits data, 1bit stop, sin bit de paridad
  *
  **********************************************************************/
 
@@ -30,8 +30,8 @@ uart_t *puerto_serial = (uart_t *) (0xc0);
 
 /*------------------------------Rutina de Inicialización------------------------*/
 
-#define USART_BAUDRATE 115200
-#define BAUD_PRESCALE (((F_CPU/(USART_BAUDRATE*16UL))))
+#define USART_BAUDRATE 9600
+#define BAUD_PRESCALE (((F_CPU/(USART_BAUDRATE*16UL)))-1)
 #define ENABLE_TX 0x08
 #define ENABLE_RX 0x10
 #define SIZE_CHAR 0x06
@@ -76,9 +76,9 @@ void serial_put_char (char out_put_char)
 }
 void serial_put_String(char cadena[])
 {
-1	if ( inicializar == 1 ) {
+	if (inicializar == 1) {
 		unsigned char i=0;
-		while ( cadena[i] != 0 ) {
+		while (cadena[i]!=0) {
 
 			serial_put_char(cadena[i]);
 			i++;

@@ -32,9 +32,9 @@ int main(void)
 	timer0_rtc_set(0,0,0,0,0,0);
 	int tmp = timer0_rtc_get_sec();
 	sei();
+	 
 	
-	while(tmp == 0)
-	{
+	while (tmp == 0) {
 		serial_put_char('a');
 		cant_serial++;
 
@@ -42,13 +42,18 @@ int main(void)
 		tmp = timer0_rtc_get_sec();
 		sei();
 	}
+
 	serial_put_String("\r\n");
 	serial_put_String("la cantidad de E/S en un segundo es: ");
+
 	char cadena[6];
 	int i = convertir_ASCII(cant_serial, cadena);
-	for(i; i>=0 ; i--)
+
+	for( i; i>=0 ; i-- )
 		serial_put_char(cadena[i]);
+	
 	serial_put_String("\r\n");
+	
 	for (;;);
 		
 }

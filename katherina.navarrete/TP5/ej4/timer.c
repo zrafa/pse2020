@@ -15,7 +15,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-
 #define TIMER0_CS 0x03 /* prescalar=64 CS02|CS01|CS00 = 0b011 */
 #define TIMER0_CTC 0x02 /* CTC = WGM = 0b010 : modo CTC es comparar y volver a cero*/
 
@@ -41,7 +40,10 @@ volatile timer0_t *timer0 = (timer0_t *)(0x44);
 /* registro mascara de interrupciones timer 0 */
 volatile unsigned char *timer0_timsk0 = (unsigned char *)(0x6E);
 
-volatile int ticks;
+volatile int ticks = 0;
+
+extern volatile int task_sync;
+
 int anio;
 int mes;
 int dia;
@@ -49,7 +51,6 @@ int hora;
 int min;
 int seg;
 int dec;
-
 
 void timer0_init( void )
 {
@@ -85,7 +86,6 @@ void incrementar_mes()
 		anio++;
 	}
 }
-
 void incrementar_dia()
 {
 	dia++;
@@ -94,7 +94,6 @@ void incrementar_dia()
 		incrementar_mes();
 	}	
 }
-
 void incrementar_hora()
 {
 	hora++;
@@ -103,7 +102,6 @@ void incrementar_hora()
 		incrementar_dia();
 	}
 }
-
 void incrementar_min()
 {
 	min++;
@@ -112,7 +110,6 @@ void incrementar_min()
 		incrementar_hora();
 	}
 }
-
 void incrementar_seg()
 {
 	seg++;
@@ -121,7 +118,6 @@ void incrementar_seg()
 		incrementar_min();
 	}
 }
-
 void incrementar_dec()
 {
 	dec++;
@@ -131,29 +127,30 @@ void incrementar_dec()
 	}
 }
 
+
 ISR(TIMER0_COMPA_vect)
 {
     	ticks ++;
-    	if (ticks == 100) {
-		ticks = 0; 
+    	task_sync++;
+	if((ticks %  100) == 0){
+
 		incrementar_dec();
-		
-
 	}
+	else if (ticks == 1000) {
+		ticks=0;
+		
+       }
 }
-
 
 char timer0_rtc_get_tos()
 {
 	return dec;
 }
-
 char dig_ASCII(int valor, int div)
 {
 	return ((valor / div)+48);
 }
-
-void timer0_rtc_to_str( char buffer[] )
+void timer0_rtc_to_str(char buffer[])
 {
 	buffer[0] = dig_ASCII(hora,10);
 	buffer[1] = dig_ASCII(hora % 10,1);
@@ -182,10 +179,5 @@ void timer0_rtc_to_str( char buffer[] )
 	
 }
 
-
-int cant_ticks()
-{
-	return ticks;
-}
 
 

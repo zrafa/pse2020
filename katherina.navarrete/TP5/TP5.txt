@@ -1,0 +1,34 @@
+-----------------------------------------------------------------TP5--------------------------------------------------
+
+Katherina Navarrete
+--------------------
+
+ej3) Al utilizar una velocidad de 9600bps la cantidad de E/S por segundo, deberia ser de 1024 (9600/8)
+     pero segun el contador definido en el programa es de 968.
+     
+     Al utilizar una velocidad de 57600bps la cantidad de E/S por segundo, deberia ser de 7200 (57600/8)
+     pero segun el contador definido en el programa es de 5908.
+
+     Al utilizar una velocidad de 57600bps la cantidad de E/S por segundo, deberia ser de 14400 (115200/8)
+     pero segun el contador definido en el programa es de 11158.
+
+-------------------
+
+ej4)
+ 
+	a. tasks.c define la estructura task_t la cual posee tres atributos: 
+		. el primero se corresponde con el periodo 
+		. el segundo con los ticks correspondientes al relog de software
+		. el tecero es la función, es decir la pocision de memoria en que se encuentra dicha funcion.
+
+	Para poder realizar las tareas guardadas en el arreglo tasks, se utiliza la variable task_sync. La cual es
+	inicializada en 0 e incrementada atraves de timer.c, cuando ocurra una interrupción. 
+	El metodo tasks_do verifica si task_sync es 0 significa que no se a producido una interrupion que incremente 
+	la misma, pero si task_sync tiene un valor mayor a 0 implica que se a producido, por lo cual 
+	se debe volver asignar a task_sync el valor 0 y decrementar los ticks correspondientes a cada tarea. Si los ticks 
+	de una tarea llega a 0 se debe ejecutar la funcion, y debe restablecer el valor de los ticks correspondientes a dicha 
+	tarea.
+	C
+
+
+

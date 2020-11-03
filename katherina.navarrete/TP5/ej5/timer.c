@@ -70,7 +70,7 @@ void timer1_init( void )
 }
 
 volatile unsigned int dato_pc = 0;
-#define MAX_OCR1A 180
+#define MAX_OCR1A 150
 #define MAX_PC 255
 
 ISR(TIMER1_OVF_vect)

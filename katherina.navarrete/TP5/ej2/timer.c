@@ -42,13 +42,13 @@ volatile timer0_t *timer0 = (timer0_t *)(0x44);
 volatile unsigned char *timer0_timsk0 = (unsigned char *)(0x6E);
 
 volatile int ticks;
-int anio;
-int mes;
-int dia;
-int hora;
-int min;
-int seg;
-int dec;
+unsigned int anio = 2020;
+unsigned char mes = 10;
+unsigned char dia = 28;
+unsigned char hora = 0;
+unsigned char min = 0;
+unsigned char seg = 0;
+unsigned char dec = 0;
 
 
 void timer0_init( void )
@@ -60,23 +60,6 @@ void timer0_init( void )
 				      y genera interrupcion si hay un match */
 	ticks = 0;
 }
-
-void timer0_rtc_set(int year, int month, int day, int hour, int m, int sec)
-{
-	anio = year;
-	mes = month;
-	dia = day;
-	hora = hour;
-	min = m;
-	seg = sec;
-	ticks = 0;
-}
-
-int timer0_rtc_get_sec()
-{
-	return seg;
-}
-
 void incrementar_mes()
 {
 	mes++;
@@ -85,7 +68,6 @@ void incrementar_mes()
 		anio++;
 	}
 }
-
 void incrementar_dia()
 {
 	dia++;
@@ -94,7 +76,6 @@ void incrementar_dia()
 		incrementar_mes();
 	}	
 }
-
 void incrementar_hora()
 {
 	hora++;
@@ -103,7 +84,6 @@ void incrementar_hora()
 		incrementar_dia();
 	}
 }
-
 void incrementar_min()
 {
 	min++;
@@ -112,7 +92,6 @@ void incrementar_min()
 		incrementar_hora();
 	}
 }
-
 void incrementar_seg()
 {
 	seg++;
@@ -121,7 +100,6 @@ void incrementar_seg()
 		incrementar_min();
 	}
 }
-
 void incrementar_dec()
 {
 	dec++;
@@ -130,7 +108,6 @@ void incrementar_dec()
 		incrementar_seg();
 	}
 }
-
 ISR(TIMER0_COMPA_vect)
 {
     	ticks ++;
@@ -143,17 +120,16 @@ ISR(TIMER0_COMPA_vect)
 }
 
 
+
 char timer0_rtc_get_tos()
 {
 	return dec;
 }
-
 char dig_ASCII(int valor, int div)
 {
 	return ((valor / div)+48);
 }
-
-void timer0_rtc_to_str( char buffer[] )
+void timer0_rtc_to_str(char buffer[])
 {
 	buffer[0] = dig_ASCII(hora,10);
 	buffer[1] = dig_ASCII(hora % 10,1);
