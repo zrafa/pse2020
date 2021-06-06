@@ -68,10 +68,10 @@ void serial_init()
         puerto_serial->baud_rate_l = (unsigned char) (BAUD_PRESCALE);
 
         /* Configurar un frame de 8bits, sin bit de paridad y un bit de stop */
-        puerto_serial->status_control_c = (unsigned char) (FRAME_SIZE_0 + FRAME_SIZE_1);
+        puerto_serial->status_control_c = (unsigned char) (FRAME_SIZE_0 | FRAME_SIZE_1);
 
         /* Activar la recepcion y transmision */
-        puerto_serial->status_control_b = (unsigned char) (RECEIVER_ENABLE + TRANSMITTER_ENABLE);
+        puerto_serial->status_control_b = (unsigned char) (RECEIVER_ENABLE | TRANSMITTER_ENABLE);
 }
 
 

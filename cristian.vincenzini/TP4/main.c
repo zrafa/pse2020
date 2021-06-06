@@ -18,14 +18,12 @@ int main(void)
 
         while (1) {
                 readADC = adc_get(0);
-                scale = readADC >> 7;        /* valores entre 0 y 8 */
-                ascii_value = scale + 0x30;  /* numero en ASCII */
+                scale = readADC >> 7;         /* valores entre 0 y 8 */
+                ascii_value = scale + '0';   /* numero en ASCII */
 
                 serial_put_char(ascii_value);
-                encendido_binario(ascii_value);
 
-                //se_presiono_boton = leer_boton();
-                //serial_get_char();
+                encendido_binario(ascii_value);
         }
 
         return 0;

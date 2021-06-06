@@ -3,8 +3,8 @@
 #ifndef _UTILS_H
 #define _UTILS_H
 
-void setup();
-void esperar(unsigned long);
-void cambiar_estado();
+void led_init();
+void delay_ms(unsigned long);
+void led_toggle();
 
 #endif  /* _UTILS_H */

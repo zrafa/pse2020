@@ -39,5 +39,18 @@
 .vscode/
 .history/
 
+# Sound files
+*.wav
+*.mp3
+
 # Ejecutables
 led-test
+binary
+knight-rider
+uart
+adc
+realtime-led
+realtime-clock
+serial-test
+soft-timer
+pwm

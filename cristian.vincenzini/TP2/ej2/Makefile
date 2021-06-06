@@ -1,6 +1,6 @@
 CC=avr-gcc
 OBJETOS=main.o utils.o
-APP=led-test
+APP=binary
 CFLAGS=-Os -DF_CPU=16000000UL -mmcu=atmega328p 
 LDFLAGS=-mmcu=atmega328p
 FIRMWARE=imagen.hex

@@ -7,6 +7,8 @@
  **********************************************************************/
 #include "utils.h"
 
+#define CYCLES_PER_MS (450)
+
 /* 
  * El puerto B de un atmega328 tiene los bits 0-5 mapeados a los 
  * pines 8-13 de arduino 
@@ -25,11 +27,11 @@ volatile unsigned char * PINB  = (unsigned char *) 0x23;  /* direccion PIN B (re
 
 /* funciones */
 
-void esperar(unsigned long msec)
+void delay_ms(unsigned long ms)
 {
-        unsigned long i;
+        volatile unsigned long i;
 
-        for (i = 0; i < 450 * msec; i++);
+        for (i = 0; i < CYCLES_PER_MS * ms; i++);
 }
 
 void suma_binaria()
@@ -38,7 +40,7 @@ void suma_binaria()
 
         for (i = 0; i < 15; i++) {
                 *PORTB += 1;
-                esperar(1000);
+                delay_ms(500);
         }
 
         /* setea en OFF el voltaje de los pines */
@@ -48,9 +50,9 @@ void suma_binaria()
 void prender_apagar(unsigned char pin)
 {
         *PORTB |= pin;
-        esperar(50);
+        delay_ms(50);
         *PORTB &= ~pin;
-        esperar(50);
+        delay_ms(50);
 }
 
 void knight_rider()
@@ -77,8 +79,4 @@ void leds_init()
 
         /* setea pines en modo OUTPUT */
         *DDRB |= (PB0 | PB1 | PB2 | PB3);
-        
-        /* configuracion del boton */
-        *DDRB &= ~PB4;  /* setea pin del boton en modo INPUT (bit ddrb = 0) */
-        *PORTB |= PB4;  /* activa modo PULL-UP (bit portb = 1) */
 }

@@ -4,7 +4,7 @@
 #define _UTILS_H
 
 void leds_init();
-void esperar(unsigned long);
+void delay_ms(unsigned long);
 void knight_rider();
 void suma_binaria();
 

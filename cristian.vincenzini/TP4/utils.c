@@ -7,6 +7,8 @@
  **********************************************************************/
 #include "utils.h"
 
+#define CYCLES_PER_MS (450)
+
 /* 
  * El puerto B de un atmega328 tiene los bits 0-5 mapeados a los 
  * pines 8-13 de arduino 
@@ -23,33 +25,11 @@ volatile unsigned char * PORTB = (unsigned char *) 0x25;  /* direccion de PORTB:
 volatile unsigned char * DDRB  = (unsigned char *) 0x24;  /* direccion de DDR B (registro de control) */
 volatile unsigned char * PINB  = (unsigned char *) 0x23;  /* direccion PIN B (registro de datos)*/
 
-/* funciones */
-
-void esperar(unsigned long msec)
+void delay_ms(unsigned long ms)
 {
-        unsigned long i;
+        volatile unsigned long i;
 
-        for (i = 0; i < 450 * msec; i++);
-}
-
-unsigned char leer_boton()
-{
-        unsigned char lectura;
-
-        /* estado ON mientras no se presione switch */
-        lectura = *PINB & PB4;
-
-        /* cambio para que pulsar sea ON */
-        lectura = !lectura;
-
-        /* debugging: cuando se presiona boton se enciende pin 13 */
-        if (lectura) {
-                *PORTB |= PB5;
-        } else {
-                *PORTB &= ~PB5;
-        }
-
-        return lectura;
+        for (i = 0; i < CYCLES_PER_MS * ms; i++);
 }
 
 void encendido_binario(char bits)
@@ -66,7 +46,7 @@ void suma_binaria()
 
         for (i = 0; i < 15; i++) {
                 *PORTB += 1;
-                esperar(1000);
+                delay_ms(500);
         }
 
         /* setea en OFF el voltaje de los pines */
@@ -76,9 +56,9 @@ void suma_binaria()
 void prender_apagar(unsigned char pin)
 {
         *PORTB |= pin;
-        esperar(50);
+        delay_ms(50);
         *PORTB &= ~pin;
-        esperar(50);
+        delay_ms(50);
 }
 
 void knight_rider()

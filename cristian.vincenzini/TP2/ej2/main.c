@@ -2,25 +2,28 @@
 
 #include "utils.h"
 
-unsigned char modo = 0;
-unsigned char se_presiono_boton = 0;
+unsigned char mode = 0;
+extern unsigned char switch_up;
 
 int main(void)
 {
-        setup();
+        leds_init();
 
         while (1) {
-                se_presiono_boton = leer_boton();
+                switch_state();
 
-                if (se_presiono_boton) {
-                        modo = !modo;
+                if (!switch_up) {
+                        mode = !mode;
+                        toggle_debug_led();
+                        delay_ms(500);
                 }
 
-                if (modo) {
+                if (mode) {
                         suma_binaria();
                 } else {
-                        // modo 0 inicial
-                        encender_leds();
+                        leds_on();
                 }
+
+                delay_ms(1000);
         }
 }

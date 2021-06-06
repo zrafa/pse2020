@@ -1,8 +1,6 @@
-Implementa driver para periferico UART:
-- Enviar letra 'c' para iniciar conteo binario
-- Enviar letra 'k' para efecto knight rider
-- Enviar letra 'q' para terminar el programa
-- Resto de las letras produce echo
+Implementa driver para periferico ADC.
+Utiliza UART para enviar datos a los LEDS
+los cuales se encienden segun el valor leido
 
 Pasos:
 

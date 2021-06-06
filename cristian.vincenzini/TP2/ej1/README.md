@@ -1,5 +1,4 @@
-Enciende y apaga LED interno de placa atmega328 
-
+Enciende y apaga LED interno de la placa arduino.
 
 Pasos:
 

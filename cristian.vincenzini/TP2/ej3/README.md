@@ -1,5 +1,6 @@
 Enciende y apaga leds para conseguir el efecto del knight-rider
 
+Pines 8, 9, 10 y 11. Sin pulsador.
 
 Pasos:
 

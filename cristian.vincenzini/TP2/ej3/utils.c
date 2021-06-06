@@ -1,6 +1,7 @@
 /* utils.c - implementacion de funciones utiles al TP2 */
 #include "utils.h"
 
+#define CYCLES_PER_MS (450)
 
 /* 
  * El puerto B de un atmega328 tiene los bits 0-5 mapeados a los 
@@ -14,23 +15,23 @@
 #define PB5 (0x20)  /* 0b 0010 0000 PIN 13 en placa */
 
 /* puertos de E/S */
-volatile unsigned char * PORTB = (unsigned char *) 0x25;  /* direccion de PORTB: SALIDA */
+volatile unsigned char * PORTB = (unsigned char *) 0x25;  /* direccion de PORTB */
 volatile unsigned char * DDRB  = (unsigned char *) 0x24;  /* direccion de DDR B (registro de control) */
-volatile unsigned char * PINB  = (unsigned char *) 0x23;  /* direccion PIN B (registro de datos)*/
+volatile unsigned char * PINB  = (unsigned char *) 0x23;  /* direccion PIN B (registro de datos) */
 
-void esperar(unsigned long msec)
+void delay_ms(unsigned long ms)
 {
-        unsigned long i;
+        volatile unsigned long i;
 
-        for (i = 0; i < 450 * msec; i++);
+        for (i = 0; i < CYCLES_PER_MS * ms; i++);
 }
 
 void prender_apagar(unsigned char pin)
 {
         *PORTB |= pin;
-        esperar(50);
+        delay_ms(50);
         *PORTB &= ~pin;
-        esperar(50);
+        delay_ms(50);
 }
 
 void knight_rider()
@@ -50,7 +51,7 @@ void knight_rider()
         *PORTB &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );
 }
 
-void setup()
+void leds_init()
 {
         /* setea en OFF el voltaje de los pines */
         *PORTB &= ( ~PB0 & ~PB1 & ~PB2 & ~PB3 );

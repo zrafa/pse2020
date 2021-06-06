@@ -3,8 +3,8 @@
 #ifndef _UTILS_H
 #define _UTILS_H
 
-void setup();
-void esperar(unsigned long);
+void leds_init();
+void delay_ms(unsigned long);
 void knight_rider();
 
 #endif  /* _UTILS_H */

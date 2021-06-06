@@ -4,7 +4,7 @@
 
 int main(void)
 {
-        setup();
+        leds_init();
 
         while (1) {
                 knight_rider();
