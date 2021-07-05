@@ -1,14 +1,14 @@
 Implementa varios software timers que utilizan el mismo
 hardware timer (timer0) para ejecutar varias tareas:
 
-* Parpadear led integrado al arduino
-* Parpadear led externo (pin 10)
-* Enviar la hora/fecha por puerto serial
+* Parpadear led integrado al arduino.
+* Parpadear led externo (pin 10).
+* Enviar la hora/fecha por puerto serial.
 
 tasks.c define la estructura task_t la cual posee tres atributos:
-* Periodo, tiempo que ira variando y al llegar a cero se reiniciará
-* Timer, valor al que se reiniciará el periodo
-* Función, tarea que se realizará
+* Periodo, tiempo que ira variando y al llegar a cero se reiniciará.
+* Timer, valor al que se reiniciará el periodo.
+* Función, tarea que se realizará.
 
 Un arreglo de tipo task_t contendrá la cantidad de tareas a realizar.
 

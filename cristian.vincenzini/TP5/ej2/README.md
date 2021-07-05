@@ -1,4 +1,4 @@
-Implementa un real-time clock utilizando timers y lo muestra por el serial
+Implementa un real-time clock utilizando timers y lo muestra por el serial.
 
 Pasos:
 
@@ -7,13 +7,10 @@ Pasos:
 3. make flash
 
 Presionar el boton de reset un tiempo y soltar,
-repetir si no funciona
+repetir si no funciona.
 
 Datos para cutecom:
 
 baudrate = 9600
 data bits = 8
 bit de stop = 1
-
-
-

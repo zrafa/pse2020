@@ -1,6 +1,8 @@
 Implementa driver para periferico ADC.
 Utiliza UART para enviar datos a los LEDS
-los cuales se encienden segun el valor leido
+los cuales se encienden segun el valor leido.
+
+![ADC](adc.png)
 
 Pasos:
 
@@ -9,4 +11,4 @@ Pasos:
 3. make flash
 
 Presionar el boton de reset un tiempo y soltar,
-repetir si no funciona
+repetir si no funciona.

@@ -1,7 +1,7 @@
 /* utils.c - implementacion de funciones utiles al TP2 */
 #include "utils.h"
 
-#define LED (0x20)  /* 0b00100000 */
+#define LED (0x20)  /* 0010 0000 */
 
 #define CYCLES_PER_MS (450)
 

@@ -1,25 +1,16 @@
 /* Pulsador que intercambia modos de operacion */
 
 #include "utils.h"
+#include <avr/interrupt.h>
 
 unsigned char mode = 0;
-unsigned char state, old_state;
 
 int main(void)
 {
         leds_init();
+        sei();
 
         while (1) {
-                state = switch_state();
-
-                if (state && !old_state) {
-                        mode = !mode;
-                        toggle_debug_led();  /* visually show mode */
-                        delay_ms(500);
-                }
-
-                old_state = state;
-
                 if (mode) {
                         suma_binaria();
                 } else {
@@ -27,5 +18,16 @@ int main(void)
                 }
 
                 delay_ms(1000);
+        }
+}
+
+ISR(PCINT0_vect)
+{
+        mode = !mode;
+
+        if (mode) {
+                debug_led_on();
+        } else {
+                debug_led_off();
         }
 }

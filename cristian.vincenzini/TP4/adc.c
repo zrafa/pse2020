@@ -50,17 +50,17 @@ void adc_init()
 int adc_get(char input)
 {
         int val;
-        /* 1. Establecer el multiplexor a la entrada input */
+        /* 1. Selects which analog input is connected to the ADC */
         adc->admux |= input;
 
-        /* 2. Iniciar una conversion ADC */
+        /* 2. Write this bit to one to start each conversion */
         adc->adcsra |= 1 << 6;  /* 0100 0000 */
 
-        /* 3. Completar con E/S programada */
+        /* 3. When conversion is complete, it returns to zero */
         while ( !((adc->adcsra) & (1 << 6)) );
 
-        /* 4. Devolver el valor del registro de datos del ADC (low y high) */
-        /* IMPORTANTE: hay que leer el registro L antes del H */
+        /* 4. When conversion is complete, the result is found in these registers */
+        /* IMPORTANT: ADCL must be read first, then ADCH */
         val = adc->adcl;
 
         val += (adc->adch << 8);

@@ -1,6 +1,7 @@
 /* utils.c - implementacion de funciones utiles al TP2 */
 #include "utils.h"
 
+
 #define CYCLES_PER_MS (450)
 
 #define PB0 (0x01)  /* 0b 0000 0001 PIN 8 en placa  */
@@ -15,19 +16,14 @@ volatile unsigned char * PORTB = (unsigned char *) 0x25;  /* direccion de PORTB 
 volatile unsigned char * DDRB  = (unsigned char *) 0x24;  /* direccion de DDR B (registro de control) */
 volatile unsigned char * PINB  = (unsigned char *) 0x23;  /* direccion PIN B (registro de datos) */
 
+volatile unsigned char * PCMSK0 = (unsigned char *) 0x6B;
+volatile unsigned char * PCICR  = (unsigned char *) 0x68;
+
 void delay_ms(unsigned long ms)
 {
         volatile unsigned long i;  /* no quitar volatile o NO funciona */
 
         for (i = 0; i < CYCLES_PER_MS * ms; i++);
-}
-
-unsigned char switch_state()
-{
-        unsigned char state = !(*PINB & PB4);  /* unpressed is LOW */
-        delay_ms(50);
-
-        return state;
 }
 
 void suma_binaria()
@@ -63,9 +59,22 @@ void leds_init()
         /* configuracion del boton */
         *DDRB &= ~PB4;  /* setea pin del boton en modo INPUT (bit ddrb = 0) */
         *PORTB |= PB4;  /* activa modo PULL-UP (bit portb = 1) */
+
+        *PCICR  |= (1 << 0);
+        *PCMSK0 |= PB4;  /* activa interrupcion */
 }
 
 void toggle_debug_led()
 {
         *PORTB ^= PB5;
+}
+
+void debug_led_on()
+{
+        *PORTB |= PB5;
+}
+
+void debug_led_off()
+{
+        *PORTB &= ~PB5;
 }

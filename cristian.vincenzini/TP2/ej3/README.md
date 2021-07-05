@@ -1,6 +1,8 @@
-Enciende y apaga leds para conseguir el efecto del knight-rider
+Enciende y apaga leds para conseguir el efecto del knight-rider.
 
 Pines 8, 9, 10 y 11. Sin pulsador.
+
+![LEDS](../images/leds.png)
 
 Pasos:
 
@@ -9,4 +11,4 @@ Pasos:
 3. make flash
 
 Presionar el boton de reset un tiempo y soltar,
-repetir si no funciona
+repetir si no funciona.

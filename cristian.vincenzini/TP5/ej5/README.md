@@ -5,7 +5,7 @@ Pasos:
 3. make flash
 
 Presionar el boton de reset un tiempo y soltar,
-repetir si no funciona
+repetir si no funciona.
 
 Configurar el driver serial del Linux a 115200:
 
